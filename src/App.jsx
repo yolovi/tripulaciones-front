@@ -2,6 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Register from "./components/User/Register/Register";
 import Login from "./components/User/Login/Login";
+import PrivateZone from "./guards/PrivateZone";
+import Profile from "./components/User/Profile/Profile";
+import AdminZone from "./guards/AdminZone";
+import Admin from "./components/Admin/Admin";
+import NotFound from "./components/NotFound/NotFound";
 import Event from "./components/Events/Event";
 
 function App() {
@@ -9,11 +14,26 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route>
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/event" element={<Event />} />
-          </Route>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/event" element={<Event />} />
+          <Route
+            path="/profile"
+            element={
+              <PrivateZone>
+                <Profile />
+              </PrivateZone>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <AdminZone>
+                <Admin />
+              </AdminZone>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>

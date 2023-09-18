@@ -1,4 +1,5 @@
 import React from 'react'
+console.log("login")
 
 const Login = () => {
   return (
