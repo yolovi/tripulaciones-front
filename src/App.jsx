@@ -7,7 +7,8 @@ import Profile from "./components/User/Profile/Profile";
 import AdminZone from "./guards/AdminZone";
 import Admin from "./components/Admin/Admin";
 import NotFound from "./components/NotFound/NotFound";
-import Event from "./components/Events/Event";
+import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
+
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/event" element={<Event />} />
+          <Route path="/event" element={<CreateEvent />} />
           <Route
             path="/profile"
             element={
