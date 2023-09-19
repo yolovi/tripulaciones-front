@@ -1,0 +1,12 @@
+@import "../../../index.scss";
+
+input {
+    border: 1px solid #ccc;
+}
+
+.form-register {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px;
+}
