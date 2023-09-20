@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import { editEvent } from "../../../features/events/eventsSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { createEvent } from "../../../features/events/eventsSlice";
-import "./CreateEvent.scss";
+import { useParams } from "react-router-dom";
 
-const CreateEvent = () => {
+const EditEvent = () => {
   const [formData, setFormData] = useState({
     title: "",
     body: "",
@@ -13,41 +12,21 @@ const CreateEvent = () => {
     place: "",
     capacity: "0",
     speaker: "",
-    image: "",
+    image: Image,
     category:"",
   });
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { _id } = useParams();
   const handleInputChange = (event) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    const formData = new FormData();
-    try {
-      const imageFile = event.target.elements.image.files[0];
-      if (imageFile) {
-        formData.append("image", imageFile);
-      }
-      formData.append("title", event.target.elements.title.value);
-      formData.append("body", event.target.elements.body.value);
-      formData.append("price", event.target.elements.price.value);
-      formData.append("date", event.target.elements.date.value);
-      formData.append("place", event.target.elements.place.value);
-      formData.append("capacity", event.target.elements.capacity.value);
-      formData.append("speaker", event.target.elements.speaker.value);
-      formData.append("category", event.target.elements.category.value);
-
-      await dispatch(createEvent(formData));
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(editEvent({ _id, formData }));
   };
-
   return (
     <>
       {/* HAY QUE METER LAS ALERTAS */}
@@ -94,7 +73,7 @@ const CreateEvent = () => {
           name="speaker"
           onChange={handleInputChange}
         />
-        {/* NO SE SI ES NECESARIO EL HANDLE INPUT */}
+        {/* AÑADIR ETIQUETAS PARA ELEGIR LA CATEGORIA DEL EVENTO */}
         <select name="category" onChange={handleInputChange}>
           <optgroup label="Categoría">
             <option value="Finanzas e inversión">Finanzas e inversión</option>
@@ -108,12 +87,11 @@ const CreateEvent = () => {
             <option value="Sociedad">Sociedad</option>
           </optgroup>
         </select>
-
         <input type="file" name="image" id="file" />
-        <button type="submit">Enviar</button>
+        <button type="submit">Aceptar cambios</button>
       </form>
     </>
   );
 };
 
-export default CreateEvent;
+export default EditEvent;

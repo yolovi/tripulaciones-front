@@ -7,7 +7,10 @@ import Profile from "./components/User/Profile/Profile";
 import AdminZone from "./guards/AdminZone";
 import Admin from "./components/Admin/Admin";
 import NotFound from "./components/NotFound/NotFound";
-import Event from "./components/Events/Event";
+import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
+import GetEvents from "./components/Events/GetEvents/GetEvents";
+import EditEvent from "./components/Events/EditEvent/EditEvent";
+import EventDetail from "./components/Events/EventDetail/EventDetail";
 
 function App() {
   return (
@@ -16,7 +19,10 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/event" element={<Event />} />
+          <Route path="/createevent" element={<CreateEvent />} />
+          <Route path="/getevents" element={<GetEvents />} />  
+          <Route path="/editevent/:_id" element={<EditEvent />} />  
+          <Route path="/eventdetail/:_id" element={<EventDetail />} />  
           <Route
             path="/profile"
             element={

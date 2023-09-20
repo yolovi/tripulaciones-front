@@ -11,7 +11,6 @@ export const createEvent = createAsyncThunk(
   "events/createEvent",
   async (formData) => {
     try {
-      console.log("slice Event");
       return await eventsService.createEvent(formData);
     } catch (error) {
       console.error(error);
@@ -31,14 +30,15 @@ export const deleteEvent = createAsyncThunk(
   "events/deleteEvent",
   async (eventId) => {
     try {
+        console.log(eventId)
       return await eventsService.deleteEvent(eventId);
     } catch (error) {
       console.error(error);
     }
   }
 );
-export const getAll = createAsyncThunk("events/allEvents", async () => {
-  try {
+export const getAll = createAsyncThunk("events/getAll", async () => {
+    try {
     return await eventsService.getAll();
   } catch (error) {
     console.error(error);
