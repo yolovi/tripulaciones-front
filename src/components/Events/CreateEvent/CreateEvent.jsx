@@ -116,4 +116,4 @@ const CreateEvent = () => {
   );
 };
 
-export default CreateEvent;
+export default CreateEvent
