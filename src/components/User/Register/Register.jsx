@@ -3,6 +3,9 @@ import "./Register.scss";
 import { register } from "../../../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 
+//TODO: añadir validacines (email valido, email unico, pass1=pass2) y alerts si la petición es rechazada (ej. email unico, usuario ya existe...)
+//TODO: añadir useNavigate > login
+
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -50,6 +53,8 @@ const Register = () => {
     //   }
     // };
   };
+
+
   return (
     <>
       <div>Register</div>

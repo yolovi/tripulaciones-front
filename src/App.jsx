@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Register from "./components/User/Register/Register";
 import Login from "./components/User/Login/Login";
-import PrivateZone from "./guards/PrivateZone";
+//import PrivateZone from "./guards/PrivateZone";
 import Profile from "./components/User/Profile/Profile";
 import AdminZone from "./guards/AdminZone";
 import Admin from "./components/Admin/Admin";
@@ -18,14 +18,15 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/event" element={<CreateEvent />} />
-          <Route
+          <Route path="/profile" element={<Profile />} />
+          {/* <Route
             path="/profile"
             element={
               <PrivateZone>
-                <Profile />
+                <profile />
               </PrivateZone>
             }
-          />
+          /> */}
           <Route
             path="/admin"
             element={

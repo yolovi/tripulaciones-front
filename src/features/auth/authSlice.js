@@ -47,17 +47,17 @@ export const authSlice = createSlice({
       //   state.token = null;
       //   state.userConnected = null;
       // })
-      // .addCase(getUserConnected.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(getUserConnected.fulfilled, (state, action) => {
-      //   state.userConnected = action.payload;
-      //   state.isLoading = false;
-      // })
-      // .addCase(getUserConnected.rejected, (state) => {
-      //   state.isError = true;
-      //   state.message = "error getUserConnected";
-      // })
+      .addCase(getUserConnected.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserConnected.fulfilled, (state, action) => {
+        state.userConnected = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getUserConnected.rejected, (state) => {
+        state.isError = true;
+        state.message = "error getUserConnected";
+      })
       // .addCase(updateUser.fulfilled, (state, action) => {
       //   state.userConnected = action.payload;
       // })
@@ -101,16 +101,16 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 //   }
 // });
 
-// export const getUserConnected = createAsyncThunk(
-//   "auth/getUserConnected",
-//   async () => {
-//     try {
-//       return await authService.getUserConnected();
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-// );
+export const getUserConnected = createAsyncThunk(
+  "auth/getUserConnected",
+  async () => {
+    try {
+      return await authService.getUserConnected();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 // export const getUserById = createAsyncThunk("auth/getUserById", async (_id) => {
 //   try {

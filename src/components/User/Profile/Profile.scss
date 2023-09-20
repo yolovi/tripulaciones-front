@@ -1,0 +1,49 @@
+@import "../../../index.scss";
+
+.card-profile-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid blue;
+}
+
+.profile-data {
+  padding: 20px;
+}
+
+.container-img-profile {
+  display: flex;
+  align-items: center;
+}
+
+.img-profile {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.container-post-profile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.divider-profile {
+  margin: 20px;
+}
+
+.footer-card-profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-updateUser {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  flex-direction: column;
+  align-content: center;
+}

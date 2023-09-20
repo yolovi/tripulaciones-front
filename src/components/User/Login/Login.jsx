@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, reset } from "../../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-// import {
-//   Alert,
-//   AlertIcon,
-//   AlertTitle,
-//   AlertDescription,
-// } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
 import "./Login.scss";
 // import petsSperience from "../../assets/images/Petspierince1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,26 +26,26 @@ const Login = () => {
   });
 
   const { email, password } = formData;
- // const { isSuccess, isError, message } = useSelector((state) => state.auth);
+ const { isSuccess, isError, message } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   // Renderizar el Alert
+  useEffect(() => {
+    // Renderizar el Alert
 
-  //   if (isSuccess) {
-  //     setTimeout(() => {
-  //       navigate("/profile");
-  //     }, 1500);
-  //   }
+    if (isSuccess) {
+      setTimeout(() => {
+        navigate("/profile");
+      }, 1500);
+    }
 
-  //   if (isError) {
-  //     setTimeout(() => {
-  //       dispatch(reset());
-  //     }, 3000);
-  //   }
-  // }, [isSuccess, isError, message, navigate, dispatch]);
+    if (isError) {
+      setTimeout(() => {
+        dispatch(reset());
+      }, 3000);
+    }
+  }, [isSuccess, isError, message, navigate, dispatch]);
 
   const onChange = (e) =>
     setFormData((prevState) => ({
@@ -60,7 +60,7 @@ const Login = () => {
 
   return (
     <>
-      {/* <div className="alert-container">
+      <div className="alert-container">
         {isError && (
           <Alert status="error">
             <AlertIcon />
@@ -76,41 +76,10 @@ const Login = () => {
             <AlertDescription>{message}</AlertDescription>
           </Alert>
         )}
-      </div> */}
+      </div>
 
       <div className="container-login">
         <div className="card-login">
-          {/* <div className="container-icons-left">
-            <section className="container-logo">
-              <img src={petsSperience} alt="Logo Petsperience" />
-            </section>
-            <section className="container-index">
-              <div>
-                <FontAwesomeIcon
-                  className="icon"
-                  icon={faCamera}
-                  style={{ color: "#ef6262" }}
-                />
-                <p>Take photos</p>
-              </div>
-              <div>
-                <FontAwesomeIcon
-                  className="icon"
-                  icon={faMobile}
-                  style={{ color: "#ef6262" }}
-                />
-                <p>Share moments</p>
-              </div>
-              <div>
-                <FontAwesomeIcon
-                  className="icon"
-                  icon={faFaceSmile}
-                  style={{ color: "#ef6262" }}
-                />
-                <p>Meet friends</p>
-              </div>
-            </section>
-          </div> */}
           <div className="form-data">
             <form className="form" onSubmit={onSubmit}>
               <p id="heading">Login</p>
