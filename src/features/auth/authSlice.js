@@ -34,15 +34,15 @@ export const authSlice = createSlice({
         state.isError = true;
         // state.message = action.payload;
       })
-      // .addCase(login.fulfilled, (state, action) => {
-      //   state.isSuccess = true;
-      //   state.token = action.payload.token;
-      //   state.userConnected = action.payload;
-      // })
-      // .addCase(login.rejected, (state, action) => {
-      //   state.isError = true;
-      //   state.message = action.payload;
-      // })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isSuccess = true;
+        state.token = action.payload.token;
+        state.userConnected = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isError = true;
+        state.message = action.payload;
+      })
       // .addCase(logout.fulfilled, (state) => {
       //   state.token = null;
       //   state.userConnected = null;
@@ -83,15 +83,15 @@ export const register = createAsyncThunk(
   }
 );
 
-// export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-//   try {
-//     return await authService.login(user);
-//   } catch (error) {
-//     console.error("login slice error", error.response.data.message);
-//     const message = error.response.data.message;
-//     return thunkAPI.rejectWithValue(message);
-//   }
-// });
+export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+  try {
+    return await authService.login(user);
+  } catch (error) {
+    console.error("login slice error", error.response.data.message);
+    const message = error.response.data.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
 // export const logout = createAsyncThunk("auth/logout", async () => {
 //   try {

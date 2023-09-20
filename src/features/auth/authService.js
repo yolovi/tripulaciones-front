@@ -7,15 +7,16 @@ const register = async (userData) => {
   return res.data;
 };
 
-// const login = async (userData) => {
-//   const res = await axios.post(API_URL + "/users/login", userData);
-//   if (res.data) {
-//     localStorage.setItem("user", JSON.stringify(res.data.user));
-//     localStorage.setItem("token", JSON.stringify(res.data.token));
-//     localStorage.setItem("userConnected", JSON.stringify(res.data.userObject));
-//   }
-//   return res.data;
-// };
+const login = async (userData) => {
+  const res = await axios.post(API_URL + "/users/loginUser", userData);
+  console.log(res.data)
+  if (res.data) {
+    // localStorage.setItem("user", JSON.stringify(res.data.user));
+    localStorage.setItem("token", JSON.stringify(res.data.token));
+    localStorage.setItem("userConnected", JSON.stringify(res.data.user));
+  }
+  return res.data;
+};
 
 // const logout = async () => {
 //   const token = JSON.parse(localStorage.getItem("token"));
@@ -69,7 +70,7 @@ const register = async (userData) => {
 
 const authService = {
   register,
-  //   login,
+    login,
   //   logout,
   //   getUserConnected,
   //   getUserById,
