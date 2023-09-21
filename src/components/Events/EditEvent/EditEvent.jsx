@@ -1,34 +1,32 @@
 import React, { useState } from "react";
+import { editEvent } from "../../../features/events/eventsSlice";
 import { useDispatch } from "react-redux";
-import { createEvent } from "../../../features/events/eventsSlice";
-import "./CreateEvent.scss";
+import { useParams } from "react-router-dom";
 
-const CreateEvent = () => {
+const EditEvent = () => {
+  const [formData, setFormData] = useState({
+    title: "",
+    body: "",
+    price: "0",
+    date: "00/00/00",
+    place: "",
+    capacity: "0",
+    speaker: "",
+    image: Image,
+    category:"",
+  });
   const dispatch = useDispatch();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    /* if (isError) {
-      return;
-    } */
-    const formData = new FormData();
-    try {
-      if (event.target.image.files[0])
-        formData.set("image", event.target.image.files[0]);
-      formData.set("title", event.target.title.value);
-      formData.set("body", event.target.body.value);
-      formData.set("price", event.target.price.value);
-      formData.set("date", event.target.date.value);
-      formData.set("place", event.target.place.value);
-      formData.set("capacity", event.target.capacity.value);
-      formData.set("speaker", event.target.speaker.value);
-      formData.set("category", event.target.category.value);
-
-      await dispatch(createEvent(formData));
-    } catch (error) {
-      console.error(error);
-    }
+  const { _id } = useParams();
+  const handleInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
   };
-
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(editEvent({ _id, formData }));
+  };
   return (
     <>
       {/* HAY QUE METER LAS ALERTAS */}
@@ -37,45 +35,46 @@ const CreateEvent = () => {
           type="text"
           placeholder="Nombre del evento"
           name="title"
-          required
+          onChange={handleInputChange}
         />
         <input
           type="text"
           placeholder="Descripción del evento"
           name="body"
-          required
+          onChange={handleInputChange}
         />
         <input
           type="number"
           placeholder="Precio de la entrada"
           name="price"
-          required
+          onChange={handleInputChange}
         />
         <input
           type="date"
           placeholder="Fecha"
           name="date"
-          required
+          onChange={handleInputChange}
         />
         <input
           type="text"
           placeholder="Lugar"
           name="place"
-          required
+          onChange={handleInputChange}
         />
         <input
           type="number"
           placeholder="Asistentes"
           name="capacity"
-          required
+          onChange={handleInputChange}
         />
         <input
           type="text"
           placeholder="Ponente"
           name="speaker"
-          required
+          onChange={handleInputChange}
         />
-        <select name="category" >
+        {/* AÑADIR ETIQUETAS PARA ELEGIR LA CATEGORIA DEL EVENTO */}
+        <select name="category" onChange={handleInputChange}>
           <optgroup label="Categoría">
             <option value="Finanzas e inversión">Finanzas e inversión</option>
             <option value="Gestión empresarial">Gestión empresarial</option>
@@ -88,12 +87,11 @@ const CreateEvent = () => {
             <option value="Sociedad">Sociedad</option>
           </optgroup>
         </select>
-
         <input type="file" name="image" id="file" />
-        <button type="submit">Enviar</button>
+        <button type="submit">Aceptar cambios</button>
       </form>
     </>
   );
 };
 
-export default CreateEvent;
+export default EditEvent;
