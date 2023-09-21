@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteEvent, getAll } from "../../../features/events/eventsSlice";
 import { Link } from "react-router-dom";
+import { Image } from "@chakra-ui/react";
 
 const GetEvents = () => {
   const dispatch = useDispatch();
@@ -26,12 +27,30 @@ const GetEvents = () => {
         return (
           <div key={event._id}>
             <h2>Título: {event.title}</h2>
-            <div className="container-img-event">
-              {event.image}
+            <div className="container-img-profile">
+              <div className="img-profile">
+                {event.image ? (
+                  <Image
+                    className="img-profile"
+                    objectFit="cover"
+                    maxW={{ base: "100%", sm: "200px" }}
+                    src={event.image_url}
+                    alt="avatar-profile-image"
+                  />
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
-            <button><Link to={"/eventdetail/" + event._id}>Vista detalle</Link></button>
-            <button><Link to={"/editevent/" + event._id}>Editar</Link></button>
-            <button onClick={() => dispatch(deleteEvent(event._id))}>Borrar</button>
+            <button>
+              <Link to={"/eventdetail/" + event._id}>Vista detalle</Link>
+            </button>
+            <button>
+              <Link to={"/editevent/" + event._id}>Editar</Link>
+            </button>
+            <button onClick={() => dispatch(deleteEvent(event._id))}>
+              Borrar
+            </button>
           </div>
         );
       })}
