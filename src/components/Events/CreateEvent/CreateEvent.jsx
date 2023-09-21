@@ -1,46 +1,27 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { createEvent } from "../../../features/events/eventsSlice";
 import "./CreateEvent.scss";
 
 const CreateEvent = () => {
-  const [formData, setFormData] = useState({
-    title: "",
-    body: "",
-    price: "0",
-    date: "00/00/00",
-    place: "",
-    capacity: "0",
-    speaker: "",
-    image: "",
-    category:"",
-  });
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handleInputChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    /* if (isError) {
+      return;
+    } */
     const formData = new FormData();
     try {
-      const imageFile = event.target.elements.image.files[0];
-      if (imageFile) {
-        formData.append("image", imageFile);
-      }
-      formData.append("title", event.target.elements.title.value);
-      formData.append("body", event.target.elements.body.value);
-      formData.append("price", event.target.elements.price.value);
-      formData.append("date", event.target.elements.date.value);
-      formData.append("place", event.target.elements.place.value);
-      formData.append("capacity", event.target.elements.capacity.value);
-      formData.append("speaker", event.target.elements.speaker.value);
-      formData.append("category", event.target.elements.category.value);
+      if (event.target.image.files[0])
+        formData.set("image", event.target.image.files[0]);
+      formData.set("title", event.target.title.value);
+      formData.set("body", event.target.body.value);
+      formData.set("price", event.target.price.value);
+      formData.set("date", event.target.date.value);
+      formData.set("place", event.target.place.value);
+      formData.set("capacity", event.target.capacity.value);
+      formData.set("speaker", event.target.speaker.value);
+      formData.set("category", event.target.category.value);
 
       await dispatch(createEvent(formData));
     } catch (error) {
@@ -56,46 +37,45 @@ const CreateEvent = () => {
           type="text"
           placeholder="Nombre del evento"
           name="title"
-          onChange={handleInputChange}
+          required
         />
         <input
           type="text"
           placeholder="Descripción del evento"
           name="body"
-          onChange={handleInputChange}
+          required
         />
         <input
           type="number"
           placeholder="Precio de la entrada"
           name="price"
-          onChange={handleInputChange}
+          required
         />
         <input
           type="date"
           placeholder="Fecha"
           name="date"
-          onChange={handleInputChange}
+          required
         />
         <input
           type="text"
           placeholder="Lugar"
           name="place"
-          onChange={handleInputChange}
+          required
         />
         <input
           type="number"
           placeholder="Asistentes"
           name="capacity"
-          onChange={handleInputChange}
+          required
         />
         <input
           type="text"
           placeholder="Ponente"
           name="speaker"
-          onChange={handleInputChange}
+          required
         />
-        {/* NO SE SI ES NECESARIO EL HANDLE INPUT */}
-        <select name="category" onChange={handleInputChange}>
+        <select name="category" >
           <optgroup label="Categoría">
             <option value="Finanzas e inversión">Finanzas e inversión</option>
             <option value="Gestión empresarial">Gestión empresarial</option>
@@ -116,4 +96,4 @@ const CreateEvent = () => {
   );
 };
 
-export default CreateEvent
+export default CreateEvent;
