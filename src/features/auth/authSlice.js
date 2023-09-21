@@ -58,13 +58,13 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = "error getUserConnected";
       })
-      // .addCase(updateUser.fulfilled, (state, action) => {
-      //   state.userConnected = action.payload;
-      // })
-      // .addCase(updateUser.rejected, (state) => {
-      //   state.isError = true;
-      //   state.message = "error updateUser";
-      // });
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.userConnected = action.payload;
+      })
+      .addCase(updateUser.rejected, (state) => {
+        state.isError = true;
+        state.message = "error updateUser";
+      });
   },
 });
 
@@ -120,16 +120,17 @@ export const getUserConnected = createAsyncThunk(
 //   }
 // });
 
-// export const updateUser = createAsyncThunk(
-//   "auth/updateUser",
-//   async (userData) => {
-//     try {
-//       const res = await authService.updateUser(userData);
-//       return res;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-// );
+export const updateUser = createAsyncThunk(
+  "auth/updateUser",
+  async (userData) => {
+    try {
+      console.log("slice", userData)
+      const res = await authService.updateUser(userData);
+      return res;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 export default authSlice.reducer;

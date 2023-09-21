@@ -1,7 +1,6 @@
 import "./profile.scss";
 import React, { useEffect } from "react";
-import { getUserConnected } from "../../../features/auth/authSlice";
-//import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
+import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
@@ -22,12 +21,21 @@ const Profile = () => {
 
   const { userConnected, isLoading } = useSelector((state) => state.auth);
   //TODO:  falta pintar los eventos guardados (wishlist) y los eventos a los que te has inscrito (como si hicieras un pedido)
-  const { avatar_url, avatar, name, surname, surname2, email, followers, eventIds, occupation,  } =
-    userConnected;
+  const {
+    avatar_url,
+    avatar,
+    name,
+    surname,
+    surname2,
+    email,
+    followers,
+    eventIds,
+    occupation,
+  } = userConnected;
 
   useEffect(() => {
     dispatch(getUserConnected());
-  }, [avatar, name, email]);
+  }, [avatar, name, surname, surname2, email]);
 
   if (isLoading) {
     return <Spinner size="lg" color="red.500" />;
@@ -42,6 +50,8 @@ const Profile = () => {
       if (event.target.avatar.files[0])
         formData.set("avatar", event.target.avatar.files[0]);
       formData.set("name", event.target.name.value);
+      formData.set("surname", event.target.surname.value);
+      formData.set("surname2", event.target.surname2.value);
       formData.set("email", event.target.email.value);
 
       dispatch(updateUser(formData));
@@ -82,11 +92,11 @@ const Profile = () => {
                   {name}
                 </Heading>
                 <div>
-                  <Text py="2" >{email}</Text>
+                  <Text py="2">{email}</Text>
                   {/* <Text py="2" >{phone}</Text> */}
                   <Text py="2">{surname}</Text>
                   <Text py="2">{surname2}</Text>
-                  <Text py="2" >{occupation}</Text>
+                  <Text py="2">{occupation}</Text>
                   {/* <Text py="2">
                     Followers: {followers ? followers.length : "0"}
                   </Text> */}
@@ -95,42 +105,50 @@ const Profile = () => {
 
               <CardFooter className="footer-card-profile">
                 <div className="modal-profile">
-                      <>
-                        <form
-                          className="form-updateUser"
-                          onSubmit={handleSubmit}
-                        >
-                          <input
-                            type="text"
-                            name="name"
-                            placeholder={name}
-                            defaultValue={name}
-                          />
-                          <input
-                            type="text"
-                            name="email"
-                            placeholder={email}
-                            defaultValue={email}
-                          />
-                          <input
-                            type="file"
-                            name="avatar"
-                            id="file"
-                            className="input-avatar"
-                          />
+                  <>
+                    <form className="form-updateUser" onSubmit={handleSubmit}>
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder={name}
+                        defaultValue={name}
+                      />
+                      <input
+                        type="text"
+                        name="surname"
+                        placeholder={surname}
+                        defaultValue={surname}
+                      />
+                      <input
+                        type="text"
+                        name="surname2"
+                        placeholder={surname2}
+                        defaultValue={surname2}
+                      />
+                      <input
+                        type="text"
+                        name="email"
+                        placeholder={email}
+                        defaultValue={email}
+                      />
+                      <input
+                        type="file"
+                        name="avatar"
+                        id="file"
+                        className="input-avatar"
+                      />
 
-                          <Button
-                            className="btn-card"
-                            type="submit"
-                            variant="solid"
-                            colorScheme="blue"
-                          >
-                            Send
-                          </Button>
-                        </form>
-                      </>                               
+                      <Button
+                        className="btn-card"
+                        type="submit"
+                        variant="solid"
+                        colorScheme="blue"
+                      >
+                        Send
+                      </Button>
+                    </form>
+                  </>
                 </div>
-
               </CardFooter>
             </Stack>
           </Card>
@@ -138,8 +156,7 @@ const Profile = () => {
 
         <Divider className="divider-profile" />
 
-
-{/* //FIXME: cambiar los posts por los eventos */}
+        {/* //FIXME: cambiar los posts por los eventos */}
         {/* <div className="container-post-profile"> 
           {postIds?.map((post, i) => {
             return (
