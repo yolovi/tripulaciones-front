@@ -11,6 +11,7 @@ import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
 import GetEvents from "./components/Events/GetEvents/GetEvents";
 import EditEvent from "./components/Events/EditEvent/EditEvent";
 import EventDetail from "./components/Events/EventDetail/EventDetail";
+import CreateQuestion from "./components/Questions/CreateQuestion/CreateQuestion";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/getevents" element={<GetEvents />} />  
           <Route path="/editevent/:_id" element={<EditEvent />} />  
           <Route path="/eventdetail/:_id" element={<EventDetail />} />  
+          <Route path="/createquestion" element={<CreateQuestion />} />  
           <Route
             path="/profile"
             element={
