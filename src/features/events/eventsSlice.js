@@ -30,7 +30,7 @@ export const deleteEvent = createAsyncThunk(
   "events/deleteEvent",
   async (eventId) => {
     try {
-        console.log(eventId)
+      console.log(eventId);
       return await eventsService.deleteEvent(eventId);
     } catch (error) {
       console.error(error);
@@ -38,7 +38,7 @@ export const deleteEvent = createAsyncThunk(
   }
 );
 export const getAll = createAsyncThunk("events/getAll", async () => {
-    try {
+  try {
     return await eventsService.getAll();
   } catch (error) {
     console.error(error);
@@ -47,6 +47,13 @@ export const getAll = createAsyncThunk("events/getAll", async () => {
 export const getById = createAsyncThunk("events/getById", async (_id) => {
   try {
     return await eventsService.getById(_id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+export const like = createAsyncThunk("events/like", async (_id) => {
+  try {
+    return await eventsService.like(_id);
   } catch (error) {
     console.error(error);
   }
@@ -68,14 +75,21 @@ export const eventsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getById.fulfilled, (state, action) => {
-        /* REVISAR */
         state.event = action.payload;
         state.isLoading = false;
       })
-
       .addCase(getById.pending, (state) => {
         state.isLoading = true;
-      });
+      })
+      .addCase(like.fulfilled, (state, action) => {
+        const events = state.events.map((event) => {
+          if (event._id === action.payload._id) {
+            event = action.payload;
+          }
+          return event;
+        });
+        state.event = events;
+      })
   },
 });
 

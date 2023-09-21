@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteEvent, getAll } from "../../../features/events/eventsSlice";
+import { deleteEvent, getAll, like } from "../../../features/events/eventsSlice";
 import { Link } from "react-router-dom";
-import { Image } from "@chakra-ui/react";
+import { Image, Spinner } from "@chakra-ui/react";
+import { HeartOutlined } from "@ant-design/icons";
 
 const GetEvents = () => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { events, isLoading } = useSelector((state) => state.events); // Accede a la lista de eventos desde el estado de Redux
   useEffect(() => {
@@ -24,6 +26,7 @@ const GetEvents = () => {
   return (
     <div>
       {events.map((event) => {
+        const isAlreadyLiked = event.likes?.includes(user?.user._id);
         return (
           <div key={event._id}>
             <h2>Título: {event.title}</h2>
@@ -51,6 +54,11 @@ const GetEvents = () => {
             <button onClick={() => dispatch(deleteEvent(event._id))}>
               Borrar
             </button>
+            {isAlreadyLiked ? (
+              <HeartFilled onClick={() => console.log("dislike")} />
+            ) : (
+              <HeartOutlined onClick={() => dispatch(like(event._id))} />
+            )}
           </div>
         );
       })}
