@@ -39,8 +39,8 @@ const getUserConnected = async () => {
       authorization: token,
     },
   });
-  console.log(res);
-  return res.data.getUser;
+  console.log(res.data);
+  return res.data;
 };
 
 // const getUserById = async (_id) => {
