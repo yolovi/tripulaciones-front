@@ -18,19 +18,19 @@ const login = async (userData) => {
   return res.data;
 };
 
-// const logout = async () => {
-//   const token = JSON.parse(localStorage.getItem("token"));
-//   const res = await axios.delete(API_URL + "/users/logout", {
-//     headers: {
-//       authorization: token,
-//     },
-//   });
+const logout = async () => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.delete(API_URL + "/users/logout", {
+    headers: {
+      authorization: token,
+    },
+  });
 
-//   if (res.data) {
-//     localStorage.clear();
-//   }
-//   return res.data;
-// };
+  if (res.data) {
+    localStorage.clear();
+  }
+  return res.data;
+};
 
 const getUserConnected = async () => {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -39,7 +39,6 @@ const getUserConnected = async () => {
       authorization: token,
     },
   });
-  console.log(res.data);
   return res.data;
 };
 
@@ -69,7 +68,7 @@ const updateUser = async (userData) => {
 const authService = {
   register,
   login,
-  //   logout,
+    logout,
   getUserConnected,
   //   getUserById,
   updateUser,

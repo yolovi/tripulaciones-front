@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import { logout } from "../../features/auth/authSlice";
+import { logout } from "../../features/auth/authSlice";
 import BtnTop from "../Tools/BtnTop/BtnTop";
 import "./Header.scss";
 import logoImg from "../../assets/images/default-event.png";
