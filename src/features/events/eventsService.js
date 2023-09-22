@@ -14,15 +14,11 @@ const createEvent = async (formData) => {
 const editEvent = async (obj) => {
   const token = JSON.parse(localStorage.getItem("token"));
 
-  const res = await axios.put(
-    API_URL + "/events/id/" + obj._id,
-    obj.formData,
-    {
-      headers: {
-        Authorization: token,
-      },
-    }
-  );
+  const res = await axios.put(API_URL + "/events/id/" + obj._id, obj.formData, {
+    headers: {
+      Authorization: token,
+    },
+  });
   return res.data;
 };
 const deleteEvent = async (eventId) => {
@@ -48,13 +44,41 @@ const getById = async (_id) => {
   });
   return res.data;
 };
+const like = async (_id) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.put(
+    API_URL + "/events/like/" + _id,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
 
+  return res.data;
+};
+const dislike = async (_id) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.put(
+    API_URL + "/events/dislike/" + _id,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+  return res.data;
+};
 const eventsService = {
   createEvent,
   editEvent,
   deleteEvent,
   getAll,
   getById,
+  like,
+  dislike,
 };
 
 export default eventsService;
