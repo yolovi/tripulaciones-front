@@ -10,23 +10,31 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
-    surname2: "",
     email: "",
+    bday: "", //input modificable + calendario
+    tel: "", //desde Api externa (ver trello)
+    ecosystem: "", //radiobutton yes/no BOOLEAN true/false
+    occupation: "", //desplegable (segun opcion si ha elegido si/no en ecosystem)
     password: "",
     password2: "",
-    occupation: "",
-    role: "",
+    role: "", //predeterminado user
+    acceptPolicity:"", // check box BOOLEAN true/false
+    acceptCommunication:"", // check box BOOLEAN true/false
   });
 
   const {
     name,
     surname,
-    surname2,
     email,
+    bday,
+    tel,
+    ecosystem,
     password,
     password2,
     occupation,
     role,
+    acceptPolicity,
+    acceptCommunication,
   } = formData;
 
   const dispatch = useDispatch();
@@ -54,7 +62,6 @@ const Register = () => {
     // };
   };
 
-
   return (
     <>
       <div>Register</div>
@@ -70,13 +77,6 @@ const Register = () => {
           type="text"
           name="surname"
           value={surname}
-          placeholder="Insert your surname"
-          onChange={onChange}
-        />
-        <input
-          type="text"
-          name="surname2"
-          value={surname2}
           placeholder="Insert your surname"
           onChange={onChange}
         />
