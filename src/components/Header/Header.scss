@@ -54,16 +54,19 @@ search:hover {
 }
 
 .container-drawer {
-  background-color: rgb(207, 207, 207) !important;
-  opacity: 0.6 !important;
+
+ border: 1px dashed red ;
+ padding: 10px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  
 
   .btn-drawer-header {
     color: $salmon;
     background-color: transparent;
     text-align: center;
-    //leading-trim: both;
-    //text-edge: cap;
     font-family: Atkinson Hyperlegible;
     font-size: 20px;
     font-style: normal;

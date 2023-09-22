@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteEvent,
-  dislike,
   getAll,
-  like,
 } from "../../../features/events/eventsSlice";
 import { Link } from "react-router-dom";
 import { Image, Spinner } from "@chakra-ui/react";
-import { HeartFilled, HeartOutlined } from "@ant-design/icons";
+
 
 const GetEvents = () => {
   const { user } = useSelector((state) => state.auth);
