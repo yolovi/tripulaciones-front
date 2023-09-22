@@ -12,8 +12,8 @@ import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 const GetEvents = () => {
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
   const { events, isLoading } = useSelector((state) => state.events); // Accede a la lista de eventos desde el estado de Redux
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAll());
   }, []);
@@ -31,14 +31,6 @@ const GetEvents = () => {
   return (
     <div>
       {events.map((event) => {
-        const isAlreadyLiked = event.likes?.includes(user?.user._id);
-        const handleLikeDislike = () => {
-          if (isAlreadyLiked) {
-            dispatch(dislike(event._id));
-          } else {
-            dispatch(like(event._id));
-          }
-        };
         return (
           <div key={event._id}>
             <h2>Título: {event.title}</h2>
@@ -66,11 +58,6 @@ const GetEvents = () => {
             <button onClick={() => dispatch(deleteEvent(event._id))}>
               Borrar
             </button>
-            {isAlreadyLiked ? (
-              <HeartFilled onClick={handleLikeDislike} />
-            ) : (
-              <HeartOutlined onClick={handleLikeDislike} />
-            )}
           </div>
         );
       })}

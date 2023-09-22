@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getById } from "../../../features/events/eventsSlice";
 import { useParams } from "react-router-dom";
 import { Spinner } from "@chakra-ui/react";
+import LikeEvent from "../LikeEvent/LikeEvent";
 
 const EventDetail = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const EventDetail = () => {
     <div key={event._id}>
       <h2>Título: {event.title}</h2>
       <h2>Cuerpo: {event.body}</h2>
+      <LikeEvent/>
     </div>
   );
 };

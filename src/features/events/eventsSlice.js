@@ -89,11 +89,17 @@ export const eventsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(like.fulfilled, (state, action) => {
-        state.event = action.payload;
+        state.event = {
+          ...action.payload,
+        };
+        console.log("slice like", state.event);
       })
       .addCase(dislike.fulfilled, (state, action) => {
-        state.event = action.payload;
-      })
+        state.event = {
+          ...action.payload,
+        };
+        console.log("slice dislike", state.event);
+      });
   },
 });
 
