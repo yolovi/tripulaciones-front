@@ -1,17 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteEvent,
-  dislike,
-  getAll,
-  like,
-} from "../../../features/events/eventsSlice";
+import { deleteEvent, getAll } from "../../../features/events/eventsSlice";
 import { Link } from "react-router-dom";
 import { Image, Spinner } from "@chakra-ui/react";
-import { HeartFilled, HeartOutlined } from "@ant-design/icons";
-
+import "./GetEvents.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 const GetEvents = () => {
-  const { user } = useSelector((state) => state.auth);
   const { events, isLoading } = useSelector((state) => state.events); // Accede a la lista de eventos desde el estado de Redux
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,12 +23,17 @@ const GetEvents = () => {
       />
     );
   }
+  /* FORMATEO FECHA */
+  const formatDate = (isoDateString) => {
+    const options = { day: "numeric", month: "long" };
+    return new Date(isoDateString).toLocaleDateString("es-ES", options);
+  };
+
   return (
-    <div>
+    <div className="eventos-grupo">
       {events.map((event) => {
         return (
-          <div key={event._id}>
-            <h2>Título: {event.title}</h2>
+          <div key={event._id} className="evento-individual">
             <div className="container-img-profile">
               <div className="img-profile">
                 {event.image ? (
@@ -49,7 +49,21 @@ const GetEvents = () => {
                 )}
               </div>
             </div>
-            <button>
+            <div className="info-evento">
+              <div className="category">
+                <div className="texto">
+                  {event.category} - <span id="edem">EDEM</span>
+                </div>
+                <div className="flecha">
+                  <span><FontAwesomeIcon icon={faChevronRight} /></span>
+                </div>
+              </div>
+              <div className="fecha">
+                {formatDate(event.date)} <span className="hora">17:00- 19:30</span>
+              </div>
+            </div>
+            {/* BOTONES COMENTADOS */}
+            {/* <button>
               <Link to={"/eventdetail/" + event._id}>Vista detalle</Link>
             </button>
             <button>
@@ -57,7 +71,7 @@ const GetEvents = () => {
             </button>
             <button onClick={() => dispatch(deleteEvent(event._id))}>
               Borrar
-            </button>
+            </button> */}
           </div>
         );
       })}
