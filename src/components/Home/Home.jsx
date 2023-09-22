@@ -1,6 +1,6 @@
 import React from "react";
 import GetEvents from "../Events/GetEvents/GetEvents";
-
+import "./Home.scss"
 const Home = () => {
   return (
     <>

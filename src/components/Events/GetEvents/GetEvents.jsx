@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteEvent, getAll } from "../../../features/events/eventsSlice";
 import { Link } from "react-router-dom";
-import { Image, Spinner } from "@chakra-ui/react";
+import { Image, LinkOverlay, Spinner } from "@chakra-ui/react";
 import "./GetEvents.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -34,36 +34,40 @@ const GetEvents = () => {
       {events.map((event) => {
         return (
           <div key={event._id} className="evento-individual">
-            <div className="container-img-profile">
-              <div className="img-profile">
-                {event.image ? (
-                  <Image
-                    className="img-profile"
-                    objectFit="cover"
-                    maxW={{ base: "100%", sm: "200px" }}
-                    src={event.image_url}
-                    alt="avatar-profile-image"
-                  />
-                ) : (
-                  <div></div>
-                )}
-              </div>
-            </div>
-            <div className="info-evento">
-              <div className="category">
-                <div className="texto">
-                  {event.category} - <span id="edem">EDEM</span>
-                </div>
-                <div className="flecha">
-                  <span><FontAwesomeIcon icon={faChevronRight} /></span>
+            <LinkOverlay href={`/eventdetail/${event._id}`}>
+              <div className="container-img-profile">
+                <div className="img-profile">
+                  {event.image ? (
+                    <Image
+                      className="img-profile"
+                      objectFit="cover"
+                      maxW={{ base: "100%", sm: "200px" }}
+                      src={event.image_url}
+                      alt="avatar-profile-image"
+                    />
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </div>
-              <div className="fecha">
-                {formatDate(event.date)} <span className="hora">17:00- 19:30</span>
+              <div className="info-evento">
+                <div className="category">
+                  <div className="texto">
+                    {event.category} - <span id="edem">EDEM</span>
+                  </div>
+                  <div className="flecha">
+                    <span>
+                      <FontAwesomeIcon icon={faChevronRight} />
+                    </span>
+                  </div>
+                </div>
+                <div className="fecha">
+                  {formatDate(event.date)}{" "}
+                  <span className="hora">17:00- 19:30</span>
+                </div>
               </div>
-            </div>
-            {/* BOTONES COMENTADOS */}
-            {/* <button>
+              {/* BOTONES COMENTADOS */}
+              {/* <button>
               <Link to={"/eventdetail/" + event._id}>Vista detalle</Link>
             </button>
             <button>
@@ -72,6 +76,7 @@ const GetEvents = () => {
             <button onClick={() => dispatch(deleteEvent(event._id))}>
               Borrar
             </button> */}
+            </LinkOverlay>
           </div>
         );
       })}
