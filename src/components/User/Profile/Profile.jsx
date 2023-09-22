@@ -1,4 +1,4 @@
-import "./profile.scss";
+import "./Profile.scss";
 import React, { useEffect } from "react";
 import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
