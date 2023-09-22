@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteEvent, getAll, like } from "../../../features/events/eventsSlice";
+import {
+  deleteEvent,
+  dislike,
+  getAll,
+  like,
+} from "../../../features/events/eventsSlice";
 import { Link } from "react-router-dom";
 import { Image, Spinner } from "@chakra-ui/react";
-import { HeartOutlined } from "@ant-design/icons";
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 const GetEvents = () => {
   const { user } = useSelector((state) => state.auth);
@@ -27,6 +32,13 @@ const GetEvents = () => {
     <div>
       {events.map((event) => {
         const isAlreadyLiked = event.likes?.includes(user?.user._id);
+        const handleLikeDislike = () => {
+          if (isAlreadyLiked) {
+            dispatch(dislike(event._id));
+          } else {
+            dispatch(like(event._id));
+          }
+        };
         return (
           <div key={event._id}>
             <h2>Título: {event.title}</h2>
@@ -55,9 +67,9 @@ const GetEvents = () => {
               Borrar
             </button>
             {isAlreadyLiked ? (
-              <HeartFilled onClick={() => console.log("dislike")} />
+              <HeartFilled onClick={handleLikeDislike} />
             ) : (
-              <HeartOutlined onClick={() => dispatch(like(event._id))} />
+              <HeartOutlined onClick={handleLikeDislike} />
             )}
           </div>
         );

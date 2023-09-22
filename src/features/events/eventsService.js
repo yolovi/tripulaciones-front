@@ -45,7 +45,7 @@ const getById = async (_id) => {
   return res.data;
 };
 const like = async (_id) => {
-  const token = JSON.parse(localStorage.getItem("user"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const res = await axios.put(
     API_URL + "/events/like/" + _id,
     {},
@@ -58,7 +58,19 @@ const like = async (_id) => {
 
   return res.data;
 };
-
+const dislike = async (_id) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.put(
+    API_URL + "/events/dislike/" + _id,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+  return res.data;
+};
 const eventsService = {
   createEvent,
   editEvent,
@@ -66,6 +78,7 @@ const eventsService = {
   getAll,
   getById,
   like,
+  dislike,
 };
 
 export default eventsService;
