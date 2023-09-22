@@ -43,10 +43,10 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      // .addCase(logout.fulfilled, (state) => {
-      //   state.token = null;
-      //   state.userConnected = null;
-      // })
+      .addCase(logout.fulfilled, (state) => {
+        state.token = null;
+        state.userConnected = null;
+      })
       .addCase(getUserConnected.pending, (state) => {
         state.isLoading = true;
       })
@@ -93,13 +93,13 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
-// export const logout = createAsyncThunk("auth/logout", async () => {
-//   try {
-//     return await authService.logout();
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
+export const logout = createAsyncThunk("auth/logout", async () => {
+  try {
+    return await authService.logout();
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export const getUserConnected = createAsyncThunk(
   "auth/getUserConnected",

@@ -12,28 +12,31 @@ import GetEvents from "./components/Events/GetEvents/GetEvents";
 import EditEvent from "./components/Events/EditEvent/EditEvent";
 import EventDetail from "./components/Events/EventDetail/EventDetail";
 import CreateQuestion from "./components/Questions/CreateQuestion/CreateQuestion";
+import Header from "./components/Header/Header";
+import PrivateZone from "./guards/PrivateZone";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      <Header/>
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
+          //<Route path="/profile" element={<Profile />} />
           <Route path="/createevent" element={<CreateEvent />} />
           <Route path="/getevents" element={<GetEvents />} />
           <Route path="/editevent/:_id" element={<EditEvent />} />
           <Route path="/eventdetail/:_id" element={<EventDetail />} />
           <Route path="/createquestion" element={<CreateQuestion />} />
-          {/* <Route
+          <Route
             path="/profile"
             element={
               <PrivateZone>
                 <profile />
               </PrivateZone>
             }
-            /> */}
+            />
           <Route
             path="/admin"
             element={
