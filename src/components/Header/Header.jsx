@@ -14,7 +14,6 @@ import { logout } from "../../features/auth/authSlice";
 import BtnTop from "../Tools/BtnTop/BtnTop";
 import "./Header.scss";
 import logoImg from "../../assets/images/default-event.png";
-//import logoImgText from "../../assets/images/Petspierince1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faHouse, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
@@ -48,12 +47,12 @@ const Header = () => {
     <nav className="nav-container">
       <div className="container-drawer">
         <>
-          <Button
+          <Link
             className="btn-drawer-header"
             onClick={onOpen}
           >
-           <FontAwesomeIcon icon={faBars} size= "lg" style={{color: "rgb(239, 98, 98)"}} />
-          </Button>
+           <span>MENÚ</span>
+          </Link>
           <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
             <DrawerOverlay />
             <DrawerContent>
