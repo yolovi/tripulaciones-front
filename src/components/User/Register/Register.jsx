@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
 import "./Register.scss";
+import "react-phone-number-input/style.css";
+import { useState } from "react";
+import PhoneInput from "react-phone-number-input";
+//import DatePicker from "react-date-picker";
 import { register } from "../../../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import {
@@ -18,24 +21,21 @@ import SelectForm from "../../Tools/SelectForm/SelectForm";
 //TODO: añadir useNavigate > login
 
 const Register = () => {
-
- 
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
     email: "",
     bday: "", //input modificable + calendario
     tel: "", //desde Api externa (ver trello)
-    ecosystem : "", //radiobutton yes/no BOOLEAN true/false
+    ecosystem: "", //radiobutton yes/no BOOLEAN true/false
     occupation: "", //desplegable (segun opcion si ha elegido si/no en ecosystem)
     password: "",
     password2: "",
     role: "user",
-    acceptPolicity: false , // check box BOOLEAN true/false
+    acceptPolicity: false, // check box BOOLEAN true/false
     acceptCommunication: false, // check box BOOLEAN true/false
   });
 
-  
   const {
     name,
     surname,
@@ -49,11 +49,8 @@ const Register = () => {
     acceptPolicity,
     acceptCommunication,
   } = formData;
- 
-  const dispatch = useDispatch();
-  console.log("P", acceptPolicity)
-  console.log("C", acceptCommunication)
 
+  const dispatch = useDispatch();
 
   const mdeTrue = [
     "Empleado de EDEM",
@@ -70,15 +67,12 @@ const Register = () => {
     "Estudiante",
   ];
 
-
-
   const onChange = (e) => {
-
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log("onChange", e.target.value)
+    console.log("onChange", e.target.value);
   };
 
   const onSubmit = (e) => {
@@ -104,58 +98,59 @@ const Register = () => {
       <h3>Register</h3>
       <form onSubmit={onSubmit} className="form-register">
         <div className="register-data">
-          <input
-            type="text"
-            name="name"
-            value={name}
-            placeholder="Insert your name*"
-            onChange={onChange}
-            required
-          />
-          <input
-            type="text"
-            name="surname"
-            value={surname}
-            placeholder="Insert your surname*"
-            onChange={onChange}
-          />
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Insert your email*"
-            onChange={onChange}
-          />
-          <input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Insert your password*"
-            onChange={onChange}
-          />
-          <input
-            type="password"
-            name="password2"
-            value={password2}
-            placeholder="Repeat your password*"
-            onChange={onChange}
-          />
+          <label>
+            Nombre*
+            <input
+              type="text"
+              name="name"
+              value={name}
+              placeholder="Ej: Irene"
+              onChange={onChange}
+              required
+            />
+          </label>
+          <label>
+            Apellidos*
+            <input
+              type="text"
+              name="surname"
+              value={surname}
+              placeholder="Ej: Pérez Gomez"
+              onChange={onChange}
+              required
+            />
+          </label>
+          <label>
+            Correo*:
+            <input
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Indica tu correo electrónico"
+              onChange={onChange}
+            />
+          </label>
+          <label>
+            Edad*:
+            <input type="date" name="bday" value={bday} onChange={onChange} />
+          </label>
         </div>
         <div className="select-ecosystem">
           <FormControl as="fieldset">
             <FormLabel as="legend">
               ¿Formas parte del ecosistema MDE?*
             </FormLabel>
-            <RadioGroup onChange={(e)=> {
-              setFormData({
-                ...formData,
-                ecosystem: e
-              })} 
-
-            }
-            value={ecosystem}>
+            <RadioGroup
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  ecosystem: e,
+                });
+              }}
+              value={ecosystem}
+            >
               <HStack spacing="24px">
-                <Radio colorScheme="facebook" value="1">
+                <Radio isRequired colorScheme="facebook" value="1">
                   Sí
                 </Radio>
                 <Radio colorScheme="facebook" value="2">
@@ -168,46 +163,83 @@ const Register = () => {
         {
           //con el && me ahorro hacer un ternario y tener que poner : null en el else
 
-          (ecosystem === "1" || ecosystem === "2") &&
-
-          <div className="actual-situation">
-            <SelectForm
-              className="selectForm"
-              placeholder = "Seleccione una Opcion"
-              options={ecosystem === "1" ? mdeTrue : mdeFalse}
-              selectedValue= {occupation}
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  occupation: e.target.value,
-                });
-              }}
-            />
-          </div>
+          (ecosystem === "1" || ecosystem === "2") && (
+            <div className="actual-situation">
+              <SelectForm
+                className="selectForm"
+                placeholder="Seleccione una Opcion"
+                options={ecosystem === "1" ? mdeTrue : mdeFalse}
+                selectedValue={occupation}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    occupation: e.target.value,
+                  });
+                }}
+              />
+            </div>
+          )
         }
+        <label>
+          Número de teléfono*
+          <PhoneInput
+            placeholder="Indica tu número de teléfono"
+            name="tel"
+            value={tel}
+            onChange=
+            {(e) => {
+              setFormData({
+                ...formData,
+                tel: e,
+              });
+            }}
+          />
+        </label>
+        <label>
+          Contraseña*
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Indica tu contraseña"
+            onChange={onChange}
+          />
+        </label>
+        <label>
+          Repite tu contraseña*
+          <input
+            type="password"
+            name="password2"
+            value={password2}
+            placeholder="Repeat your password*"
+            onChange={onChange}
+          />
+        </label>
 
         <Stack pl={6} mt={1} spacing={1}>
           <CustomCheckbox
             label="acceptPolicity"
             checked={acceptPolicity}
-            onChange={ () => setFormData({
+            onChange={() =>
+              setFormData({
                 ...formData,
-                acceptPolicity: !acceptPolicity
+                acceptPolicity: !acceptPolicity,
               })
             }
             text="Acepto el Aviso Legal y la Política de Privacidad"
           />
           <CustomCheckbox
-          checked = {acceptCommunication}
-          onChange={() => setFormData({
-              ...formData,
-              acceptCommunication: !acceptCommunication
-            })
-          }
-            text="acepto comunicacion"
+            checked={acceptCommunication}
+            onChange={() =>
+              setFormData({
+                ...formData,
+                acceptCommunication: !acceptCommunication,
+              })
+            }
+            text="Acepto que EDEM me envíe comunicaciones electrónicas sobre los Cursos, jornadas, seminarios organizados por EDEM y aquellos vinculados con el emprendimiento, inversión y liderazgo desarrollados en MARINA DE EMPRESAS."
           />
         </Stack>
-        <Button disabled={ ecosystem !== "" ||!acceptPolicity} type="submit">
+        <Button disabled={ecosystem !== "" || !acceptPolicity} type="submit">
           Register
         </Button>
       </form>

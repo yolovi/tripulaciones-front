@@ -1,9 +1,11 @@
 @import "../../../index.scss";
 
 .container-check {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
   }
   
   .container-check input {

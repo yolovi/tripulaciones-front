@@ -27,10 +27,12 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
+        console.log("slice yes",action)
         state.isSuccess = true;
         // state.message = action.payload.message;
       })
       .addCase(register.rejected, (state, action) => {
+        console.log("slice no",action)
         state.isError = true;
         // state.message = action.payload;
       })
@@ -74,7 +76,8 @@ export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
     try {
-
+console.log("hola")
+console.log("slice",user)
       return await authService.register(user);
     } catch (error) {
       const message = error.response.data.msg;

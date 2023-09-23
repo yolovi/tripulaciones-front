@@ -7,25 +7,25 @@ const SelectForm = ({
   placeholder = "",
   selectedValue = "",
   options = [],
-  // name = "Select"
 }) => {
   return (
     <div className="custom-select">
-      <Select onChange={onChange}
-      //  name={name}
+      <Select
+        onChange={onChange}
+        variant="unstyled"
         value={selectedValue}
-         placeholder={placeholder}
-         >
-            {options.map((elem, i) => {
-            return (
+        placeholder={placeholder}
+      >
+        {options.map((elem, i) => {
+          return (
             <option key={i} value={elem}>
-               {elem}
+              {elem}
             </option>
           );
         })}
       </Select>
     </div>
-  )
+  );
 
   // return (
   //   <div className="custom-select">

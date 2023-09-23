@@ -13,6 +13,7 @@
 .custom-select select {
   flex: 1;
   color: $blue;
+  border-radius: 0;
   border: none; /* Elimina el borde por defecto */
   border-bottom: 1px solid $blue; /* Añade un borde inferior azul */
   background: transparent;
@@ -22,11 +23,12 @@
 }
 
 .custom-select select:focus {
-  border-bottom: 1px solid$blue; /* Aplica un borde inferior azul cuando el select tiene el foco */
-
+  border-bottom: 1px solid $blue; /* Aplica un borde inferior azul cuando el select tiene el foco */
   border-radius: none;
+
 }
 
 .custom-select select option:hover {
   background: pink !important; /* Cambia el fondo a rosa al hacer hover */
+  outline: none;
 }
