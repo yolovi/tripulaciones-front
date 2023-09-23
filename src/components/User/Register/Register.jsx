@@ -95,7 +95,7 @@ const Register = () => {
 
   return (
     <div className="registro-container">
-      <h3>Register</h3>
+      <h2>Registrate</h2>
       <form onSubmit={onSubmit} className="form-register">
         <div className="register-data">
           <label>
@@ -121,7 +121,7 @@ const Register = () => {
             />
           </label>
           <label>
-            Correo*:
+            Correo*
             <input
               type="email"
               name="email"
@@ -131,15 +131,13 @@ const Register = () => {
             />
           </label>
           <label>
-            Edad*:
+            Edad*
             <input type="date" name="bday" value={bday} onChange={onChange} />
           </label>
         </div>
         <div className="select-ecosystem">
           <FormControl as="fieldset">
-            <FormLabel as="legend">
-              ¿Formas parte del ecosistema MDE?*
-            </FormLabel>
+            <label>¿Formas parte del ecosistema MDE?*</label>
             <RadioGroup
               onChange={(e) => {
                 setFormData({
@@ -186,8 +184,7 @@ const Register = () => {
             placeholder="Indica tu número de teléfono"
             name="tel"
             value={tel}
-            onChange=
-            {(e) => {
+            onChange={(e) => {
               setFormData({
                 ...formData,
                 tel: e,

@@ -9,7 +9,7 @@ const CustomCheckbox = ({
 }) => {
   return (
     <div>
-      <label className="container-check">
+      <label className="container-check" >
         <input
           type="checkbox"
           name={label}

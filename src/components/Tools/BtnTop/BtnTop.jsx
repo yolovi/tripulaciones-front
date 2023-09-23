@@ -29,7 +29,7 @@ const BtnTop = () => {
     <>
       {showButton && (
         <div onClick={scrollToTop}>
-          <button className="btn-top" ><FontAwesomeIcon icon={faChevronUp} /><br/> Up </button>
+          <button className="btn-top"  ><FontAwesomeIcon icon={faChevronUp}   size="xl"/> </button>
         </div>
       )}
     </>
