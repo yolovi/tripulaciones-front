@@ -24,8 +24,6 @@
     color: $light-Grey;
     font-family: $primary-font;
     font-size: 18px;
-
-
   }
 
   .form-register {
@@ -85,24 +83,4 @@
       }
     }
   }
-}
-
-
-.eyePassBtn {
-  border: none;
-  background-color:none;
-
-  &:focus {
-    outline: none; /* Quitar el borde de enfoque */
-  }
-}
-
-
-button:focus {
-  outline: none; /* Quitar el borde de enfoque */
-}
-span {
-  color: $blue;
-  font-family: $primary-font;
-  font-size: 12px;
 }
