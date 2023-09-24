@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  Avatar,
   Button,
   Divider,
   Heading,
@@ -10,6 +11,7 @@ import {
   Spinner,
   Stack,
   Text,
+  WrapItem,
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
@@ -73,13 +75,14 @@ const Profile = () => {
             <div className="container-img-profile">
               <div className="img-profile">
                 {avatar_url ? (
-                  <Image
-                    className="img-profile"
-                    objectFit="cover"
-                    maxW={{ base: "100%", sm: "200px" }}
-                    src={avatar_url}
-                    alt="avatar-profile-image"
-                  />
+                  <WrapItem>
+                    <Avatar
+                      size="2xl"
+                      name={name}
+                      src={avatar_url}
+                      alt="avatar-profile-image"
+                    />
+                  </WrapItem>
                 ) : (
                   <div></div>
                 )}
