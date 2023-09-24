@@ -14,15 +14,11 @@ import {
   FormLabel,
   HStack,
   Input,
-  InputGroup,
-  InputRightElement,
 } from "@chakra-ui/react";
 import CustomCheckbox from "../../Tools/CustomCheckbox/CustomCheckbox";
 import SelectForm from "../../Tools/SelectForm/SelectForm";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import PasswordEye from "../../Tools/PasswordEye/PasswordEye";
 
 //TODO: añadir validacines (email valido, email unico, pass1=pass2) y alerts si la petición es rechazada (ej. email unico, usuario ya existe...)
 //TODO: añadir useNavigate > login
@@ -57,9 +53,6 @@ const Register = () => {
     acceptCommunication,
   } = formData;
 
-  // const [show, setShow] = useState(false);
-  // const handleClick = () => setShow(!show);
-
   const dispatch = useDispatch();
 
   const mdeTrue = [
@@ -76,26 +69,6 @@ const Register = () => {
     "Desempleado/a",
     "Estudiante",
   ];
-
-  // function PasswordInput() {
-  //   const [show, setShow] = React.useState(false)
-  //   const handleClick = () => setShow(!show)
-
-  //   return (
-  // <InputGroup size='md'>
-  //   <Input
-  //     pr='4.5rem'
-  //     type={show ? 'text' : 'password'}
-  //     placeholder='Enter password'
-  //   />
-  //   <InputRightElement width='4.5rem'>
-  //     <Button h='1.75rem' size='sm' onClick={handleClick}>
-  //       {show ? 'Hide' : 'Show'}
-  //     </Button>
-  //   </InputRightElement>
-  // </InputGroup>
-  //   )
-  // }
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -115,7 +88,7 @@ const Register = () => {
     //   if (password !== password2) {
     //     return notification.error({
     //       message: "Error",
-    //       description: "Las contraseñas no coinciden",
+    //       description: "Passwords do not match",
     //     });
     //   } else {
     //       return dispatch(register(formData));
@@ -167,7 +140,7 @@ const Register = () => {
             />
           </label>
           <label>
-            Fecha de nacimiento*
+            Edad*
             <Input
               type="date"
               name="bday"
@@ -205,7 +178,7 @@ const Register = () => {
               value={ecosystem}
             >
               <HStack spacing="24px">
-                <Radio colorScheme="facebook" value="1">
+                <Radio isRequired colorScheme="facebook" value="1">
                   Sí
                 </Radio>
                 <Radio colorScheme="facebook" value="2">
@@ -221,7 +194,6 @@ const Register = () => {
           (ecosystem === "1" || ecosystem === "2") && (
             <div className="actual-situation">
               <SelectForm
-                isRequired
                 className="selectForm"
                 placeholder="Indica tu situación actual"
                 options={ecosystem === "1" ? mdeTrue : mdeFalse}
@@ -237,57 +209,61 @@ const Register = () => {
           )
         }
 
-        <PasswordEye
-          label="Contraseña*"
-          placeholder="Indica tu contraseña"
-          name="password"
-          value={password}
-          onChange={onChange}
-          isRequired
-        />
-        <span>
-          Debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y
-          1 carácter especial
-        </span>
+        <label>
+          Contraseña*
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Indica tu contraseña"
+            _placeholder={{ opacity: 1, color: "gray.400" }}
+            variant="unstyled"
+            onChange={onChange}
+          />
+          <FontAwesomeIcon icon={faEyeSlash} />
+        </label>
+        <label>
+          Repite tu contraseña*
+          <Input
+            type="password"
+            name="password2"
+            value={password2}
+            placeholder="Repeat your password*"
+            _placeholder={{ opacity: 1, color: "gray.400" }}
+            variant="unstyled"
+            onChange={onChange}
+          />
+          <FontAwesomeIcon icon={faEyeSlash} />
+        </label>
 
-        <PasswordEye
-          label="Repite tu contraseña*"
-          placeholder="Reòte tu contraseña"
-          name="password2"
-          value={password2}
-          onChange={onChange}
-          isRequired
-        />
-
-        <Stack pl={6} mt={1} spacing={1}>
+        <Stack  pl={6} mt={1} spacing={1}>
           <div className="stackCheck">
-            <CustomCheckbox
-              label="acceptPolicity"
-              checked={acceptPolicity}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  acceptPolicity: !acceptPolicity,
-                })
-              }
-              text="Acepto el Aviso Legal y la Política de Privacidad"
-              isRequired
-            />
-            <CustomCheckbox
-              checked={acceptCommunication}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  acceptCommunication: !acceptCommunication,
-                })
-              }
-              text="Acepto que EDEM me envíe comunicaciones electrónicas sobre los Cursos, jornadas, seminarios organizados por EDEM y aquellos vinculados con el emprendimiento, inversión y liderazgo desarrollados en MARINA DE EMPRESAS."
-            />
+          <CustomCheckbox
+            label="acceptPolicity"
+            checked={acceptPolicity}
+            onChange={() =>
+              setFormData({
+                ...formData,
+                acceptPolicity: !acceptPolicity,
+              })
+            }
+            text="Acepto el Aviso Legal y la Política de Privacidad"
+          />
+          <CustomCheckbox
+            checked={acceptCommunication}
+            onChange={() =>
+              setFormData({
+                ...formData,
+                acceptCommunication: !acceptCommunication,
+              })
+            }
+            text="Acepto que EDEM me envíe comunicaciones electrónicas sobre los Cursos, jornadas, seminarios organizados por EDEM y aquellos vinculados con el emprendimiento, inversión y liderazgo desarrollados en MARINA DE EMPRESAS."
+          />
           </div>
         </Stack>
 
         <div className="captcha">
-          <CustomCheckbox
+        <CustomCheckbox
             //checked={captcha} //FIXME: investigar como aplicar
             onChange={() =>
               setFormData({
