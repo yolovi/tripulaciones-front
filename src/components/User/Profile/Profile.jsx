@@ -4,6 +4,7 @@ import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Avatar,
+  Box,
   Button,
   Divider,
   Heading,
@@ -15,6 +16,9 @@ import {
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import ModalRender from "../../Tools/ModalRender/ModalRender";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import PostCard from "../PostCard/PostCard";
 
 const Profile = () => {
@@ -37,7 +41,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getUserConnected());
-  }, [avatar, name, surname, surname2, email]);
+  }, [avatar, name, surname, email]);
 
   if (isLoading) {
     return <Spinner size="lg" color="red.500" />;
@@ -53,8 +57,7 @@ const Profile = () => {
         formData.set("avatar", event.target.avatar.files[0]);
       formData.set("name", event.target.name.value);
       formData.set("surname", event.target.surname.value);
-      formData.set("surname2", event.target.surname2.value);
-      formData.set("email", event.target.email.value);
+      // formData.set("email", event.target.email.value);
 
       dispatch(updateUser(formData));
     } catch (error) {
@@ -92,69 +95,85 @@ const Profile = () => {
             <Stack className="profile-data" spacing="4">
               <CardBody>
                 <Heading title="Profile" size="lg">
-                  {name}
+                  {`${name} ${surname}`}
                 </Heading>
                 <div>
                   <Text py="2">{email}</Text>
-                  {/* <Text py="2" >{phone}</Text> */}
-                  <Text py="2">{surname}</Text>
-                  <Text py="2">{surname2}</Text>
-                  <Text py="2">{occupation}</Text>
-                  {/* <Text py="2">
-                    Followers: {followers ? followers.length : "0"}
-                  </Text> */}
                 </div>
               </CardBody>
 
-              <CardFooter className="footer-card-profile">
-                <div className="modal-profile">
-                  <>
-                    <form className="form-updateUser" onSubmit={handleSubmit}>
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder={name}
-                        defaultValue={name}
-                      />
-                      <input
-                        type="text"
-                        name="surname"
-                        placeholder={surname}
-                        defaultValue={surname}
-                      />
-                      <input
-                        type="text"
-                        name="surname2"
-                        placeholder={surname2}
-                        defaultValue={surname2}
-                      />
-                      <input
-                        type="text"
-                        name="email"
-                        placeholder={email}
-                        defaultValue={email}
-                      />
-                      <input
-                        type="file"
-                        name="avatar"
-                        id="file"
-                        className="input-avatar"
-                      />
+              <Button colorScheme="pink">Ver QR personal</Button>
 
-                      <Button
-                        className="btn-card"
-                        type="submit"
-                        variant="solid"
-                        colorScheme="blue"
-                      >
-                        Send
-                      </Button>
-                    </form>
-                  </>
+              <CardBody className="footer-card-profile">
+                <div className="modal-profile">
+                  <ModalRender
+                    modalTitle={"Edit your profile"}
+                    textBtn={<FontAwesomeIcon icon={faPen} />}
+                    text={
+                      <>
+                        <form
+                          className="form-updateUser"
+                          onSubmit={handleSubmit}
+                        >
+                          <input
+                            type="text"
+                            name="name"
+                            placeholder={name}
+                            defaultValue={name}
+                          />
+                          <input
+                            type="text"
+                            name="surname"
+                            placeholder={surname}
+                            defaultValue={surname}
+                          />
+                          {/* <input
+                            type="text"
+                            name="email"
+                            placeholder={email}
+                            defaultValue={email}
+                          /> */}
+                          <input
+                            type="file"
+                            name="avatar"
+                            id="file"
+                            className="input-avatar"
+                          />
+
+                          <Button
+                            className="btn-card"
+                            type="submit"
+                            variant="solid"
+                            colorScheme="blue"
+                          >
+                            Send
+                          </Button>
+                        </form>
+                      </>
+                    }
+                  />
                 </div>
-              </CardFooter>
+              </CardBody>
             </Stack>
           </Card>
+
+          <Card>
+          <Box className="eventsUser">
+            <span>Inscritos</span>
+            <span>Asistidos</span>
+            <span>Guardados</span>
+          </Box>
+          <Box className="scrollOrderEvents">
+            <span>Carousel con los eventos inscritos</span>
+          </Box>
+          <Box className="scrollSavedEvents">
+            <span>Carousel con los eventos guardados</span>
+          </Box>
+          <Box className="scrollPastEvents">
+            <span>Carousel con los eventos asistidos</span>
+          </Box>
+          </Card>
+
         </div>
 
         <Divider className="divider-profile" />
@@ -181,3 +200,6 @@ const Profile = () => {
 };
 
 export default Profile;
+
+//TODO: verTrapping Focus within Popover para editar pefil con lapiz https://chakra-ui.com/docs/components/popover/usage 
+//TODO: horizontal scroll cards with animation : https://medium.com/dailyjs/horizontal-scroll-animation-fc39ae43cbe5
