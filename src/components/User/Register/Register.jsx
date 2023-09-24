@@ -252,7 +252,7 @@ const Register = () => {
 
         <PasswordEye
           label="Repite tu contraseña*"
-          placeholder="Reòte tu contraseña"
+          placeholder="Repite tu contraseña"
           name="password2"
           value={password2}
           onChange={onChange}
@@ -299,10 +299,12 @@ const Register = () => {
           />
         </div>
         <Button disabled={ecosystem !== "" || !acceptPolicity} type="submit">
-          Register
+          Registrar
         </Button>
       </form>
     </div>
   );
 };
 export default Register;
+
+//FIXME: si el botón Regisrar está disable no se distingue > además añadir warning/modal indicar los errores (completa todos los campos, email unico, acepta politica...)
