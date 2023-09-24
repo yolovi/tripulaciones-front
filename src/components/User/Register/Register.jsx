@@ -13,6 +13,7 @@ import {
   FormControl,
   FormLabel,
   HStack,
+  Input,
 } from "@chakra-ui/react";
 import CustomCheckbox from "../../Tools/CustomCheckbox/CustomCheckbox";
 import SelectForm from "../../Tools/SelectForm/SelectForm";
@@ -95,44 +96,71 @@ const Register = () => {
 
   return (
     <div className="registro-container">
-      <h2>Registrate</h2>
+      <h2>Regístrate</h2>
       <form onSubmit={onSubmit} className="form-register">
         <div className="register-data">
           <label>
             Nombre*
-            <input
+            <Input
               type="text"
               name="name"
               value={name}
               placeholder="Ej: Irene"
+              _placeholder={{ opacity: 1, color: "gray.400" }}
+              variant="unstyled"
               onChange={onChange}
               required
             />
           </label>
           <label>
             Apellidos*
-            <input
+            <Input
               type="text"
               name="surname"
               value={surname}
               placeholder="Ej: Pérez Gomez"
+              _placeholder={{ opacity: 1, color: "gray.400" }}
+              variant="unstyled"
               onChange={onChange}
               required
             />
           </label>
           <label>
             Correo*
-            <input
+            <Input
               type="email"
               name="email"
               value={email}
               placeholder="Indica tu correo electrónico"
+              _placeholder={{ opacity: 1, color: "gray.400" }}
+              variant="unstyled"
               onChange={onChange}
             />
           </label>
           <label>
             Edad*
-            <input type="date" name="bday" value={bday} onChange={onChange} />
+            <Input
+              type="date"
+              name="bday"
+              value={bday}
+              onChange={onChange}
+              _placeholder={{ opacity: 1, color: "gray.400" }}
+              variant="unstyled"
+            />
+          </label>
+          <label>
+            Número de teléfono*
+            <PhoneInput
+              placeholder="Indica tu número de teléfono"
+              name="tel"
+              value={tel}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  tel: e,
+                });
+              }}
+            />
           </label>
         </div>
         <div className="select-ecosystem">
@@ -165,7 +193,7 @@ const Register = () => {
             <div className="actual-situation">
               <SelectForm
                 className="selectForm"
-                placeholder="Seleccione una Opcion"
+                placeholder="Indica tu situación actual"
                 options={ecosystem === "1" ? mdeTrue : mdeFalse}
                 selectedValue={occupation}
                 onChange={(e) => {
@@ -178,42 +206,33 @@ const Register = () => {
             </div>
           )
         }
-        <label>
-          Número de teléfono*
-          <PhoneInput
-            placeholder="Indica tu número de teléfono"
-            name="tel"
-            value={tel}
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                tel: e,
-              });
-            }}
-          />
-        </label>
+
         <label>
           Contraseña*
-          <input
+          <Input
             type="password"
             name="password"
             value={password}
             placeholder="Indica tu contraseña"
+            _placeholder={{ opacity: 1, color: "gray.400" }}
+            variant="unstyled"
             onChange={onChange}
           />
         </label>
         <label>
           Repite tu contraseña*
-          <input
+          <Input
             type="password"
             name="password2"
             value={password2}
             placeholder="Repeat your password*"
+            _placeholder={{ opacity: 1, color: "gray.400" }}
+            variant="unstyled"
             onChange={onChange}
           />
         </label>
 
-        <Stack pl={6} mt={1} spacing={1}>
+        <Stack className="stackCheck" pl={6} mt={1} spacing={1}>
           <CustomCheckbox
             label="acceptPolicity"
             checked={acceptPolicity}
