@@ -8,7 +8,6 @@ import LikeEvent from "../LikeEvent/LikeEvent";
 const EventDetail = () => {
   const dispatch = useDispatch();
   const { event, isLoading } = useSelector((state) => state.events);
-  console.log(event);
   const { _id } = useParams();
   useEffect(() => {
     dispatch(getById(_id));

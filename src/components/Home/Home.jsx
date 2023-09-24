@@ -1,6 +1,7 @@
 import React from "react";
 import GetEvents from "../Events/GetEvents/GetEvents";
-import "./Home.scss"
+import "./Home.scss";
+import CarrouselEvents from "../Events/CarrouselEvents/CarrouselEvents";
 const Home = () => {
   return (
     <>
@@ -9,11 +10,12 @@ const Home = () => {
       <h2>Filtros</h2>
       <h2>Para ti</h2>
       <section className="paraTi">
-    <p>Slider</p>
-    <h2>Próximos eventos</h2>
+        <CarrouselEvents />
+        <h2>Próximos eventos</h2>
       </section>
-      
-      <GetEvents />
+      <section>
+        <GetEvents />
+      </section>
     </>
   );
 };
