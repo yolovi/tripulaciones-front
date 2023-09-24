@@ -6,10 +6,13 @@ const Home = () => {
   return (
     <>
       <h2>ESTÁS EN HOME</h2>
+      <div className="buscador">
+        
+      </div>
       <h2>SearchBar</h2>
       <div className="filtros-home">
         <h2>Filtros</h2>
-        
+
       </div>
       <section className="paraTi">
         <h2>Para ti</h2>
