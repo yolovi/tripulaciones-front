@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll } from "../../../features/events/eventsSlice";
 import { Image, Spinner } from "@chakra-ui/react";
+import LikeEvent from "../LikeEvent/LikeEvent";
 
 const CarrouselEvents = () => {
   const navigate = useNavigate();
@@ -46,11 +47,14 @@ const CarrouselEvents = () => {
               <img src={event.image_url} alt="imagen del evento" />
             </div>
             <div className="contenido-individual-scroll">
-              <div className="contenido-categoria">{event.category}</div>
-              <div className="contenido-fecha">
-                <span className="fecha">{formatDate(event.date)}</span>:{" "}
-                <span className="hora">{event.time}</span>
+              <div className="container-contenido">
+                <div className="contenido-categoria">{event.category}</div>
+                <div className="contenido-fecha">
+                  <span className="fecha">{formatDate(event.date)}</span>:{" "}
+                  <span className="hora">{event.time}</span>
+                </div>
               </div>
+              <div className="like"><LikeEvent/></div>
             </div>
           </div>
         );
