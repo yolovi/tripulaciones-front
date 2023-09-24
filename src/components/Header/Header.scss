@@ -54,15 +54,12 @@ search:hover {
 }
 
 .container-drawer {
-
- border-bottom: 1px solid $light-Grey ;
- padding: 10px;
+  border-bottom: 1px solid $light-Grey;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
-
-  
 
   .btn-drawer-header {
     color: $salmon;
@@ -74,10 +71,16 @@ search:hover {
     font-weight: 400;
     line-height: normal;
 
-    :hover{
+    :hover {
       color: $salmon-light;
     }
   }
+}
+
+.drawer-logo{
+  display: flex;
+  justify-content: center;
+  margin: 40px; 
 }
 
 .nav-container {
@@ -91,6 +94,8 @@ search:hover {
   justify-content: center;
   align-items: center;
   gap: 20px;
+
+
 }
 
 @media (max-width: 480px) {
@@ -101,4 +106,12 @@ search:hover {
   .menu-toggle {
     display: block;
   }
+}
+
+
+/* Estilos para las líneas horizontales debajo de los enlaces */
+.links-container > .line {
+  display: block;
+  border-top: 1px solid $grey-color-light; /* Agrega una línea horizontal azul */
+  width: 100%; /* Hacer que la línea ocupe todo el ancho */
 }

@@ -13,8 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../features/auth/authSlice";
 import BtnTop from "../Tools/BtnTop/BtnTop";
-import "./Header.scss";
-import logoImg from "../../assets/svg/logo-risky.svg";
+import logoDrawer from "../../assets/svg/logo-drawer.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightFromBracket,
@@ -25,6 +24,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import logoHeader from "../../assets/svg/logo-header.svg";
+import "./Header.scss"
 
 
 const Header = () => {
@@ -72,50 +72,53 @@ const Header = () => {
 
           {/* Elemento de la derecha */}
 
-
-    {/* Elemento de la derecha */}
-<div className="menu-right">
-  {userConnected ? (
-    isProfileView ? (
-      <span onClick={onLogout}>
-        <FontAwesomeIcon
-          className="color-salmon"
-          icon={faArrowRightFromBracket}
-          size="xl"
-        />
-      </span>
-    ) : (
-      <span>
-        <Link to={`/profile`} onClick={onClose}>
-          <WrapItem>
-            <Avatar
-              className="avatar"
-              size="md"
-              name="Avatar del usuario"
-              src={userConnected.avatar_url}
-            />
-          </WrapItem>
-        </Link>
-      </span>
-    )
-  ) : (
-    <span>
-      <FontAwesomeIcon
-        className="color-salmon"
-        icon={faUser}
-        size="xl"
-      />
-    </span>
-  )}
-</div>
+          {/* Elemento de la derecha */}
+          <div className="menu-right">
+            {userConnected ? (
+              isProfileView ? (
+                <span onClick={onLogout}>
+                  <FontAwesomeIcon
+                    className="color-salmon"
+                    icon={faArrowRightFromBracket}
+                    size="xl"
+                  />
+                </span>
+              ) : (
+                <span>
+                  <Link to={`/profile`} onClick={onClose}>
+                    <WrapItem>
+                      <Avatar
+                        className="avatar"
+                        size="md"
+                        name="Avatar del usuario"
+                        src={userConnected.avatar_url}
+                      />
+                    </WrapItem>
+                  </Link>
+                </span>
+              )
+            ) : (
+              <span>
+                <FontAwesomeIcon
+                  className="color-salmon"
+                  icon={faUser}
+                  size="xl"
+                />
+              </span>
+            )}
+          </div>
         </>
 
-        <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+        <Drawer
+          placement="left"
+          onClose={onClose}
+          isOpen={isOpen}
+        >
           <DrawerOverlay />
           <DrawerContent>
             <DrawerHeader borderBottomWidth="1px">
-              <div className="drawerHeader-logo">
-                <img alt="image logo" src={logoImg} />
+              <div className="drawer-logo">
+                <img alt="image logo" src={logoDrawer} />
               </div>
             </DrawerHeader>
             <DrawerBody>
@@ -131,26 +134,27 @@ const Header = () => {
                   />
                 </div>
                 <div className="links-container">
-                  <Link to={"/"} onClick={onClose}>
-                    <img
-                      className="icon"
-                      src={<FontAwesomeIcon icon={faHouse} />}
-                      alt="birdHouseIcon"
-                    />
+                  <Link to={"/"} onClick={onClose}> Eventos
                   </Link>
+                  <span className="line" />
+                  <Link to={"/requestevent"} onClick={onClose}> Solicitud Eventos
+                  </Link>
+                  <span className="line" />
                   {userConnected ? (
                     <>
                       <span>
                         <Link to={`/profile`} onClick={onClose}>
-                          Profile{" "}
+                          Mi cuenta
                         </Link>
+                        <span className="line" />
                       </span>
-                      <span>
+                      {/* <span>
                         <Link to={"/addpost"} onClick={onClose}>
                           Add Post{" "}
                         </Link>
-                      </span>
+                      </span> */}
                       <span onClick={onLogout}>Logout</span>
+                      <span className="line" />
                     </>
                   ) : (
                     <>
@@ -159,11 +163,13 @@ const Header = () => {
                           Login{" "}
                         </Link>
                       </span>
+                      <span className="line" />
                       <span>
                         <Link to={"/register"} onClick={onClose}>
                           Register{" "}
                         </Link>
                       </span>
+                      <span className="line" />
                     </>
                   )}
                 </div>

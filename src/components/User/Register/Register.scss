@@ -41,6 +41,13 @@
       font-family: $primary-font;
       font-size: 12px;
       letter-spacing: 0.1px;
+      
+    }
+
+    span {
+      color: $blue;
+      font-family: $primary-font;
+      font-size: 12px;
     }
 
     label {
@@ -100,9 +107,4 @@
 
 button:focus {
   outline: none; /* Quitar el borde de enfoque */
-}
-span {
-  color: $blue;
-  font-family: $primary-font;
-  font-size: 12px;
 }
