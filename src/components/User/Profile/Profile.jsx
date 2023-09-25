@@ -32,12 +32,17 @@ const Profile = () => {
     avatar,
     name,
     surname,
-    surname2,
     email,
+    interested,
     followers,
-    eventIds,
+    eventIds, //solo admin users pueden crear eventos
+      
+    wishList,
     occupation,
+    reviewIds,
   } = userConnected;
+
+  console.log(userConnected)
 
   useEffect(() => {
     dispatch(getUserConnected());
@@ -158,25 +163,41 @@ const Profile = () => {
           </Card>
 
           <Card>
-          <Box className="eventsUser">
-            <span>Inscritos</span>
-            <span>Asistidos</span>
-            <span>Guardados</span>
-          </Box>
-          <Box className="scrollOrderEvents">
-            <span>Carousel con los eventos inscritos</span>
-          </Box>
-          <Box className="scrollSavedEvents">
-            <span>Carousel con los eventos guardados</span>
-          </Box>
-          <Box className="scrollPastEvents">
-            <span>Carousel con los eventos asistidos</span>
-          </Box>
+            <Box className="eventsUser">
+              <span>Inscritos</span>
+              <span>Asistidos</span>
+              <span>Guardados</span>
+            </Box>
+            <Box className="scrollOrderEvents">
+              <span>Carousel con los eventos inscritos</span>
+            </Box>
+            <Box className="scrollSavedEvents">
+              <span>Carousel con los eventos guardados</span>
+            </Box>
+            <Box className="scrollPastEvents">
+              <span>Carousel con los eventos asistidos</span>
+            </Box>
           </Card>
-
         </div>
 
         <Divider className="divider-profile" />
+
+        {/* <div className="container-eventsSaved">
+          {events.map((event) => {
+            console.log(event);
+            return (
+              <CardSlider
+                _id={event._id}
+                image={event.image_url}
+                category={event.category}
+                date={event.date}
+                time=""
+              />
+            );
+          })}
+        </div> */}
+        <div className="container-eventsPast"></div>
+        <div className="container-eventsOrders"></div>
 
         {/* //FIXME: cambiar los posts por los eventos */}
         {/* <div className="container-post-profile"> 
@@ -201,5 +222,5 @@ const Profile = () => {
 
 export default Profile;
 
-//TODO: verTrapping Focus within Popover para editar pefil con lapiz https://chakra-ui.com/docs/components/popover/usage 
+//TODO: verTrapping Focus within Popover para editar pefil con lapiz https://chakra-ui.com/docs/components/popover/usage
 //TODO: horizontal scroll cards with animation : https://medium.com/dailyjs/horizontal-scroll-animation-fc39ae43cbe5

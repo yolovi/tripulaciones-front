@@ -33,6 +33,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
+   
 
     .textCheck {
       overflow: hidden;
@@ -50,18 +51,6 @@
       font-size: 12px;
     }
 
-    label {
-      display: flex;
-      flex-direction: column;
-      color: $blue;
-      font-family: $primary-font;
-      font-size: 18px;
-    }
-
-    .stackCheck {
-      display: flex;
-      flex-direction: row-reverse;
-    }
 
     .register-data {
       display: flex;
@@ -94,6 +83,11 @@
   }
 }
 
+.captcha{
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
 
 .eyePassBtn {
   border: none;
@@ -107,4 +101,42 @@
 
 button:focus {
   outline: none; /* Quitar el borde de enfoque */
+}
+
+.btn-primary {
+  border-radius: 12px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: $white-color;
+  background-color: $salmon;
+  cursor: pointer;
+  transition: border-color 0.25s;
+
+  width: 224px;
+  height: 50px;
+ 
+
+
+  &:hover {
+    background-color: $salmon-light;
+    border: 1px solid transparent;
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline: none
+  }
+}
+
+.btn-div{
+  width: 100%;
+  display: flex;
+
+  //padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  //gap: 10px;
 }

@@ -259,8 +259,8 @@ const Register = () => {
           isRequired
         />
 
-        <Stack pl={6} mt={1} spacing={1}>
-          <div className="stackCheck">
+        <div className="stackCheck">
+          <Stack pl={6} mt={1} spacing={1}>
             <CustomCheckbox
               label="acceptPolicity"
               checked={acceptPolicity}
@@ -283,24 +283,29 @@ const Register = () => {
               }
               text="Acepto que EDEM me envíe comunicaciones electrónicas sobre los Cursos, jornadas, seminarios organizados por EDEM y aquellos vinculados con el emprendimiento, inversión y liderazgo desarrollados en MARINA DE EMPRESAS."
             />
-          </div>
-        </Stack>
-
-        <div className="captcha">
-          <CustomCheckbox
-            //checked={captcha} //FIXME: investigar como aplicar
-            onChange={() =>
-              setFormData({
-                ...formData,
-                captcha: !captcha,
-              })
-            }
-            text="No soy un robot + icono captcha"
-          />
+            <div className="captcha">
+              <CustomCheckbox
+                //checked={captcha} //FIXME: investigar como aplicar
+                // onChange={() =>
+                //   setFormData({
+                //     ...formData,
+                //     captcha: !captcha,
+                //   })
+                // }
+                text="No soy un robot + icono captcha"
+              />
+            </div>
+          </Stack>
         </div>
-        <Button disabled={ecosystem !== "" || !acceptPolicity} type="submit">
-          Registrar
-        </Button>
+        <div className="btn-div">
+          <button
+            className="btn-primary"
+            disabled={ecosystem !== "" || !acceptPolicity}
+            type="submit"
+          >
+            Siguiente
+          </button>
+        </div>
       </form>
     </div>
   );
