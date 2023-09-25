@@ -1,8 +1,8 @@
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { formatDate } from "../../../utils/utils";
 import { useNavigate } from "react-router";
+import { formatDate } from "../../../../utils/utils";
 
 const CardSlider = ({ 
   _id = "",

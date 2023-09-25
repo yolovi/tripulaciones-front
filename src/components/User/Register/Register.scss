@@ -18,14 +18,13 @@
     display: flex;
     height: 40px;
     gap: 10px;
+    background-color: transparent; /* Hacer el fondo transparente */
     //flex-direction: column;
     //align-items: flex-start;
 
     color: $light-Grey;
     font-family: $primary-font;
     font-size: 18px;
-
-
   }
 
   .form-register {
@@ -33,7 +32,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
-   
 
     .textCheck {
       overflow: hidden;
@@ -42,7 +40,6 @@
       font-family: $primary-font;
       font-size: 12px;
       letter-spacing: 0.1px;
-      
     }
 
     span {
@@ -50,7 +47,6 @@
       font-family: $primary-font;
       font-size: 12px;
     }
-
 
     .register-data {
       display: flex;
@@ -83,21 +79,19 @@
   }
 }
 
-.captcha{
+.captcha {
   margin-left: 30px;
   margin-top: 20px;
 }
 
-
 .eyePassBtn {
   border: none;
-  background-color:none;
+  background-color: none;
 
   &:focus {
     outline: none; /* Quitar el borde de enfoque */
   }
 }
-
 
 button:focus {
   outline: none; /* Quitar el borde de enfoque */
@@ -114,11 +108,8 @@ button:focus {
   background-color: $salmon;
   cursor: pointer;
   transition: border-color 0.25s;
-
   width: 224px;
   height: 50px;
- 
-
 
   &:hover {
     background-color: $salmon-light;
@@ -127,16 +118,32 @@ button:focus {
 
   button:focus,
   button:focus-visible {
-    outline: none
+    outline: none;
   }
 }
 
-.btn-div{
+.btn-div {
   width: 100%;
   display: flex;
-
-  //padding: 10px 20px;
   justify-content: center;
   align-items: center;
-  //gap: 10px;
 }
+
+.btn-primary {
+  &:focus {
+    outline: none; /* Quitar el borde de enfoque */
+  }
+
+  /* Estilos para botones deshabilitados */
+  &:disabled {
+    background-color: gray; /* Cambia el color de fondo */
+    cursor: not-allowed; /* Cambia el cursor */
+    opacity: 0.5; /* Reduce la opacidad */
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline: none;
+  }
+}
+

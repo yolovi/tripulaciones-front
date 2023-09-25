@@ -300,7 +300,7 @@ const Register = () => {
         <div className="btn-div">
           <button
             className="btn-primary"
-            disabled={ecosystem !== "" || !acceptPolicity}
+            disabled={ecosystem == "" || !acceptPolicity  || occupation == "" }
             type="submit"
           >
             Siguiente

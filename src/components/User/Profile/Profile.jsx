@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import ModalRender from "../../Tools/ModalRender/ModalRender";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CardSlider from "../../Tools/CardSlider/CardSlider";
 // import PostCard from "../PostCard/PostCard";
 
 const Profile = () => {
@@ -182,20 +183,20 @@ const Profile = () => {
 
         <Divider className="divider-profile" />
 
-        {/* <div className="container-eventsSaved">
-          {events.map((event) => {
-            console.log(event);
+        <div className="container-eventsSaved">
+          {wishList.map((wishList) => {
+            console.log(wishList);
             return (
               <CardSlider
-                _id={event._id}
-                image={event.image_url}
-                category={event.category}
-                date={event.date}
+                _id={wishList._id}
+                image={wishList.image_url}
+                category={wishList.category}
+                date={wishList.date}
                 time=""
               />
             );
           })}
-        </div> */}
+        </div>
         <div className="container-eventsPast"></div>
         <div className="container-eventsOrders"></div>
 
