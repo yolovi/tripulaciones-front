@@ -183,9 +183,8 @@ const Profile = () => {
 
         <Divider className="divider-profile" />
 
-        <div className="container-eventsSaved">
+        <div className="eventos-grupo">
           {wishList.map((wishList) => {
-            console.log(wishList);
             return (
               <CardSlider
                 _id={wishList._id}
@@ -197,25 +196,14 @@ const Profile = () => {
             );
           })}
         </div>
-        <div className="container-eventsPast"></div>
-        <div className="container-eventsOrders"></div>
 
-        {/* //FIXME: cambiar los posts por los eventos */}
-        {/* <div className="container-post-profile"> 
-          {postIds?.map((post, i) => {
-            return (
-              <div key={i}>
-                <Link to={"/profilepost/" + post._id}>
-                  <PostCard
-                    textTitle={post.title}
-                    textLikes={post.likes?.length}
-                    srcImage={post.image_url}
-                  />
-                </Link>
-              </div>
-            );
-          })}
-        </div> */}
+        <div className="eventos-grupo">
+          map eventos inscritos
+          </div> 
+        <div className="eventos-grupo">
+          map eventos pasados
+        </div>
+
       </div>
     </>
   );
