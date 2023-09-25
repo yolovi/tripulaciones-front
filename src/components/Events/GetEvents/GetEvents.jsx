@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteEvent, getAll } from "../../../features/events/eventsSlice";
-import { Link } from "react-router-dom";
-import { Image, LinkOverlay, Spinner } from "@chakra-ui/react";
+import { getAll } from "../../../features/events/eventsSlice";
+import { Image, Spinner } from "@chakra-ui/react";
 import "./GetEvents.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const GetEvents = () => {
   const navigate = useNavigate();
-  const { events, isLoading } = useSelector((state) => state.events); // Accede a la lista de eventos desde el estado de Redux
+  const { events, isLoading } = useSelector((state) => state.events); 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAll());
@@ -26,12 +25,10 @@ const GetEvents = () => {
       />
     );
   }
-  /* FORMATEO FECHA */
   const formatDate = (isoDateString) => {
     const options = { day: "numeric", month: "long" };
     return new Date(isoDateString).toLocaleDateString("es-ES", options);
   };
-  /* REDIRECCION AL PINCHAR EN LA TARJETA */
 
   const handleDivClick = (event) => {
     navigate(`/eventdetail/${event._id}`);
@@ -78,16 +75,6 @@ const GetEvents = () => {
                 <span className="hora">{event.time}</span>
               </div>
             </div>
-            {/* BOTONES COMENTADOS */}
-            {/* <button>
-              <Link to={"/eventdetail/" + event._id}>Vista detalle</Link>
-            </button>
-            <button>
-              <Link to={"/editevent/" + event._id}>Editar</Link>
-            </button>
-            <button onClick={() => dispatch(deleteEvent(event._id))}>
-              Borrar
-            </button> */}
           </div>
         );
       })}
