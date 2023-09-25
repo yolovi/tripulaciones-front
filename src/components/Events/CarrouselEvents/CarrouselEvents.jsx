@@ -3,7 +3,7 @@ import "./CarrouselEvents.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll } from "../../../features/events/eventsSlice";
-import { Image, Spinner } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 import LikeEvent from "../LikeEvent/LikeEvent";
 
 const CarrouselEvents = () => {
