@@ -66,6 +66,29 @@ const updateUser = async (userData) => {
   return res.data;
 };
 
+const imageSafePost = async (image) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.post("https://datapi-9xvl-dev.fl0.io/img_det", image, {
+    headers: {
+      authorization: token,
+    },
+  });
+  console.log("imageSafePost", res);
+  return res.data; 
+};
+
+const imageSafeRes = async () => {
+  const res = await axios.get("https://datapi-9xvl-dev.fl0.io/img_det", {
+    headers: {
+      authorization: token,
+    },
+  });
+  return res.data; 
+  // devolerá {
+  //   "unsafe": false  //(o true)
+  // }
+};
+
 const authService = {
   register,
   login,
