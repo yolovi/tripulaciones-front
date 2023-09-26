@@ -1,7 +1,7 @@
-import "./Profile.scss";
-import React, { useEffect } from "react";
-import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import './Profile.scss';
+import React, { useEffect } from 'react';
+import { getUserConnected, updateUser } from '../../../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Avatar,
   Box,
@@ -13,19 +13,19 @@ import {
   Stack,
   Text,
   WrapItem,
-} from "@chakra-ui/react";
-import { Card, CardBody, CardFooter } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import ModalRender from "../../Tools/ModalRender/ModalRender";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from '@chakra-ui/react';
+import { Card, CardBody, CardFooter } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import ModalRender from '../../Tools/ModalRender/ModalRender';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import PostCard from "../PostCard/PostCard";
 
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userConnected, isLoading } = useSelector((state) => state.auth);
+  const { userConnected, isLoading } = useSelector(state => state.auth);
   //TODO:  falta pintar los eventos guardados (wishlist) y los eventos a los que te has inscrito (como si hicieras un pedido)
   const {
     avatar_url,
@@ -49,14 +49,14 @@ const Profile = () => {
 
   //TODO: Nota. No utilizar un form si vas a subir/editar fotos > hay que usar un FORM-DATA (como en postman)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     const formData = new FormData();
     try {
       if (event.target.avatar.files[0])
-        formData.set("avatar", event.target.avatar.files[0]);
-      formData.set("name", event.target.name.value);
-      formData.set("surname", event.target.surname.value);
+        formData.set('avatar', event.target.avatar.files[0]);
+      formData.set('name', event.target.name.value);
+      formData.set('surname', event.target.surname.value);
       // formData.set("email", event.target.email.value);
 
       dispatch(updateUser(formData));
@@ -71,7 +71,7 @@ const Profile = () => {
         <div className="card-profile-data">
           <Card
             className="card-profile-data"
-            direction={{ base: "column", sm: "row" }}
+            direction={{ base: 'column', sm: 'row' }}
             variant="unstyled"
             size="lg"
           >
@@ -107,7 +107,7 @@ const Profile = () => {
               <CardBody className="footer-card-profile">
                 <div className="modal-profile">
                   <ModalRender
-                    modalTitle={"Edit your profile"}
+                    modalTitle={'Edit your profile'}
                     textBtn={<FontAwesomeIcon icon={faPen} />}
                     text={
                       <>
@@ -158,22 +158,21 @@ const Profile = () => {
           </Card>
 
           <Card>
-          <Box className="eventsUser">
-            <span>Inscritos</span>
-            <span>Asistidos</span>
-            <span>Guardados</span>
-          </Box>
-          <Box className="scrollOrderEvents">
-            <span>Carousel con los eventos inscritos</span>
-          </Box>
-          <Box className="scrollSavedEvents">
-            <span>Carousel con los eventos guardados</span>
-          </Box>
-          <Box className="scrollPastEvents">
-            <span>Carousel con los eventos asistidos</span>
-          </Box>
+            <Box className="eventsUser">
+              <span>Inscritos</span>
+              <span>Asistidos</span>
+              <span>Guardados</span>
+            </Box>
+            <Box className="scrollOrderEvents">
+              <span>Carousel con los eventos inscritos</span>
+            </Box>
+            <Box className="scrollSavedEvents">
+              <span>Carousel con los eventos guardados</span>
+            </Box>
+            <Box className="scrollPastEvents">
+              <span>Carousel con los eventos asistidos</span>
+            </Box>
           </Card>
-
         </div>
 
         <Divider className="divider-profile" />
@@ -201,5 +200,5 @@ const Profile = () => {
 
 export default Profile;
 
-//TODO: verTrapping Focus within Popover para editar pefil con lapiz https://chakra-ui.com/docs/components/popover/usage 
+//TODO: verTrapping Focus within Popover para editar pefil con lapiz https://chakra-ui.com/docs/components/popover/usage
 //TODO: horizontal scroll cards with animation : https://medium.com/dailyjs/horizontal-scroll-animation-fc39ae43cbe5

@@ -95,7 +95,17 @@ search:hover {
   align-items: center;
   gap: 20px;
 
+  button, button:active, button:focus, button:hover {
+    border: 0 !important;
+  }
 
+  button:hover {
+    color: #747bff;
+  }
+}
+
+.login-header {
+  cursor: pointer;
 }
 
 @media (max-width: 480px) {
@@ -107,6 +117,11 @@ search:hover {
     display: block;
   }
 }
+
+.menu-right {
+  
+}
+
 
 
 /* Estilos para las líneas horizontales debajo de los enlaces */
