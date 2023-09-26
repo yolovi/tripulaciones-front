@@ -1,28 +1,15 @@
-<<<<<<< Updated upstream
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login, reset } from "../../../features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, reset } from '../../../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 import {
   Alert,
   AlertIcon,
   AlertTitle,
   AlertDescription,
-} from "@chakra-ui/react";
-import "./Login.scss";
-=======
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, reset } from '../../../features/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
-// import {
-//   Alert,
-//   AlertIcon,
-//   AlertTitle,
-//   AlertDescription,
-// } from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import './Login.scss';
->>>>>>> Stashed changes
+
 // import petsSperience from "../../assets/images/Petspierince1.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -40,11 +27,7 @@ const Login = () => {
   });
 
   const { email, password } = formData;
-<<<<<<< Updated upstream
- const { isSuccess, isError, message } = useSelector((state) => state.auth);
-=======
-  // const { isSuccess, isError, message } = useSelector((state) => state.auth);
->>>>>>> Stashed changes
+  const { isSuccess, isError, message } = useSelector(state => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -54,7 +37,7 @@ const Login = () => {
 
     if (isSuccess) {
       setTimeout(() => {
-        navigate("/profile");
+        navigate('/profile');
       }, 1500);
     }
 
