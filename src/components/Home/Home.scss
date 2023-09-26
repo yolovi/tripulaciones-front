@@ -50,11 +50,17 @@ h2 {
       padding: 11px 24px;
       font-weight: 400;
       margin-bottom: 5px;
-      
+
       &:hover {
         background-color: $blue;
         color: $white-color;
         border-color: $blue;
+      }
+
+      &.inactive{
+        background-color: inherit;
+        color: inherit;
+        border-color: inherit;
       }
 
       &.active {

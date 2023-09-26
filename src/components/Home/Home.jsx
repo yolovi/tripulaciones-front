@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react';
 import GetEvents from '../Events/GetEvents/GetEvents';
 import './Home.scss';
 import CarrouselEvents from '../Events/CarrouselEvents/CarrouselEvents';
+import { searchEvents, getAll } from '../../features/events/eventsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 
-import { SearchIcon } from '@chakra-ui/icons';
+import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const [categories, setCategories] = useState([]);
+  const [title, setTitle] = useState('');
+  const [timer, setTimer] = useState();
+
   const validCategories = [
     { value: 'Finanzas e inversión', label: 'Finanzas' },
     { value: 'Gestión empresarial', label: 'Gestión' },
@@ -18,18 +25,16 @@ const Home = () => {
     { value: 'Sociedad', label: 'Sociedad' },
   ];
 
-  const [categories, setCategories] = useState([]);
-  const [searchText, setSearchText] = useState('');
-  const [timer, setTimer] = useState();
-
   //retrasa la busqueda unos milisegundos para las busquedas de texto
   useEffect(() => {
     if (timer) {
       clearTimeout(timer);
     }
-    const t = setTimeout(search, 600);
+    const t = setTimeout(search, 200);
     setTimer(t);
-  }, [searchText, categories]);
+  }, [title]);
+
+  useEffect(() => search(), [categories]);
 
   const toggleCategory = category => {
     if (categories.includes(category)) {
@@ -40,31 +45,35 @@ const Home = () => {
   };
 
   const search = () => {
-    console.log(searchText);
-    console.log(categories);
+    if (!title && !categories.length) {
+      dispatch(getAll());
+      return;
+    }
+    dispatch(searchEvents({ title, categories }));
   };
 
   return (
     <>
       <InputGroup pb="4" w="100%">
-        <InputRightElement pointerEvents="none">
-          <SearchIcon />
+        <InputRightElement cursor="pointer" onClick={() => setTitle('')}>
+          {title ? <CloseIcon /> : <SearchIcon />}
         </InputRightElement>
         <Input
           placeholder="Buscar"
           borderRadius={24}
           background="#FAF9FC"
           border="0"
-          value={searchText}
-          onChange={e => setSearchText(e.target.value)}
+          value={title}
+          onChange={e => setTitle(e.target.value)}
         />
       </InputGroup>
       <div className="filtros-home">
         <div className="botones-filtros-home">
           {validCategories.map(cat => (
             <button
+              key={cat.label}
               className={`boton-filtros-home ${
-                categories.includes(cat.value) ? 'active' : ''
+                categories.includes(cat.value) ? 'active' : 'inactive'
               }`}
               onClick={() => toggleCategory(cat.value)}
             >

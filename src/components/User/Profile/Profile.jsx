@@ -184,7 +184,7 @@ const Profile = () => {
         <Divider className="divider-profile" />
 
         <div className="eventos-grupo">
-          {wishList.map(wishList => {
+          {wishList?.map(wishList => {
             return (
               <CardSlider
                 _id={wishList._id}
