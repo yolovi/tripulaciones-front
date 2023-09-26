@@ -43,7 +43,7 @@ const Profile = () => {
     reviewIds,
   } = userConnected;
 
-  console.log(userConnected);
+  // console.log(userConnected);
 
   useEffect(() => {
     dispatch(getUserConnected());
@@ -79,7 +79,7 @@ const Profile = () => {
             className="card-profile-data"
             direction={{ base: "column", sm: "row" }}
             variant="unstyled"
-            size="lg"
+            size="sm"
           >
             <div className="container-img-profile">
               <div className="img-profile">
@@ -185,7 +185,7 @@ const Profile = () => {
 
         {/* //FIXME: hay que recargar la pagina, a veces da error al cargar wishlist, tambien hay problema con el warking key id en map */}
 
-        <div className="eventos-grupo">
+        <div className="container-events-profile">
           <div className="scroll-x">
             {wishList.map((wishList, i) => {
               return (

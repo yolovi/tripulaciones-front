@@ -8,6 +8,9 @@
   margin-top: 20px;
   margin-bottom: 20px;
   border: 1px solid blue;
+  width: 100%; /* Ancho al 100% por defecto */
+  max-width: 375px; /* Ancho máximo de 760px */
+  overflow-x: hidden; /* Ocultar desplazamiento horizontal si lo hubiera */
 }
 
 .profile-data {
@@ -55,6 +58,8 @@
 //   width: 100%;
 // }
 
+
+
 .scroll-x {
   height: 260px;
   overflow-x: scroll;
@@ -63,4 +68,99 @@
   gap: 3%;
   padding-left: 30px;
   padding-right: 30px;
+}
+
+.container-events-profile {
+width: 100%; /* Ancho al 100% para adaptarse al dispositivo */
+}
+
+  .evento-individual {
+    box-shadow: 0px 1.20543px 7.23256px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 5%; //Solo para verlo bien
+    background: var(--Blanco, #fefefe);
+    width: 328px;
+    height: 207px;
+    flex-shrink: 0;
+    border-radius: 14.465px;
+    cursor: pointer;
+    .container-img-profile {
+      height: 60%;
+      overflow: hidden;
+      border-radius: 14.465px 14.465px 0px 0px;
+    }
+    .info-evento {
+        display: flex;
+        padding-left: 5%;
+        justify-content: center;
+        align-items: baseline;
+        flex-direction: column;
+
+      height: 40%;
+      .category {
+          width: 100%;
+        display: flex;
+        margin-bottom: 1%;
+        justify-content: space-between;
+        color: var(--Negro, #080808);
+        font-feature-settings: "clig" off, "liga" off;
+        font-family: Atkinson Hyperlegible;
+        font-size: 14.465px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%; /* 17.358px */
+        .flecha{
+            padding-right: 5%;
+        }
+        #edem {
+          color: var(--Azul-primario, #004368);
+          font-feature-settings: "clig" off, "liga" off;
+          font-family: Atkinson Hyperlegible;
+          font-size: 14.465px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 120%;
+        }
+      }
+      .fecha {
+        color: var(--Rojo, #cb7862);
+        font-feature-settings: "clig" off, "liga" off;
+        font-family: Spectral;
+        font-size: 14.465px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%; /* 17.358px */
+
+    }
+    .hora {
+      color: #080808;
+      font-feature-settings: "clig" off, "liga" off;
+      font-family: Spectral;
+      font-size: 14.465px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
+    }
+    }
+  }
+
+/* Para pantallas de 481px hasta 600px (máximo 480px) */
+@media screen and (min-width: 481px) and (max-width: 600px) {
+  .card-profile-data {
+    min-width: 300px;
+    max-width: 480px;
+  }
+}
+
+/* Para pantallas de 600px hasta 768px (máximo 600px) */
+@media screen and (min-width: 600px) and (max-width: 768px) {
+  .card-profile-data {
+    max-width: 600px;
+  }
+}
+
+/* Para pantallas a partir de 768px (máximo 768px) */
+@media screen and (min-width: 768px) {
+  .card-profile-data {
+    max-width: 768px;
+  }
 }
