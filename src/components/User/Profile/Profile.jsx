@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import ModalRender from "../../Tools/ModalRender/ModalRender";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CardSlider from "../../Tools/CardSlider/CardSlider";
 // import PostCard from "../PostCard/PostCard";
 
 const Profile = () => {
@@ -32,12 +33,17 @@ const Profile = () => {
     avatar,
     name,
     surname,
-    surname2,
     email,
+    interested,
     followers,
-    eventIds,
+    eventIds, //solo admin users pueden crear eventos
+      
+    wishList,
     occupation,
+    reviewIds,
   } = userConnected;
+
+  console.log(userConnected)
 
   useEffect(() => {
     dispatch(getUserConnected());
@@ -158,42 +164,46 @@ const Profile = () => {
           </Card>
 
           <Card>
-          <Box className="eventsUser">
-            <span>Inscritos</span>
-            <span>Asistidos</span>
-            <span>Guardados</span>
-          </Box>
-          <Box className="scrollOrderEvents">
-            <span>Carousel con los eventos inscritos</span>
-          </Box>
-          <Box className="scrollSavedEvents">
-            <span>Carousel con los eventos guardados</span>
-          </Box>
-          <Box className="scrollPastEvents">
-            <span>Carousel con los eventos asistidos</span>
-          </Box>
+            <Box className="eventsUser">
+              <span>Inscritos</span>
+              <span>Asistidos</span>
+              <span>Guardados</span>
+            </Box>
+            <Box className="scrollOrderEvents">
+              <span>Carousel con los eventos inscritos</span>
+            </Box>
+            <Box className="scrollSavedEvents">
+              <span>Carousel con los eventos guardados</span>
+            </Box>
+            <Box className="scrollPastEvents">
+              <span>Carousel con los eventos asistidos</span>
+            </Box>
           </Card>
-
         </div>
 
         <Divider className="divider-profile" />
 
-        {/* //FIXME: cambiar los posts por los eventos */}
-        {/* <div className="container-post-profile"> 
-          {postIds?.map((post, i) => {
+        <div className="eventos-grupo">
+          {wishList.map((wishList) => {
             return (
-              <div key={i}>
-                <Link to={"/profilepost/" + post._id}>
-                  <PostCard
-                    textTitle={post.title}
-                    textLikes={post.likes?.length}
-                    srcImage={post.image_url}
-                  />
-                </Link>
-              </div>
+              <CardSlider
+                _id={wishList._id}
+                image={wishList.image_url}
+                category={wishList.category}
+                date={wishList.date}
+                time=""
+              />
             );
           })}
-        </div> */}
+        </div>
+
+        <div className="eventos-grupo">
+          map eventos inscritos
+          </div> 
+        <div className="eventos-grupo">
+          map eventos pasados
+        </div>
+
       </div>
     </>
   );
@@ -201,5 +211,5 @@ const Profile = () => {
 
 export default Profile;
 
-//TODO: verTrapping Focus within Popover para editar pefil con lapiz https://chakra-ui.com/docs/components/popover/usage 
+//TODO: verTrapping Focus within Popover para editar pefil con lapiz https://chakra-ui.com/docs/components/popover/usage
 //TODO: horizontal scroll cards with animation : https://medium.com/dailyjs/horizontal-scroll-animation-fc39ae43cbe5

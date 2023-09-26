@@ -17,15 +17,10 @@ import logoDrawer from "../../assets/svg/logo-drawer.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightFromBracket,
-  faArrowRightToBracket,
-  faBars,
-  faHouse,
-  faMagnifyingGlass,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import logoHeader from "../../assets/svg/logo-header.svg";
-import "./Header.scss"
-
+import "./Header.scss";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -46,15 +41,16 @@ const Header = () => {
     onClose();
   };
 
-  const [text, setText] = useState("");
+  //TODO: searchbar se queda o se quita del menu lateral
+  // const [text, setText] = useState("");
 
-  const handleChange = (e) => {
-    setText(e.target.value);
+  // const handleChange = (e) => {
+  //   setText(e.target.value);
 
-    if (e.key === "Enter") {
-      navigate("/search/" + text);
-    }
-  };
+  //   if (e.key === "Enter") {
+  //     navigate("/search/" + text);
+  //   }
+  // };
 
   return (
     <nav className="nav-container">
@@ -99,21 +95,19 @@ const Header = () => {
               )
             ) : (
               <span>
-                <FontAwesomeIcon
-                  className="color-salmon"
-                  icon={faUser}
-                  size="xl"
-                />
+                <Link to={`/login`} onClick={onClose}>
+                  <FontAwesomeIcon
+                    className="color-salmon"
+                    icon={faUser}
+                    size="xl"
+                  />
+                </Link>
               </span>
             )}
           </div>
         </>
 
-        <Drawer
-          placement="left"
-          onClose={onClose}
-          isOpen={isOpen}
-        >
+        <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay />
           <DrawerContent>
             <DrawerHeader borderBottomWidth="1px">
@@ -123,7 +117,7 @@ const Header = () => {
             </DrawerHeader>
             <DrawerBody>
               <nav className="nav-container">
-                <div className="search-container">
+                {/* <div className="search-container">
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                   <input
                     className="search"
@@ -132,12 +126,16 @@ const Header = () => {
                     placeholder="Search"
                     name="text"
                   />
-                </div>
+                </div> */}
                 <div className="links-container">
-                  <Link to={"/"} onClick={onClose}> Eventos
+                  <Link to={"/"} onClick={onClose}>
+                    {" "}
+                    Eventos
                   </Link>
                   <span className="line" />
-                  <Link to={"/requestevent"} onClick={onClose}> Solicitud Eventos
+                  <Link to={"/requestevent"} onClick={onClose}>
+                    {" "}
+                    Solicitud Eventos
                   </Link>
                   <span className="line" />
                   {userConnected ? (
