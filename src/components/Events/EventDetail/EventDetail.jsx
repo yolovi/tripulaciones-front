@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getById } from "../../../features/events/eventsSlice";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AspectRatio, Spinner } from "@chakra-ui/react";
 import LikeEvent from "../LikeEvent/LikeEvent";
 import "./EventDetail.scss";
@@ -15,6 +15,7 @@ import {
 
 const EventDetail = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { event, isLoading } = useSelector((state) => state.events);
   const { _id } = useParams();
   useEffect(() => {
@@ -41,6 +42,9 @@ const EventDetail = () => {
     return `${dia}/${mes}/${anio}`;
   }
   const fechaFormateada = formatearFecha(event.date);
+  const handleDivClick = (eventId) => {
+    navigate(`/cart/${eventId}`);
+  };
   return (
     <>
       <div className="imagen-detalle">
@@ -69,7 +73,9 @@ const EventDetail = () => {
               <span className="icono">
                 <FontAwesomeIcon icon={faClock} />
               </span>
-              <span className="texto">{event.time}</span>
+              <span className="texto">
+                {event.time} - {event.timeEnd || "Indefinido"}
+              </span>
             </div>
           </div>
           <div className="info-detalle-derecha">
@@ -77,20 +83,26 @@ const EventDetail = () => {
               <span className="icono">
                 <FontAwesomeIcon icon={faLocationDot} />
               </span>
-              <span className="texto">sala</span>
+              <span className="texto">{event.organization}</span>
             </div>
             <div className="elemento-info-detalle">
               <span className="icono">
                 <FontAwesomeIcon icon={faTv} />
               </span>
-              <span className="texto">modalidad</span>
+              <span className="texto">{event.modality || "No definido"}</span>
             </div>
           </div>
         </div>
       </div>
       <div className="container-ponentes">
         <h2>Ponentes</h2>
-        <div className="ponentes"></div>
+
+        <div className="img-y-ponente">
+          <div className="img-ponente">
+            <img src={event.image_url} alt="" />
+          </div>
+          <div className="ponentes">{event.speaker}</div>
+        </div>
       </div>
       <div className="map-container">
         <AspectRatio ratio={16 / 9}>
@@ -98,7 +110,9 @@ const EventDetail = () => {
         </AspectRatio>
       </div>
       <div className="inscribirme">
-        <button className="inscribirme-boton">Inscribirme</button>
+        <button className="inscribirme-boton" onClick={handleDivClick}>
+          Inscríbete
+        </button>
       </div>
     </>
   );

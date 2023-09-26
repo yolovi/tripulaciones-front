@@ -16,6 +16,7 @@ import Header from "./components/Header/Header";
 import PrivateZone from "./guards/PrivateZone";
 import Home from "./components/Home/Home";
 import Chat from "./components/Chat/Chat";
+import CartEvents from "./components/Events/CartEvents/CartEvents";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
           <Route path="/eventdetail/:_id" element={<EventDetail />} />
           <Route path="/createquestion" element={<CreateQuestion />} />
           <Route path="/chat" element={<Chat />} />
-
+          <Route path="/cart/:id" element={<CartEvents />} />
           <Route path="/" element={<Home />} />
           <Route
             path="/profile"

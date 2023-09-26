@@ -15,7 +15,6 @@ const CardSlider = ({
   
   const navigate = useNavigate();
 
-  /* REDIRECCION AL PINCHAR EN LA TARJETA */
  const handleDivClick = (eventId) => {
     navigate(`/eventdetail/${eventId}`);
   };
@@ -36,7 +35,7 @@ const CardSlider = ({
         </div>
       <div className="info-evento">
         <div className="category">
-          <div className="texto">category = {category}</div>
+          <div className="texto">{category}</div>
           <div className="flecha">
             <span>
               <FontAwesomeIcon icon={faChevronRight} />
