@@ -1,0 +1,134 @@
+.carrito-h2 {
+  text-align: center;
+  color: #000;
+  text-align: center;
+  font-family: Atkinson Hyperlegible;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  .flecha-izq {
+    position: absolute;
+    left: 0;
+    padding-left: 5%;
+  }
+}
+.tarjeta-evento-carrito {
+  margin-top: 8%;
+  width: 328px;
+  height: 126px;
+  .evento-carrito {
+    background-color: white;
+    width: 328px;
+    height: 100px;
+    border-radius: 12px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    padding: 2%;
+    .contenido-evento-carrito {
+      display: flex;
+      .img-evento-carrito {
+        width: 105px;
+        height: 86px;
+        img {
+          border-radius: 12px;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .info-evento-carrito {
+        padding-left: 3%;
+        text-align: left;
+        .datos-evento-carrito {
+            flex-wrap: wrap;
+          display: flex;
+          gap: 5%;
+        }
+      }
+    }
+  }
+  .aviso-evento-carrito {
+    width: 328px;
+    height: 32px;
+    border-radius: 0px 0px 12px 12px;
+    background: var(--Azul-primario, #004368);
+    color: var(--Blanco, #fefefe);
+    font-family: Atkinson Hyperlegible;
+    font-size: 11.667px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    padding: 5%;
+    padding-top: 6%;
+    position: relative;
+    top: -10px;
+    z-index: -5;
+  }
+}
+.entradas {
+  margin-top: 10%;
+  margin-bottom: 10%;
+  h2 {
+    color: #000;
+    font-family: Atkinson Hyperlegible;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .cantidad {
+    margin-top: 10%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    .numero {
+      color: #000;
+      font-family: Atkinson Hyperlegible;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+    }
+    .titulo {
+      color: #000;
+      font-family: Atkinson Hyperlegible;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-left: 5%;
+    }
+  }
+}
+.confirmar {
+  position: sticky;
+  bottom: 0;
+  .total {
+    color: #000;
+    font-family: Atkinson Hyperlegible;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: left;
+    padding-left: 2%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+  }
+  .boton-confirmar {
+    color: #fefefe;
+    background-color: #cb7862;
+    font-size: 20px;
+    font-family: Atkinson Hyperlegible;
+    font-weight: 700;
+    line-height: 28px;
+    word-wrap: break-word;
+    width: 90%;
+    padding: 3%;
+    margin: 2%;
+    border-radius: 12px;
+  }
+}

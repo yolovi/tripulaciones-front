@@ -15,7 +15,6 @@ const CardSlider = ({
   
   const navigate = useNavigate();
 
-  /* REDIRECCION AL PINCHAR EN LA TARJETA */
  const handleDivClick = (eventId) => {
     navigate(`/eventdetail/${eventId}`);
   };

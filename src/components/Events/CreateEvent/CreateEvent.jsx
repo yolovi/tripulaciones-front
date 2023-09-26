@@ -24,6 +24,8 @@ const CreateEvent = () => {
       formData.set("category", event.target.category.value);
       formData.set("organization", event.target.organization.value);
       formData.set("time", event.target.time.value);
+      formData.set("timeEnd", event.target.timeEnd.value);
+      formData.set("modality", event.target.modality.value);
 
       await dispatch(createEvent(formData));
     } catch (error) {
@@ -81,7 +83,17 @@ const CreateEvent = () => {
           <option value="MDE">MDE</option>
           <option value="Otro">Otro</option>
         </select>
+        <select name="modality">
+          <optgroup label="Categoría">
+            <option value="Presencial">Presencial</option>
+            <option value="Online">Online</option>
+            <option value="Semipresencial">
+              Semipresencial
+            </option>
+          </optgroup>
+        </select>
         <input type="time" name="time"/>
+        <input type="time" name="timeEnd"/>
         <input type="file" name="image" id="file" />
         <button type="submit">Enviar</button>
       </form>
