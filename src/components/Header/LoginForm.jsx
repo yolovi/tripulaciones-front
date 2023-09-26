@@ -13,7 +13,6 @@ import {
   Button,
 } from '@chakra-ui/react';
 import './LoginForm.scss';
-import logoHeader from '../../assets/svg/logo-header.svg';
 
 const Login = () => {
   const [formData, setFormData] = useState({
