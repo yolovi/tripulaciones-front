@@ -48,3 +48,19 @@
   flex-direction: column;
   align-content: center;
 }
+
+// .container-scroll {
+//   display: flex;
+//   overflow-x: scroll;
+//   width: 100%;
+// }
+
+.scroll-x {
+  height: 260px;
+  overflow-x: scroll;
+  //white-space: nowrap;
+  display: flex;
+  gap: 3%;
+  padding-left: 30px;
+  padding-right: 30px;
+}
