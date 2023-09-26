@@ -81,7 +81,9 @@ const Header = () => {
 
             {/* Elemento central: Logo */}
             <div className="menu-center">
-              <img src={logoHeader} alt="Logo" className="logo" />
+              <Link to="/">
+                <img src={logoHeader} alt="Logo" className="logo" />
+              </Link>
             </div>
 
             {/* Elemento de la derecha */}
