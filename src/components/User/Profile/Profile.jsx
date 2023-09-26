@@ -37,13 +37,13 @@ const Profile = () => {
     interested,
     followers,
     eventIds, //solo admin users pueden crear eventos
-
     wishList,
+    orderIds,
     occupation,
     reviewIds,
   } = userConnected;
 
-  // console.log(userConnected);
+  
 
   useEffect(() => {
     dispatch(getUserConnected());
@@ -52,6 +52,11 @@ const Profile = () => {
   if (isLoading) {
     return <Spinner size="lg" color="red.500" />;
   }
+
+
+const eventsList = orderIds?.map(order => order.eventsIds);
+//console.log(eventsList, "eventsList")
+
 
   //TODO: Nota. No utilizar un form si vas a subir/editar fotos > hay que usar un FORM-DATA (como en postman)
 
@@ -200,6 +205,22 @@ const Profile = () => {
               );
             })}
           </div>
+          <div className="scroll-x">
+            {eventsList?.map( event => event?.map((data, i) => {
+                return (                 
+                <CardSlider
+                  key={i}
+                  _id={data._id}
+                  image={data.image_url}
+                  category={data.category}
+                  date={data.date}
+                  time=""
+                />
+                );
+              })
+            )}
+          </div>
+
         </div>
 
         <div className="eventos-grupo">map eventos inscritos</div>
