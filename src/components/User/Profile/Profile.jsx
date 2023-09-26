@@ -37,13 +37,13 @@ const Profile = () => {
     interested,
     followers,
     eventIds, //solo admin users pueden crear eventos
-      
+
     wishList,
     occupation,
     reviewIds,
   } = userConnected;
 
-  console.log(userConnected)
+  console.log(userConnected);
 
   useEffect(() => {
     dispatch(getUserConnected());
@@ -183,8 +183,11 @@ const Profile = () => {
 
         <Divider className="divider-profile" />
 
+        {/* //FIXME: hay que recargar la pagina, a veces da error al cargar wishlist, tambien hay problema con el warking key id en map */}
         <div className="eventos-grupo">
+          <span>Eventos Guardados</span>
           {wishList.map((wishList) => {
+            console.log("ID:", wishList._id);
             return (
               <CardSlider
                 _id={wishList._id}
@@ -197,13 +200,8 @@ const Profile = () => {
           })}
         </div>
 
-        <div className="eventos-grupo">
-          map eventos inscritos
-          </div> 
-        <div className="eventos-grupo">
-          map eventos pasados
-        </div>
-
+        <div className="eventos-grupo">map eventos inscritos</div>
+        <div className="eventos-grupo">map eventos pasados</div>
       </div>
     </>
   );
