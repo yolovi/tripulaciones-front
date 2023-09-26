@@ -209,7 +209,7 @@ const Header = () => {
         </div>
         <BtnTop />
       </nav>
-      <Modal isOpen={loginModalIsOpen}>
+      <Modal isOpen={loginModalIsOpen} onClose={() => {}}>
         <ModalOverlay />
         <ModalContent w="90%" minH="60%">
           <ModalHeader>
