@@ -33,10 +33,6 @@ function App() {
           <Route path="/eventdetail/:_id" element={<EventDetail />} />
           <Route path="/createquestion" element={<CreateQuestion />} />
           <Route path="/chat" element={<Chat />} />
-<<<<<<< HEAD
-          <Route path="/cart/:id" element={<CartEvents />} />
-=======
->>>>>>> develop
           <Route path="/" element={<Home />} />
           <Route
             path="/profile"
