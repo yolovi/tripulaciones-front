@@ -1,22 +1,85 @@
-import React from "react";
-import GetEvents from "../Events/GetEvents/GetEvents";
-import "./Home.scss";
-import CarrouselEvents from "../Events/CarrouselEvents/CarrouselEvents";
+import React, { useState, useEffect } from 'react';
+import GetEvents from '../Events/GetEvents/GetEvents';
+import './Home.scss';
+import CarrouselEvents from '../Events/CarrouselEvents/CarrouselEvents';
+import { searchEvents, getAll } from '../../features/events/eventsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+
+import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
+
 const Home = () => {
+  const dispatch = useDispatch();
+  const [categories, setCategories] = useState([]);
+  const [title, setTitle] = useState('');
+  const [timer, setTimer] = useState();
+
+  const validCategories = [
+    { value: 'Finanzas e inversión', label: 'Finanzas' },
+    { value: 'Gestión empresarial', label: 'Gestión' },
+    { value: 'Habilidades directivas', label: 'Habilidades' },
+    { value: 'Marketing', label: 'Marketing' },
+    { value: 'Tecnología', label: 'Tecnología' },
+    { value: 'Emprendimiento', label: 'Emprendimiento' },
+    { value: 'Sociedad', label: 'Sociedad' },
+  ];
+
+  //retrasa la busqueda unos milisegundos para las busquedas de texto
+  useEffect(() => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    const t = setTimeout(search, 200);
+    setTimer(t);
+  }, [title]);
+
+  useEffect(() => search(), [categories]);
+
+  const toggleCategory = category => {
+    if (categories.includes(category)) {
+      setCategories(categories.filter(c => c !== category));
+    } else {
+      setCategories([...categories, category]);
+    }
+  };
+
+  const search = () => {
+    if (!title && !categories.length) {
+      dispatch(getAll());
+      return;
+    }
+    dispatch(searchEvents({ title, categories }));
+  };
+
   return (
     <>
-      <h2>ESTÁS EN HOME</h2>
-      <div className="buscador"></div>
-      <h2>SearchBar</h2>
+      <InputGroup pb="4" w="100%">
+        <InputRightElement cursor="pointer" onClick={() => setTitle('')}>
+          {title ? <CloseIcon /> : <SearchIcon />}
+        </InputRightElement>
+        <Input
+          placeholder="Buscar"
+          borderRadius={24}
+          background="#FAF9FC"
+          border="0"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+      </InputGroup>
       <div className="filtros-home">
         <div className="botones-filtros-home">
-          <button className="boton-filtros-home"><span className="letra-boton">Finanzas</span></button>
-          <button className="boton-filtros-home"><span className="letra-boton">Gestión</span></button>
-          <button className="boton-filtros-home"><span className="letra-boton">Habilidades</span></button>
-          <button className="boton-filtros-home"><span className="letra-boton">Marketing</span></button>
-          <button className="boton-filtros-home"><span className="letra-boton">Tecnología</span></button>
-          <button className="boton-filtros-home"><span className="letra-boton">Emprendimiento</span></button>
-          <button className="boton-filtros-home"><span className="letra-boton">Sociedad</span></button>
+          {validCategories.map(cat => (
+            <button
+              key={cat.label}
+              className={`boton-filtros-home ${
+                categories.includes(cat.value) ? 'active' : 'inactive'
+              }`}
+              onClick={() => toggleCategory(cat.value)}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
       </div>
       <section className="paraTi">

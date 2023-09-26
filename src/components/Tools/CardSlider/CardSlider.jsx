@@ -22,7 +22,6 @@ const CardSlider = ({
   return (
     <>
         <div
-            key={_id}
             className="evento-individual"
             onClick={() => {
               handleDivClick(_id);
