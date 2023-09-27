@@ -110,7 +110,7 @@ const EventDetail = () => {
         </AspectRatio>
       </div>
       <div className="inscribirme">
-        <button className="inscribirme-boton" onClick={handleDivClick}>
+        <button className="inscribirme-boton"  onClick={() => handleDivClick(event._id)}>
           Inscríbete
         </button>
       </div>

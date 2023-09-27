@@ -6,13 +6,32 @@ import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { formatDate } from "../../../../utils/utils";
+import { useDisclosure } from "@chakra-ui/hooks";
+import { Button } from "@chakra-ui/button";
+import { getUserConnected } from "../../../features/auth/authSlice";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/modal";
+import { WrapItem } from "@chakra-ui/layout";
+import { Avatar } from "@chakra-ui/avatar";
+
 const CartEvents = () => {
   const { event, isLoading } = useSelector((state) => state.events);
+  const { userConnected } = useSelector((state) => state.auth);
   const { _id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getById(_id));
+    dispatch(getUserConnected());
   }, [_id, dispatch]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -56,7 +75,39 @@ const CartEvents = () => {
       <div className="confirmar">
         <hr />
         <p className="total">Total a pagar</p>
-        <div className="boton-confirmar">Confirmar</div>
+        <div className="boton-confirmar">
+          <Button onClick={onOpen}>Open Modal</Button>
+
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>
+                <WrapItem className="wrap">
+                  <Avatar
+                    size="2xl"
+                    name={userConnected.name}
+                    src={userConnected.avatar_url}
+                    alt="avatar-profile-image"
+                  />
+                  <h3>
+                    ¡Enhorabuena! <br />
+                    {userConnected.name}
+                  </h3>
+                </WrapItem>
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <h3>AQUI VA EL QR</h3>
+              </ModalBody>
+
+              <ModalFooter>
+                <h3>
+                  *Podrás encontrarlo en tu perfil y en tu correo electrónico
+                </h3>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </div>
       </div>
     </>
   );

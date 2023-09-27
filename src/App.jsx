@@ -33,6 +33,7 @@ function App() {
           <Route path="/eventdetail/:_id" element={<EventDetail />} />
           <Route path="/createquestion" element={<CreateQuestion />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/cart/:_id" element={<CartEvents />} />
           <Route path="/" element={<Home />} />
           <Route
             path="/profile"

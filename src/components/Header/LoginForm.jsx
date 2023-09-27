@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, reset } from '../../features/auth/authSlice';
+import Captcha from '../Captcha/Captcha';
 import { useNavigate } from 'react-router-dom';
+import Turnstile from 'react-turnstile';
 import {
   Alert,
   AlertIcon,
@@ -14,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import './LoginForm.scss';
 
-const Login = () => {
+const Login = ({ close = () => {} }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -22,15 +24,17 @@ const Login = () => {
 
   const { email, password } = formData;
   const { isSuccess, isError, message } = useSelector(state => state.auth);
+  const [captchaValid, setCaptchaValid] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     // Renderizar el Alert
-
     if (isSuccess) {
       setTimeout(() => {
+        close();
+        dispatch(reset());
         navigate('/profile');
       }, 1500);
     }
@@ -48,9 +52,11 @@ const Login = () => {
       [e.target.name]: e.target.value,
     }));
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
-    dispatch(login(formData));
+    if (captchaValid) {
+      dispatch(login(formData));
+    }
   };
 
   return (
@@ -98,6 +104,7 @@ const Login = () => {
             required
           />
           <a href="./">¿Olvidaste la contraseña?</a>
+          <Captcha onVerify={() => setCaptchaValid(true)} />
           <Button mt="8%" className="login-button" type="submit">
             Acceder
           </Button>

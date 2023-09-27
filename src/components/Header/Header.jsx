@@ -42,7 +42,7 @@ const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { userConnected } = useSelector(state => state.auth);
-  const [loginModalIsOpen, setLogoinModalIsOpen] = useState(false);
+  const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
   useEffect(() => {
     dispatch(getUserConnected());
   }, []);
@@ -119,7 +119,7 @@ const Header = () => {
                     className="color-salmon"
                     icon={faUser}
                     size="xl"
-                    onClick={() => setLogoinModalIsOpen(true)}
+                    onClick={() => setLoginModalIsOpen(true)}
                   />
                 </span>
               )}
@@ -156,7 +156,7 @@ const Header = () => {
                       to={'/requestevent'}
                       onClick={() => {
                         onClose();
-                        setLogoinModalIsOpen(true);
+                        setLoginModalIsOpen(true);
                       }}
                     >
                       {' '}
@@ -186,7 +186,7 @@ const Header = () => {
                             type="button"
                             onClick={() => {
                               onClose();
-                              setLogoinModalIsOpen(true);
+                              setLoginModalIsOpen(true);
                             }}
                           >
                             Login
@@ -216,11 +216,11 @@ const Header = () => {
             <div className="menu-center">
               <img src={logoHeader} alt="Logo" className="logo" />
             </div>
-            <ModalCloseButton onClick={() => setLogoinModalIsOpen(false)} />
+            <ModalCloseButton onClick={() => setLoginModalIsOpen(false)} />
           </ModalHeader>
 
           <ModalBody>
-            <LoginForm />
+            <LoginForm close={() => setLoginModalIsOpen(false)} />
           </ModalBody>
         </ModalContent>
       </Modal>
