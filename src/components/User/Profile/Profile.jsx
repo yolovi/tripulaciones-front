@@ -37,8 +37,8 @@ const Profile = () => {
     interested,
     followers,
     eventIds, //solo admin users pueden crear eventos
-
     wishList,
+    orderIds,
     occupation,
     reviewIds,
   } = userConnected;
@@ -50,6 +50,9 @@ const Profile = () => {
   if (isLoading) {
     return <Spinner size="lg" color="red.500" />;
   }
+
+  const eventsList = orderIds?.map(order => order.eventsIds);
+  //console.log(eventsList, "eventsList")
 
   //TODO: Nota. No utilizar un form si vas a subir/editar fotos > hay que usar un FORM-DATA (como en postman)
 
@@ -77,7 +80,7 @@ const Profile = () => {
             className="card-profile-data"
             direction={{ base: 'column', sm: 'row' }}
             variant="unstyled"
-            size="lg"
+            size="sm"
           >
             <div className="container-img-profile">
               <div className="img-profile">
@@ -183,7 +186,7 @@ const Profile = () => {
 
         {/* //FIXME: hay que recargar la pagina, a veces da error al cargar wishlist, tambien hay problema con el warking key id en map */}
 
-        <div className="eventos-grupo">
+        <div className="container-events-profile">
           <div className="scroll-x">
             {wishList?.map((wishList, i) => {
               return (
@@ -197,6 +200,22 @@ const Profile = () => {
                 />
               );
             })}
+          </div>
+          <div className="scroll-x">
+            {eventsList?.map(event =>
+              event?.map((data, i) => {
+                return (
+                  <CardSlider
+                    key={i}
+                    _id={data._id}
+                    image={data.image_url}
+                    category={data.category}
+                    date={data.date}
+                    time=""
+                  />
+                );
+              })
+            )}
           </div>
         </div>
 
