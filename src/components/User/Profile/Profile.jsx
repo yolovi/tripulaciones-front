@@ -43,8 +43,6 @@ const Profile = () => {
     reviewIds,
   } = userConnected;
 
-  console.log(userConnected);
-
   useEffect(() => {
     dispatch(getUserConnected());
   }, [avatar, name, surname, email]);
