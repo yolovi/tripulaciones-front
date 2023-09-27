@@ -25,10 +25,10 @@ const GetEvents = () => {
 
   return (
     <div className="eventos-grupo">
-      {events.map((event) => {
-        console.log(event);
+      {events.map((event, i) => {
         return (
           <CardSlider
+            key={i}
             _id={event._id}
             image={event.image_url}
             category={event.category}
@@ -37,7 +37,6 @@ const GetEvents = () => {
           />
         );
       })}
-      
     </div>
   );
 };
