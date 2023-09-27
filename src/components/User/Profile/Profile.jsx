@@ -1,7 +1,7 @@
-import "./Profile.scss";
-import React, { useEffect } from "react";
-import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import './Profile.scss';
+import React, { useEffect } from 'react';
+import { getUserConnected, updateUser } from '../../../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Avatar,
   Box,
@@ -13,20 +13,20 @@ import {
   Stack,
   Text,
   WrapItem,
-} from "@chakra-ui/react";
-import { Card, CardBody, CardFooter } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import ModalRender from "../../Tools/ModalRender/ModalRender";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CardSlider from "../../Tools/CardSlider/CardSlider";
+} from '@chakra-ui/react';
+import { Card, CardBody, CardFooter } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import ModalRender from '../../Tools/ModalRender/ModalRender';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CardSlider from '../../Tools/CardSlider/CardSlider';
 // import PostCard from "../PostCard/PostCard";
 
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userConnected, isLoading } = useSelector((state) => state.auth);
+  const { userConnected, isLoading } = useSelector(state => state.auth);
   //TODO:  falta pintar los eventos guardados (wishlist) y los eventos a los que te has inscrito (como si hicieras un pedido)
   const {
     avatar_url,
@@ -37,13 +37,11 @@ const Profile = () => {
     interested,
     followers,
     eventIds, //solo admin users pueden crear eventos
-      
     wishList,
+    orderIds,
     occupation,
     reviewIds,
   } = userConnected;
-
-  console.log(userConnected)
 
   useEffect(() => {
     dispatch(getUserConnected());
@@ -53,16 +51,19 @@ const Profile = () => {
     return <Spinner size="lg" color="red.500" />;
   }
 
+  const eventsList = orderIds?.map(order => order.eventsIds);
+  //console.log(eventsList, "eventsList")
+
   //TODO: Nota. No utilizar un form si vas a subir/editar fotos > hay que usar un FORM-DATA (como en postman)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     const formData = new FormData();
     try {
       if (event.target.avatar.files[0])
-        formData.set("avatar", event.target.avatar.files[0]);
-      formData.set("name", event.target.name.value);
-      formData.set("surname", event.target.surname.value);
+        formData.set('avatar', event.target.avatar.files[0]);
+      formData.set('name', event.target.name.value);
+      formData.set('surname', event.target.surname.value);
       // formData.set("email", event.target.email.value);
 
       dispatch(updateUser(formData));
@@ -77,9 +78,9 @@ const Profile = () => {
         <div className="card-profile-data">
           <Card
             className="card-profile-data"
-            direction={{ base: "column", sm: "row" }}
+            direction={{ base: 'column', sm: 'row' }}
             variant="unstyled"
-            size="lg"
+            size="sm"
           >
             <div className="container-img-profile">
               <div className="img-profile">
@@ -113,7 +114,7 @@ const Profile = () => {
               <CardBody className="footer-card-profile">
                 <div className="modal-profile">
                   <ModalRender
-                    modalTitle={"Edit your profile"}
+                    modalTitle={'Edit your profile'}
                     textBtn={<FontAwesomeIcon icon={faPen} />}
                     text={
                       <>
@@ -183,27 +184,43 @@ const Profile = () => {
 
         <Divider className="divider-profile" />
 
-        <div className="eventos-grupo">
-          {wishList.map((wishList) => {
-            return (
-              <CardSlider
-                _id={wishList._id}
-                image={wishList.image_url}
-                category={wishList.category}
-                date={wishList.date}
-                time=""
-              />
-            );
-          })}
+        {/* //FIXME: hay que recargar la pagina, a veces da error al cargar wishlist, tambien hay problema con el warking key id en map */}
+
+        <div className="container-events-profile">
+          <div className="scroll-x">
+            {wishList?.map((wishList, i) => {
+              return (
+                <CardSlider
+                  key={i}
+                  _id={wishList._id}
+                  image={wishList.image_url}
+                  category={wishList.category}
+                  date={wishList.date}
+                  time=""
+                />
+              );
+            })}
+          </div>
+          <div className="scroll-x">
+            {eventsList?.map(event =>
+              event?.map((data, i) => {
+                return (
+                  <CardSlider
+                    key={i}
+                    _id={data._id}
+                    image={data.image_url}
+                    category={data.category}
+                    date={data.date}
+                    time=""
+                  />
+                );
+              })
+            )}
+          </div>
         </div>
 
-        <div className="eventos-grupo">
-          map eventos inscritos
-          </div> 
-        <div className="eventos-grupo">
-          map eventos pasados
-        </div>
-
+        <div className="eventos-grupo">map eventos inscritos</div>
+        <div className="eventos-grupo">map eventos pasados</div>
       </div>
     </>
   );
