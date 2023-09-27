@@ -10,6 +10,7 @@ const CardSlider = ({
   category = "",
   date = "",
   time = "",
+  place = "",
   likes = []
 }) => {
   
@@ -34,7 +35,7 @@ const CardSlider = ({
         </div>
       <div className="info-evento">
         <div className="category">
-          <div className="texto">{category}</div>
+          <div className="texto">{category}</div> <span className="place">{place}</span>
           <div className="flecha">
             <span>
               <FontAwesomeIcon icon={faChevronRight} />

@@ -316,4 +316,3 @@ const Register = () => {
 };
 export default Register;
 
-//FIXME: si el botón Regisrar está disable no se distingue > además añadir warning/modal indicar los errores (completa todos los campos, email unico, acepta politica...)

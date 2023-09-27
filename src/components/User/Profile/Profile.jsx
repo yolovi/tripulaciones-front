@@ -6,6 +6,7 @@ import {
   Avatar,
   Box,
   Button,
+  Center,
   Divider,
   Heading,
   Image,
@@ -23,7 +24,6 @@ import CardSlider from "../../Tools/CardSlider/CardSlider";
 // import PostCard from "../PostCard/PostCard";
 
 const Profile = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { userConnected, isLoading } = useSelector((state) => state.auth);
@@ -41,6 +41,7 @@ const Profile = () => {
 
   //al poner el interrogante evitamos errores al cargar la página
   const eventsList = orderIds?.map((order) => order.eventsIds);
+  console.log("eventsList", eventsList);
   //console.log(eventsList, "eventsList")
 
   //TODO: Nota. No utilizar un form si vas a subir/editar fotos > hay que usar un FORM-DATA (como en postman)
@@ -108,12 +109,6 @@ const Profile = () => {
                                   placeholder={surname}
                                   defaultValue={surname}
                                 />
-                                {/* <input
-                            type="text"
-                            name="email"
-                            placeholder={email}
-                            defaultValue={email}
-                          /> */}
                                 <input
                                   type="file"
                                   name="avatar"
@@ -142,9 +137,9 @@ const Profile = () => {
               </div>
             </div>
 
-            <Stack className="profile-data" spacing="4">
+            <Stack className="profile-data">
               <CardBody>
-                <Heading title="Profile" size="lg">
+                <Heading title="Profile" size="lg" textAlign="center">
                   {`${name} ${surname}`}
                 </Heading>
                 <div>
@@ -156,52 +151,64 @@ const Profile = () => {
             </Stack>
           </Card>
 
-          <Card>
-            <Box className="eventsCount">
-              <span>.length con los eventos inscritos</span>
-            </Box>
-            <Box className="eventsCount">
-              <span>.length con los eventos guardados</span>
-            </Box>
-            <Box className="eventsCount">
-              <span>.length con los eventos asistidos</span>
-            </Box>
-          </Card>
+          <div className="container-eventsCount">
+            <div className="eventsCount">
+              <h2>{eventsList ? eventsList.length : "0"}</h2>
+              <p>Inscritos</p>
+            </div>
+            <div className="eventsCount">
+              <h2>0</h2>
+              <p>Asistidos</p>
+            </div>
+            <div className="eventsCount">
+              <h2>{wishList ? wishList.length : "0"}</h2>
+              <p>Guardados</p>
+            </div>
+          </div>
         </div>
 
         <Divider className="divider-profile" />
 
         <div className="container-events-profile">
-          <div className="scroll-x">
-            {wishList?.map((wishList, i) => {
-              return (
-                <CardSlider
-                  key={i}
-                  _id={wishList._id}
-                  image={wishList.image_url}
-                  category={wishList.category}
-                  date={wishList.date}
-                  time=""
-                />
-              );
-            })}
-          </div>
-          <div className="scroll-x">
-            {eventsList?.map((event) =>
-              event?.map((data, i) => {
+          <section className="inscritos">
+          <h2 className="titulo">Inscritos</h2>
+            <div className="scroll-x">
+              {eventsList?.map((event) =>
+                event?.map((data, i) => {
+                  return (
+                    <CardSlider
+                      key={i}
+                      _id={data._id}
+                      image={data.image_url}
+                      category={data.category}
+                      place={data.place.toUpperCase()}
+                      date={data.date}
+                      time=""
+                    />
+                  );
+                })
+              )}
+            </div>
+          </section>
+
+          <section className="guardados">
+          <h2 className="titulo">Guardados</h2>
+            <div className="scroll-x">
+              {wishList?.map((wishList, i) => {
                 return (
                   <CardSlider
                     key={i}
-                    _id={data._id}
-                    image={data.image_url}
-                    category={data.category}
-                    date={data.date}
+                    _id={wishList._id}
+                    image={wishList.image_url}
+                    category={wishList.category}
+                    place={wishList.place.toUpperCase()}
+                    date={wishList.date}
                     time=""
                   />
                 );
-              })
-            )}
-          </div>
+              })}
+            </div>
+          </section>
         </div>
       </div>
     </>
