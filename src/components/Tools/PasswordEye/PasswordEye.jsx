@@ -8,6 +8,7 @@ const PasswordEye = ({
   placeholder = "Your password",
   name = "password",
   value = "",
+  span="",
   onChange = () => {},
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,9 +18,9 @@ const PasswordEye = ({
   };
 
   return (
-    <div>
-      <label>{label}</label>
-      <InputGroup size="md">
+    <div  className="register-data">
+      <label >{label}</label>
+      <InputGroup size="md" >
         <Input
           pr="4.5rem"
           type={showPassword ? "text" : "password"}
@@ -32,7 +33,6 @@ const PasswordEye = ({
         />
         <InputRightElement width="4.5rem">
           <Button
-            className="eyePassBtn"
             variant="unstyled"
             h="1.75rem"
             size="sm"
@@ -45,7 +45,9 @@ const PasswordEye = ({
             )}
           </Button>
         </InputRightElement>
+  
       </InputGroup>
+      <span >{span}</span>
     </div>
   );
 };

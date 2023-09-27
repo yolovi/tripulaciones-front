@@ -1,7 +1,7 @@
-import './Profile.scss';
-import React, { useEffect } from 'react';
-import { getUserConnected, updateUser } from '../../../features/auth/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import "./Profile.scss";
+import React, { useEffect } from "react";
+import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Avatar,
   Box,
@@ -13,37 +13,23 @@ import {
   Stack,
   Text,
   WrapItem,
-} from '@chakra-ui/react';
-import { Card, CardBody, CardFooter } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
-import ModalRender from '../../Tools/ModalRender/ModalRender';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CardSlider from '../../Tools/CardSlider/CardSlider';
+} from "@chakra-ui/react";
+import { Card, CardBody, CardFooter } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import ModalRender from "../../Tools/ModalRender/ModalRender";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CardSlider from "../../Tools/CardSlider/CardSlider";
 // import PostCard from "../PostCard/PostCard";
 
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userConnected, isLoading } = useSelector(state => state.auth);
+  const { userConnected, isLoading } = useSelector((state) => state.auth);
   //TODO:  falta pintar los eventos guardados (wishlist) y los eventos a los que te has inscrito (como si hicieras un pedido)
-  const {
-    avatar_url,
-    avatar,
-    name,
-    surname,
-    email,
-    interested,
-    followers,
-    eventIds, //solo admin users pueden crear eventos
-    wishList,
-    orderIds,
-    occupation,
-    reviewIds,
-  } = userConnected;
-
-  
+  const { avatar_url, avatar, name, surname, email, wishList, orderIds } =
+    userConnected;
 
   useEffect(() => {
     dispatch(getUserConnected());
@@ -53,21 +39,20 @@ const Profile = () => {
     return <Spinner size="lg" color="red.500" />;
   }
 
-
-const eventsList = orderIds?.map(order => order.eventsIds);
-//console.log(eventsList, "eventsList")
-
+  //al poner el interrogante evitamos errores al cargar la página
+  const eventsList = orderIds?.map((order) => order.eventsIds);
+  //console.log(eventsList, "eventsList")
 
   //TODO: Nota. No utilizar un form si vas a subir/editar fotos > hay que usar un FORM-DATA (como en postman)
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
     try {
       if (event.target.avatar.files[0])
-        formData.set('avatar', event.target.avatar.files[0]);
-      formData.set('name', event.target.name.value);
-      formData.set('surname', event.target.surname.value);
+        formData.set("avatar", event.target.avatar.files[0]);
+      formData.set("name", event.target.name.value);
+      formData.set("surname", event.target.surname.value);
       // formData.set("email", event.target.email.value);
 
       dispatch(updateUser(formData));
@@ -82,21 +67,75 @@ const eventsList = orderIds?.map(order => order.eventsIds);
         <div className="card-profile-data">
           <Card
             className="card-profile-data"
-            direction={{ base: 'column', sm: 'row' }}
+            direction={{ base: "column", sm: "row" }}
             variant="unstyled"
             size="sm"
           >
             <div className="container-img-profile">
               <div className="img-profile">
                 {avatar_url ? (
-                  <WrapItem>
-                    <Avatar
-                      size="2xl"
-                      name={name}
-                      src={avatar_url}
-                      alt="avatar-profile-image"
-                    />
-                  </WrapItem>
+                  <>
+                    <WrapItem className="wrap">
+                      <Avatar
+                        size="2xl"
+                        name={name}
+                        src={avatar_url}
+                        alt="avatar-profile-image"
+                      />
+                      <CardBody className="footer-card-profile">
+                        <ModalRender
+                          modalTitle={"Edit your profile"}
+                          textBtn={
+                            <div className="custom-button">
+                              <FontAwesomeIcon icon={faPen} />
+                            </div>
+                          }
+                          text={
+                            <>
+                              <form
+                                className="form-updateUser"
+                                onSubmit={handleSubmit}
+                              >
+                                <input
+                                  type="text"
+                                  name="name"
+                                  placeholder={name}
+                                  defaultValue={name}
+                                />
+                                <input
+                                  type="text"
+                                  name="surname"
+                                  placeholder={surname}
+                                  defaultValue={surname}
+                                />
+                                {/* <input
+                            type="text"
+                            name="email"
+                            placeholder={email}
+                            defaultValue={email}
+                          /> */}
+                                <input
+                                  type="file"
+                                  name="avatar"
+                                  id="file"
+                                  className="input-avatar"
+                                />
+
+                                <Button
+                                  className="btn-card"
+                                  type="submit"
+                                  variant="solid"
+                                  colorScheme="blue"
+                                >
+                                  Send
+                                </Button>
+                              </form>
+                            </>
+                          }
+                        />
+                      </CardBody>
+                    </WrapItem>
+                  </>
                 ) : (
                   <div></div>
                 )}
@@ -113,82 +152,24 @@ const eventsList = orderIds?.map(order => order.eventsIds);
                 </div>
               </CardBody>
 
-              <Button colorScheme="pink">Ver QR personal</Button>
-
-              <CardBody className="footer-card-profile">
-                <div className="modal-profile">
-                  <ModalRender
-                    modalTitle={'Edit your profile'}
-                    textBtn={<FontAwesomeIcon icon={faPen} />}
-                    text={
-                      <>
-                        <form
-                          className="form-updateUser"
-                          onSubmit={handleSubmit}
-                        >
-                          <input
-                            type="text"
-                            name="name"
-                            placeholder={name}
-                            defaultValue={name}
-                          />
-                          <input
-                            type="text"
-                            name="surname"
-                            placeholder={surname}
-                            defaultValue={surname}
-                          />
-                          {/* <input
-                            type="text"
-                            name="email"
-                            placeholder={email}
-                            defaultValue={email}
-                          /> */}
-                          <input
-                            type="file"
-                            name="avatar"
-                            id="file"
-                            className="input-avatar"
-                          />
-
-                          <Button
-                            className="btn-card"
-                            type="submit"
-                            variant="solid"
-                            colorScheme="blue"
-                          >
-                            Send
-                          </Button>
-                        </form>
-                      </>
-                    }
-                  />
-                </div>
-              </CardBody>
+              <button className="btn-primary-blue">Ver QR personal</button>
             </Stack>
           </Card>
 
           <Card>
-            <Box className="eventsUser">
-              <span>Inscritos</span>
-              <span>Asistidos</span>
-              <span>Guardados</span>
+            <Box className="eventsCount">
+              <span>.length con los eventos inscritos</span>
             </Box>
-            <Box className="scrollOrderEvents">
-              <span>Carousel con los eventos inscritos</span>
+            <Box className="eventsCount">
+              <span>.length con los eventos guardados</span>
             </Box>
-            <Box className="scrollSavedEvents">
-              <span>Carousel con los eventos guardados</span>
-            </Box>
-            <Box className="scrollPastEvents">
-              <span>Carousel con los eventos asistidos</span>
+            <Box className="eventsCount">
+              <span>.length con los eventos asistidos</span>
             </Box>
           </Card>
         </div>
 
         <Divider className="divider-profile" />
-
-        {/* //FIXME: hay que recargar la pagina, a veces da error al cargar wishlist, tambien hay problema con el warking key id en map */}
 
         <div className="container-events-profile">
           <div className="scroll-x">
@@ -206,25 +187,22 @@ const eventsList = orderIds?.map(order => order.eventsIds);
             })}
           </div>
           <div className="scroll-x">
-            {eventsList?.map( event => event?.map((data, i) => {
-                return (                 
-                <CardSlider
-                  key={i}
-                  _id={data._id}
-                  image={data.image_url}
-                  category={data.category}
-                  date={data.date}
-                  time=""
-                />
+            {eventsList?.map((event) =>
+              event?.map((data, i) => {
+                return (
+                  <CardSlider
+                    key={i}
+                    _id={data._id}
+                    image={data.image_url}
+                    category={data.category}
+                    date={data.date}
+                    time=""
+                  />
                 );
               })
             )}
           </div>
-
         </div>
-
-        <div className="eventos-grupo">map eventos inscritos</div>
-        <div className="eventos-grupo">map eventos pasados</div>
       </div>
     </>
   );

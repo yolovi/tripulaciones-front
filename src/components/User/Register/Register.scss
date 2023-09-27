@@ -2,6 +2,7 @@
 
 .registro-container {
   text-align: left;
+  align-items: center;
   h2 {
     color: $salmon;
     font-family: $primary-font;
@@ -19,8 +20,6 @@
     height: 40px;
     gap: 10px;
     background-color: transparent; /* Hacer el fondo transparente */
-    //flex-direction: column;
-    //align-items: flex-start;
 
     color: $light-Grey;
     font-family: $primary-font;
@@ -30,7 +29,7 @@
   .form-register {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 32px;
 
     .textCheck {
@@ -48,23 +47,41 @@
       font-size: 12px;
     }
 
-    .register-data {
+    .register-data , .select-ecosystem {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 10px;
+      width: 300px;
 
       input {
         border: none;
         border-bottom: 1px solid $blue;
         outline: none;
         display: flex;
+        width: 300px;
         height: 40px;
         gap: 10px;
 
         color: $light-Grey;
         font-family: $primary-font;
         font-size: 18px;
+
+      }
+
+      .PhoneInputInput{
+        width: 255px;
+      }
+
+      label {
+        font-family: $primary-font;
+        font-size: 18px;
+        font-weight: 400;
+        color: $blue;
+      }
+
+      :first-child label{
+        font-size: 16px;
       }
 
       .actual-situation {
@@ -74,6 +91,7 @@
         justify-content: center;
         align-items: flex-end;
         gap: 10px;
+        padding: 10px;
       }
     }
   }
@@ -97,19 +115,23 @@ button:focus {
   outline: none; /* Quitar el borde de enfoque */
 }
 
-.btn-primary {
-  border-radius: 12px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: $white-color;
-  background-color: $salmon;
-  cursor: pointer;
-  transition: border-color 0.25s;
+%btn-primary {
+  display: flex;
   width: 224px;
   height: 50px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background-color: $salmon;
+  transition: border-color 0.25s;
+  color: $white-color;
+  font-family: $primary-font;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
 
   &:hover {
     background-color: $salmon-light;
@@ -122,9 +144,22 @@ button:focus {
   }
 }
 
+.btn-primary {
+  @extend %btn-primary;
+}
+
+.btn-primary-blue {
+  @extend %btn-primary;
+  display: flex;
+  width: 123px;
+  height: 37.077px;
+  background: $blue;
+}
+
 .btn-div {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -147,3 +182,23 @@ button:focus {
   }
 }
 
+.chakra-radio-group {
+  margin-top: 10px;
+  margin-left: 10px;
+
+
+ 
+}
+
+.link-register {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 10px;
+  color: $blue;
+
+}
+
+.chakra-radio-control {
+  border: 2px solid grey !important;
+}

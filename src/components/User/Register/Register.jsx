@@ -23,6 +23,7 @@ import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import PasswordEye from "../../Tools/PasswordEye/PasswordEye";
+import { Link } from "react-router-dom";
 
 //TODO: añadir validacines (email valido, email unico, pass1=pass2) y alerts si la petición es rechazada (ej. email unico, usuario ya existe...)
 //TODO: añadir useNavigate > login
@@ -205,10 +206,10 @@ const Register = () => {
               value={ecosystem}
             >
               <HStack spacing="24px">
-                <Radio colorScheme="facebook" value="1">
+                <Radio className="chakra-radio-control" value="1">
                   Sí
                 </Radio>
-                <Radio colorScheme="facebook" value="2">
+                <Radio className="chakra-radio-control" value="2">
                   No
                 </Radio>
               </HStack>
@@ -244,11 +245,9 @@ const Register = () => {
           value={password}
           onChange={onChange}
           isRequired
+          span="Debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y
+          1 carácter especial"
         />
-        <span>
-          Debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y
-          1 carácter especial
-        </span>
 
         <PasswordEye
           label="Repite tu contraseña*"
@@ -300,12 +299,17 @@ const Register = () => {
         <div className="btn-div">
           <button
             className="btn-primary"
-            disabled={ecosystem == "" || !acceptPolicity  || occupation == "" }
+            disabled={ecosystem == "" || !acceptPolicity || occupation == ""}
             type="submit"
           >
             Siguiente
           </button>
+          
+          <Link className="link-register" to="/login">
+          <h3>¿Ya tienes cuenta? Accede</h3>
+        </Link>
         </div>
+  
       </form>
     </div>
   );

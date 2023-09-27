@@ -12,6 +12,7 @@
 .custom-select select {
   flex: 1;
   color: $blue;
+  padding: 0 10px;
   border-radius: 0;
   border: none; /* Elimina el borde por defecto */
   border-bottom: 1px solid $blue; /* Añade un borde inferior azul */
@@ -31,3 +32,9 @@
   background: pink !important; /* Cambia el fondo a rosa al hacer hover */
   outline: none;
 }
+
+.custom-select option {
+ padding: 10px;
+}
+
+ 

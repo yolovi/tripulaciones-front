@@ -5,9 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
   margin-bottom: 20px;
-  border: 1px solid blue;
   width: 100%; /* Ancho al 100% por defecto */
   max-width: 375px; /* Ancho máximo de 760px */
   overflow-x: hidden; /* Ocultar desplazamiento horizontal si lo hubiera */
@@ -27,6 +25,19 @@
   border-radius: 10px;
 }
 
+.modalEditPen {
+  position: absolute;
+  top: 100px;
+  right: 80px;
+}
+
+.custom-button {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
 .container-post-profile {
   display: flex;
   flex-wrap: wrap;
@@ -42,6 +53,9 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 .form-updateUser {
@@ -163,4 +177,8 @@ width: 100%; /* Ancho al 100% para adaptarse al dispositivo */
   .card-profile-data {
     max-width: 768px;
   }
+}
+
+.wrap{
+  position: relative;
 }
