@@ -10,21 +10,30 @@ import {
   Divider,
   Heading,
   Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Spinner,
   Stack,
   Text,
   WrapItem,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import ModalRender from "../../Tools/ModalRender/ModalRender";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CardSlider from "../../Tools/CardSlider/CardSlider";
-// import PostCard from "../PostCard/PostCard";
+import qrUser from "../../../assets/svg/qr-provisional.svg";
 
 const Profile = () => {
   const dispatch = useDispatch();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { userConnected, isLoading } = useSelector((state) => state.auth);
   //TODO:  falta pintar los eventos guardados (wishlist) y los eventos a los que te has inscrito (como si hicieras un pedido)
@@ -146,8 +155,54 @@ const Profile = () => {
                   <Text py="2">{email}</Text>
                 </div>
               </CardBody>
+              <>
+              {/* <button className="btn-primary-blue">Ver QR personal</button> */}
 
-              <button className="btn-primary-blue">Ver QR personal</button>
+                <Button
+                  sx={{
+                    backgroundColor: "#004368", // Cambia el color de fondo a azul
+                    color: "white", // Cambia el color del texto a blanco
+                    border: "2px solid #004368", // Agrega un borde de 2px sólido azul
+                    w: "180px",
+                    h: "45px"
+                  }}
+                  variant="unstyled"
+                  onClick={onOpen}
+                >
+                  Ver QR personal
+                </Button>
+
+                <Modal isOpen={isOpen} onClose={onClose}>
+                  <ModalOverlay />
+                  <ModalContent
+                    w="80%"
+                    h="40%"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <ModalCloseButton />
+                    <ModalBody 
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    >
+                      <Image
+                        boxSize="150px"
+                        objectFit="cover"
+                        src={qrUser}
+                        alt="imagen qr usuario"
+                      />
+                      <span className="qr-footer">QR personal</span>
+                    </ModalBody>
+
+                    {/* <ModalFooter>
+                      <span className="qr-footer">QR personal</span>
+                    </ModalFooter> */}
+                  </ModalContent>
+                </Modal>
+              </>
             </Stack>
           </Card>
 
@@ -171,7 +226,7 @@ const Profile = () => {
 
         <div className="container-events-profile">
           <section className="inscritos">
-          <h2 className="titulo">Inscritos</h2>
+            <h2 className="titulo">Inscritos</h2>
             <div className="scroll-x">
               {eventsList?.map((event) =>
                 event?.map((data, i) => {
@@ -181,7 +236,7 @@ const Profile = () => {
                       _id={data._id}
                       image={data.image_url}
                       category={data.category}
-                      place={data.place.toUpperCase()}
+                      place={data.place}
                       date={data.date}
                       time=""
                     />
@@ -192,7 +247,7 @@ const Profile = () => {
           </section>
 
           <section className="guardados">
-          <h2 className="titulo">Guardados</h2>
+            <h2 className="titulo">Guardados</h2>
             <div className="scroll-x">
               {wishList?.map((wishList, i) => {
                 return (
@@ -201,7 +256,7 @@ const Profile = () => {
                     _id={wishList._id}
                     image={wishList.image_url}
                     category={wishList.category}
-                    place={wishList.place.toUpperCase()}
+                    place={wishList.place}
                     date={wishList.date}
                     time=""
                   />

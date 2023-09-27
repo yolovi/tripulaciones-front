@@ -178,7 +178,20 @@
     font-family: $primary-font;
     font-size: 12px;
     font-weight: 700;
+    text-transform: uppercase;
   }
+}
+
+.qrUser {
+  width: 60%;
+}
+
+.qr-footer {
+  color: $blue;
+  font-family: $primary-font;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .container-eventsCount {
