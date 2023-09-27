@@ -80,7 +80,23 @@ const dislike = async _id => {
   );
   return res.data;
 };
+
+const QRcode = async (id_usuario, id_evento) => {
+  const res = await axios.post(
+    'https://datapi-9xvl-dev.fl0.io/generate_qr_usuario_evento',
+    JSON.stringify({ id_usuario, id_evento }),
+    {
+      headers: {
+        'API-KEY': '90OKxIZRZC8jObdjB3iEgnCYcRvVTH2Y',
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  return res.data;
+};
+
 const eventsService = {
+  QRcode,
   createEvent,
   editEvent,
   deleteEvent,
