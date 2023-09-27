@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import './LoginForm.scss';
 
-const Login = () => {
+const Login = ({ close = () => {} }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -28,9 +28,10 @@ const Login = () => {
 
   useEffect(() => {
     // Renderizar el Alert
-
     if (isSuccess) {
       setTimeout(() => {
+        close();
+        dispatch(reset());
         navigate('/profile');
       }, 1500);
     }
@@ -48,7 +49,7 @@ const Login = () => {
       [e.target.name]: e.target.value,
     }));
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     dispatch(login(formData));
   };
