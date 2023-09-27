@@ -64,6 +64,11 @@ const updateUser = async userData => {
   return res.data;
 };
 
+const turnstileKey = async () => {
+  const res = await axios.get(API_URL + '/users/turnstile');
+  return res.data;
+};
+
 const imageSafePost = async image => {
   const token = JSON.parse(localStorage.getItem('token'));
   const res = await axios.post(
@@ -92,6 +97,7 @@ const imageSafeRes = async () => {
 };
 
 const authService = {
+  turnstileKey,
   register,
   login,
   logout,

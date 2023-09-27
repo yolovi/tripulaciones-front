@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, reset } from '../../features/auth/authSlice';
+import Captcha from '../Captcha/Captcha';
 import { useNavigate } from 'react-router-dom';
+import Turnstile from 'react-turnstile';
 import {
   Alert,
   AlertIcon,
@@ -22,6 +24,7 @@ const Login = ({ close = () => {} }) => {
 
   const { email, password } = formData;
   const { isSuccess, isError, message } = useSelector(state => state.auth);
+  const [captchaValid, setCaptchaValid] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,7 +54,9 @@ const Login = ({ close = () => {} }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    dispatch(login(formData));
+    if (captchaValid) {
+      dispatch(login(formData));
+    }
   };
 
   return (
@@ -99,6 +104,7 @@ const Login = ({ close = () => {} }) => {
             required
           />
           <a href="./">¿Olvidaste la contraseña?</a>
+          <Captcha onVerify={() => setCaptchaValid(true)} />
           <Button mt="8%" className="login-button" type="submit">
             Acceder
           </Button>
