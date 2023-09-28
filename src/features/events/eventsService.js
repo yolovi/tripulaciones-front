@@ -67,6 +67,30 @@ const like = async _id => {
 
   return res.data;
 };
+const register = async _id => {
+  const token = JSON.parse(localStorage.getItem('token'));
+  const res = await axios.post(
+    API_URL + '/orders/',
+    { eventsIds: [_id] },
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+  return res.data;
+};
+
+const unregister = async _id => {
+  const token = JSON.parse(localStorage.getItem('token'));
+  const res = await axios.delete(API_URL + '/events/id/' + _id, {
+    headers: {
+      authorization: token,
+    },
+  });
+
+  return res.data;
+};
 const dislike = async _id => {
   const token = JSON.parse(localStorage.getItem('token'));
   const res = await axios.put(
@@ -103,6 +127,8 @@ const eventsService = {
   getAll,
   getById,
   like,
+  register,
+  unregister,
   dislike,
   search,
 };

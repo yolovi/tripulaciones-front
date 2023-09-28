@@ -1,26 +1,35 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getById } from "../../../features/events/eventsSlice";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { AspectRatio, Spinner } from "@chakra-ui/react";
-import LikeEvent from "../LikeEvent/LikeEvent";
-import "./EventDetail.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getById } from '../../../features/events/eventsSlice';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AspectRatio, Spinner } from '@chakra-ui/react';
+import LikeEvent from '../LikeEvent/LikeEvent';
+import './EventDetail.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDisclosure } from '@chakra-ui/hooks';
 import {
   faCalendar,
   faClock,
   faLocationDot,
   faTv,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
+import { Modal, ModalOverlay } from '@chakra-ui/modal';
+import QRModal from './QRModal';
+import eventsService from '../../../features/events/eventsService';
 
 const EventDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { event, isLoading } = useSelector((state) => state.events);
+  const { event, isLoading } = useSelector(state => state.events);
+  const { userConnected } = useSelector(state => state.auth);
+
   const { _id } = useParams();
   useEffect(() => {
     dispatch(getById(_id));
   }, [_id, dispatch]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   if (isLoading) {
     return (
       <Spinner
@@ -35,16 +44,24 @@ const EventDetail = () => {
   // Función para formatear la fecha
   function formatearFecha(fechaISO) {
     const fecha = new Date(fechaISO);
-    const dia = fecha.getDate().toString().padStart(2, "0");
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
     const anio = fecha.getFullYear();
 
     return `${dia}/${mes}/${anio}`;
   }
   const fechaFormateada = formatearFecha(event.date);
-  const handleDivClick = (eventId) => {
-    navigate(`/cart/${eventId}`);
+  const handleDivClick = async eventId => {
+    if (!userConnected) {
+      navigate(`/login`);
+      return;
+    }
+    await eventsService.register(event._id);
+    onOpen();
   };
+  const isSubscribed = userConnected.orderIds.find(o =>
+    o.eventsIds.find(e => e._id === event._id)
+  );
   return (
     <>
       <div className="imagen-detalle">
@@ -74,7 +91,7 @@ const EventDetail = () => {
                 <FontAwesomeIcon icon={faClock} />
               </span>
               <span className="texto">
-                {event.time} - {event.timeEnd || "Indefinido"}
+                {event.time} - {event.timeEnd || 'Indefinido'}
               </span>
             </div>
           </div>
@@ -89,7 +106,7 @@ const EventDetail = () => {
               <span className="icono">
                 <FontAwesomeIcon icon={faTv} />
               </span>
-              <span className="texto">{event.modality || "No definido"}</span>
+              <span className="texto">{event.modality || 'No definido'}</span>
             </div>
           </div>
         </div>
@@ -110,10 +127,18 @@ const EventDetail = () => {
         </AspectRatio>
       </div>
       <div className="inscribirme">
-        <button className="inscribirme-boton"  onClick={() => handleDivClick(event._id)}>
-          Inscríbete
+        <button
+          className="inscribirme-boton"
+          onClick={() => handleDivClick(event._id)}
+          disabled={isSubscribed}
+        >
+          {isSubscribed ? 'Ya estas inscrito' : 'Inscríbete'}
         </button>
       </div>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <QRModal user={userConnected?._id} event={event?._id} />
+      </Modal>
     </>
   );
 };

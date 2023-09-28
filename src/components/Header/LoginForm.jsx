@@ -4,6 +4,7 @@ import { login, reset } from '../../features/auth/authSlice';
 import Captcha from '../Captcha/Captcha';
 import { useNavigate } from 'react-router-dom';
 import Turnstile from 'react-turnstile';
+import PasswordEye from '../Tools/PasswordEye/PasswordEye';
 import {
   Alert,
   AlertIcon,
@@ -79,7 +80,7 @@ const Login = ({ close = () => {} }) => {
         )}
       </div>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="login-form">
         <VStack spacing="3" align="left">
           <Text color="#3c5b90" fontSize="1.2em">
             Correo electrónico
@@ -90,18 +91,16 @@ const Login = ({ close = () => {} }) => {
             value={email}
             placeholder="Ej: name@domain.com"
             onChange={onChange}
+            variant="unstyled"
             required
           />
-          <Text color="#3c5b90" fontSize="1.2em">
-            Contraseña
-          </Text>
-          <Input
-            type="password"
+          <PasswordEye
+            label="Contraseña*"
+            placeholder="Indica tu contraseña"
             name="password"
             value={password}
-            placeholder="Indica tu contraseña"
             onChange={onChange}
-            required
+            isRequired
           />
           <a href="./">¿Olvidaste la contraseña?</a>
           <Captcha onVerify={() => setCaptchaValid(true)} />

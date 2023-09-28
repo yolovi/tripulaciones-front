@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Drawer,
   DrawerBody,
@@ -8,18 +8,18 @@ import {
   useDisclosure,
   WrapItem,
   Avatar,
-} from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { logout } from "../../features/auth/authSlice";
-import BtnTop from "../Tools/BtnTop/BtnTop";
-import logoDrawer from "../../assets/svg/logo-drawer.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getUserConnected } from "../../features/auth/authSlice";
+} from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { logout } from '../../features/auth/authSlice';
+import BtnTop from '../Tools/BtnTop/BtnTop';
+import logoDrawer from '../../assets/svg/logo-drawer.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getUserConnected } from '../../features/auth/authSlice';
 import {
   faArrowRightFromBracket,
   faUser,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 import {
   Modal,
@@ -28,11 +28,11 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import logoHeader from "../../assets/svg/logo-header.svg";
-import LoginForm from "./LoginForm";
-import "./Header.scss";
+import logoHeader from '../../assets/svg/logo-header.svg';
+import LoginForm from './LoginForm';
+import './Header.scss';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -40,20 +40,19 @@ const Header = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { userConnected } = useSelector((state) => state.auth);
+  const { userConnected } = useSelector(state => state.auth);
   const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
   useEffect(() => {
     dispatch(getUserConnected());
   }, []);
 
-
   const location = useLocation();
-  const isProfileView = location.pathname === "/profile";
+  const isProfileView = location.pathname === '/profile';
 
-  const onLogout = (e) => {
+  const onLogout = e => {
     e.preventDefault();
     dispatch(logout());
-    navigate("/");
+    navigate('/');
     onClose();
   };
 
@@ -118,19 +117,19 @@ const Header = () => {
               <DrawerBody>
                 <nav className="nav-container">
                   <div className="links-container">
-                    <Link to={"/"} onClick={onClose}>
-                      {" "}
+                    <Link to={'/'} onClick={onClose}>
+                      {' '}
                       Eventos
                     </Link>
                     <span className="line" />
                     <Link
-                      to={"/requestevent"}
+                      to={'/requestevent'}
                       onClick={() => {
                         onClose();
                         setLoginModalIsOpen(true);
                       }}
                     >
-                      {" "}
+                      {' '}
                       Solicitud Eventos
                     </Link>
                     <span className="line" />
@@ -142,7 +141,9 @@ const Header = () => {
                           </Link>
                         </span>
                         <span className="line" />
-                        <span className="logout" onClick={onLogout}>Logout</span>
+                        <span className="logout" onClick={onLogout}>
+                          Logout
+                        </span>
                         <span className="line" />
                       </>
                     ) : (
@@ -160,8 +161,8 @@ const Header = () => {
                         </span>
                         <span className="line" />
                         <span>
-                          <Link to={"/register"} onClick={onClose}>
-                            Register{" "}
+                          <Link to={'/register'} onClick={onClose}>
+                            Register{' '}
                           </Link>
                         </span>
                         <span className="line" />
@@ -177,7 +178,7 @@ const Header = () => {
       </nav>
       <Modal isOpen={loginModalIsOpen} onClose={() => {}}>
         <ModalOverlay />
-        <ModalContent w="90%" minH="60%">
+        <ModalContent w="90%" minH="60%" borderRadius="20px">
           <ModalHeader>
             <div className="menu-center">
               <img src={logoHeader} alt="Logo" className="logo" />

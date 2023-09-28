@@ -107,13 +107,11 @@ export const eventsSlice = createSlice({
         state.event = {
           ...action.payload,
         };
-        console.log('slice like', state.event);
       })
       .addCase(dislike.fulfilled, (state, action) => {
         state.event = {
           ...action.payload,
         };
-        console.log('slice dislike', state.event);
       });
   },
 });

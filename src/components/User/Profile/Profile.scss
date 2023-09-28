@@ -116,7 +116,7 @@
       h2 {
         font-family: $primary-font;
         margin: 3% 0;
-        padding-left: 30px;
+        padding-left: 0;
       }
     }
 
@@ -134,8 +134,8 @@
     overflow-x: scroll;
     display: flex;
     gap: 3%;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .evento-individual {
