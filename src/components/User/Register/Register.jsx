@@ -2,31 +2,21 @@ import "./Register.scss";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
-//import DatePicker from "react-date-picker";
 import { register } from "../../../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import {
-  Button,
   Stack,
   Radio,
   RadioGroup,
   FormControl,
-  FormLabel,
   HStack,
   Input,
-  InputGroup,
-  InputRightElement,
 } from "@chakra-ui/react";
 import CustomCheckbox from "../../Tools/CustomCheckbox/CustomCheckbox";
 import SelectForm from "../../Tools/SelectForm/SelectForm";
-import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 import PasswordEye from "../../Tools/PasswordEye/PasswordEye";
 import { Link } from "react-router-dom";
 
-//TODO: añadir validacines (email valido, email unico, pass1=pass2) y alerts si la petición es rechazada (ej. email unico, usuario ya existe...)
-//TODO: añadir useNavigate > login
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -34,14 +24,14 @@ const Register = () => {
     surname: "",
     email: "",
     bday: "", //input modificable + calendario
-    tel: "", //desde Api externa (ver trello)
-    ecosystem: "", //radiobutton yes/no BOOLEAN true/false
-    occupation: "", //desplegable (segun opcion si ha elegido si/no en ecosystem)
+    tel: "", //PhoneInput react
+    ecosystem: "", 
+    occupation: "", 
     password: "",
     password2: "",
     role: "user",
-    acceptPolicity: false, // check box BOOLEAN true/false
-    acceptCommunication: false, // check box BOOLEAN true/false
+    acceptPolicity: false, 
+    acceptCommunication: false, 
   });
 
   const {
@@ -58,8 +48,6 @@ const Register = () => {
     acceptCommunication,
   } = formData;
 
-  // const [show, setShow] = useState(false);
-  // const handleClick = () => setShow(!show);
 
   const dispatch = useDispatch();
 
@@ -78,25 +66,6 @@ const Register = () => {
     "Estudiante",
   ];
 
-  // function PasswordInput() {
-  //   const [show, setShow] = React.useState(false)
-  //   const handleClick = () => setShow(!show)
-
-  //   return (
-  // <InputGroup size='md'>
-  //   <Input
-  //     pr='4.5rem'
-  //     type={show ? 'text' : 'password'}
-  //     placeholder='Enter password'
-  //   />
-  //   <InputRightElement width='4.5rem'>
-  //     <Button h='1.75rem' size='sm' onClick={handleClick}>
-  //       {show ? 'Hide' : 'Show'}
-  //     </Button>
-  //   </InputRightElement>
-  // </InputGroup>
-  //   )
-  // }
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -218,7 +187,6 @@ const Register = () => {
         </div>
         {
           //con el && me ahorro hacer un ternario y tener que poner : null en el else
-
           (ecosystem === "1" || ecosystem === "2") && (
             <div className="actual-situation">
               <SelectForm
@@ -285,13 +253,7 @@ const Register = () => {
             />
             <div className="captcha">
               <CustomCheckbox
-                //checked={captcha} //FIXME: investigar como aplicar
-                // onChange={() =>
-                //   setFormData({
-                //     ...formData,
-                //     captcha: !captcha,
-                //   })
-                // }
+                // TODO: poner el captcha que está en login
                 text="No soy un robot + icono captcha"
               />
             </div>

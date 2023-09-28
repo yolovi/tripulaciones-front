@@ -4,9 +4,7 @@ import { getUserConnected, updateUser } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Avatar,
-  Box,
   Button,
-  Center,
   Divider,
   Heading,
   Image,
@@ -34,9 +32,8 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const { userConnected, isLoading } = useSelector((state) => state.auth);
-  //TODO:  falta pintar los eventos guardados (wishlist) y los eventos a los que te has inscrito (como si hicieras un pedido)
+  
   const { avatar_url, avatar, name, surname, email, wishList, orderIds } =
     userConnected;
 
@@ -50,8 +47,7 @@ const Profile = () => {
 
   //al poner el interrogante evitamos errores al cargar la página
   const eventsList = orderIds?.map((order) => order.eventsIds);
-  console.log("eventsList", eventsList);
-  //console.log(eventsList, "eventsList")
+  
 
   //TODO: Nota. No utilizar un form si vas a subir/editar fotos > hay que usar un FORM-DATA (como en postman)
 
@@ -156,13 +152,13 @@ const Profile = () => {
                 </div>
               </CardBody>
               <>
-              {/* <button className="btn-primary-blue">Ver QR personal</button> */}
+   
 
                 <Button
                   sx={{
-                    backgroundColor: "#004368", // Cambia el color de fondo a azul
-                    color: "white", // Cambia el color del texto a blanco
-                    border: "2px solid #004368", // Agrega un borde de 2px sólido azul
+                    backgroundColor: "#004368", 
+                    color: "white", 
+                    border: "2px solid #004368", 
                     w: "180px",
                     h: "45px"
                   }}
@@ -269,5 +265,3 @@ const Profile = () => {
 
 export default Profile;
 
-//TODO: verTrapping Focus within Popover para editar pefil con lapiz https://chakra-ui.com/docs/components/popover/usage
-//TODO: horizontal scroll cards with animation : https://medium.com/dailyjs/horizontal-scroll-animation-fc39ae43cbe5

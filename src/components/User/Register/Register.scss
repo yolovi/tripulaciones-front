@@ -19,7 +19,7 @@
     display: flex;
     height: 40px;
     gap: 10px;
-    background-color: transparent; /* Hacer el fondo transparente */
+    background-color: transparent; 
 
     // color: $light-Grey;
     font-family: $primary-font;
@@ -112,7 +112,7 @@
 }
 
 button:focus {
-  outline: none; /* Quitar el borde de enfoque */
+  outline: none; 
 }
 
 %btn-primary {
@@ -170,14 +170,13 @@ button:focus {
 
 .btn-primary {
   &:focus {
-    outline: none; /* Quitar el borde de enfoque */
+    outline: none; 
   }
 
-  /* Estilos para botones deshabilitados */
   &:disabled {
-    background-color: gray; /* Cambia el color de fondo */
+    background-color: gray;
     cursor: not-allowed; /* Cambia el cursor */
-    opacity: 0.5; /* Reduce la opacidad */
+    opacity: 0.5; 
   }
 
   button:focus,
