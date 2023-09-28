@@ -137,7 +137,7 @@ const EventDetail = () => {
       </div>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <QRModal user={userConnected?._id} event={event?._id} />
+        <QRModal user={userConnected} event={event} />
       </Modal>
     </>
   );

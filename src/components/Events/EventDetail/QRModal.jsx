@@ -36,7 +36,7 @@ const QRModal = ({ user, event }) => {
             {user.name}
           </Text>
           <Box mb="15px">
-            <QR user={user} event={event} />
+            <QR user={user._id} event={event._id} />
           </Box>
           <Text align="center" color="#10628e" fontSize="24px">
             Aquí tienes tu QR de

@@ -66,7 +66,7 @@ const Login = ({ close = () => {} }) => {
         {isError && (
           <Alert status="error">
             <AlertIcon />
-            <AlertTitle>Error login user</AlertTitle>
+            <AlertTitle>Error al loguearse</AlertTitle>
             <AlertDescription>{message}</AlertDescription>
           </Alert>
         )}
@@ -74,7 +74,7 @@ const Login = ({ close = () => {} }) => {
         {isSuccess && (
           <Alert status="success">
             <AlertIcon />
-            <AlertTitle>User logged successfully</AlertTitle>
+            <AlertTitle>Usuario logueado</AlertTitle>
             <AlertDescription>{message}</AlertDescription>
           </Alert>
         )}
