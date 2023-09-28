@@ -22,6 +22,10 @@ const CreateEvent = () => {
       formData.set("capacity", event.target.capacity.value);
       formData.set("speaker", event.target.speaker.value);
       formData.set("category", event.target.category.value);
+      formData.set("organization", event.target.organization.value);
+      formData.set("time", event.target.time.value);
+      formData.set("timeEnd", event.target.timeEnd.value);
+      formData.set("modality", event.target.modality.value);
 
       await dispatch(createEvent(formData));
     } catch (error) {
@@ -51,31 +55,16 @@ const CreateEvent = () => {
           name="price"
           required
         />
-        <input
-          type="date"
-          placeholder="Fecha"
-          name="date"
-          required
-        />
-        <input
-          type="text"
-          placeholder="Lugar"
-          name="place"
-          required
-        />
+        <input type="date" placeholder="Fecha" name="date" required />
+        <input type="text" placeholder="Lugar" name="place" required />
         <input
           type="number"
           placeholder="Asistentes"
           name="capacity"
           required
         />
-        <input
-          type="text"
-          placeholder="Ponente"
-          name="speaker"
-          required
-        />
-        <select name="category" >
+        <input type="text" placeholder="Ponente" name="speaker" required />
+        <select name="category">
           <optgroup label="Categoría">
             <option value="Finanzas e inversión">Finanzas e inversión</option>
             <option value="Gestión empresarial">Gestión empresarial</option>
@@ -88,7 +77,23 @@ const CreateEvent = () => {
             <option value="Sociedad">Sociedad</option>
           </optgroup>
         </select>
-
+        <select name="organization">
+          <option value="Edem">Edem</option>
+          <option value="Lanzadera">Lanzadera</option>
+          <option value="MDE">MDE</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <select name="modality">
+          <optgroup label="Categoría">
+            <option value="Presencial">Presencial</option>
+            <option value="Online">Online</option>
+            <option value="Semipresencial">
+              Semipresencial
+            </option>
+          </optgroup>
+        </select>
+        <input type="time" name="time"/>
+        <input type="time" name="timeEnd"/>
         <input type="file" name="image" id="file" />
         <button type="submit">Enviar</button>
       </form>

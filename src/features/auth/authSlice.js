@@ -1,36 +1,38 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import authService from "./authService";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import authService from './authService';
 
-const token = JSON.parse(localStorage.getItem("token")) || null;
-const userConnected = JSON.parse(localStorage.getItem("userConnected")) || null;
+const token = JSON.parse(localStorage.getItem('token')) || null;
+const userConnected = JSON.parse(localStorage.getItem('userConnected')) || null;
 
 const initialState = {
   token: token,
   isError: false,
-  message: "",
+  message: '',
   isLoading: false,
   userConnected: userConnected,
 };
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
-    reset: (state) => {
+    reset: state => {
       state.isError = false;
       state.isSuccess = false;
-      state.message = "";
+      state.message = '';
       state.isLoading = false;
     },
   },
 
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, action) => {
+        console.log('slice yes', action);
         state.isSuccess = true;
         // state.message = action.payload.message;
       })
       .addCase(register.rejected, (state, action) => {
+        console.log('slice no', action);
         state.isError = true;
         // state.message = action.payload;
       })
@@ -43,27 +45,27 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(logout.fulfilled, (state) => {
+      .addCase(logout.fulfilled, state => {
         state.token = null;
         state.userConnected = null;
       })
-      .addCase(getUserConnected.pending, (state) => {
+      .addCase(getUserConnected.pending, state => {
         state.isLoading = true;
       })
       .addCase(getUserConnected.fulfilled, (state, action) => {
         state.userConnected = action.payload;
         state.isLoading = false;
       })
-      .addCase(getUserConnected.rejected, (state) => {
+      .addCase(getUserConnected.rejected, state => {
         state.isError = true;
-        state.message = "error getUserConnected";
+        state.message = 'error getUserConnected';
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.userConnected = action.payload;
       })
-      .addCase(updateUser.rejected, (state) => {
+      .addCase(updateUser.rejected, state => {
         state.isError = true;
-        state.message = "error updateUser";
+        state.message = 'error updateUser';
       });
   },
 });
@@ -71,10 +73,11 @@ export const authSlice = createSlice({
 export const { reset } = authSlice.actions;
 
 export const register = createAsyncThunk(
-  "auth/register",
+  'auth/register',
   async (user, thunkAPI) => {
     try {
-
+      console.log('hola');
+      console.log('slice', user);
       return await authService.register(user);
     } catch (error) {
       const message = error.response.data.msg;
@@ -83,17 +86,17 @@ export const register = createAsyncThunk(
   }
 );
 
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     return await authService.login(user);
   } catch (error) {
-    console.error("login slice error", error.response.data.message);
+    console.error('login slice error', error.response.data.message);
     const message = error.response.data.message;
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-export const logout = createAsyncThunk("auth/logout", async () => {
+export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     return await authService.logout();
   } catch (error) {
@@ -102,7 +105,7 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 });
 
 export const getUserConnected = createAsyncThunk(
-  "auth/getUserConnected",
+  'auth/getUserConnected',
   async () => {
     try {
       return await authService.getUserConnected();
@@ -121,10 +124,10 @@ export const getUserConnected = createAsyncThunk(
 // });
 
 export const updateUser = createAsyncThunk(
-  "auth/updateUser",
-  async (userData) => {
+  'auth/updateUser',
+  async userData => {
     try {
-      console.log("slice", userData)
+      console.log('slice', userData);
       const res = await authService.updateUser(userData);
       return res;
     } catch (error) {

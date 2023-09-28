@@ -14,6 +14,8 @@
   -webkit-text-size-adjust: 100%;
 } */
 
+@import "./variables.scss";
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -55,6 +57,10 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.color-salmon {
+  color: $salmon;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -66,4 +72,17 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+//media queries First Mobile (change the design when the width gets larger than 768px)
+/* For desktop: */
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+}
+
+/* For tablets: */
+@media only screen and (min-width: 600px) {
+}
+
+@media screen and (min-width: 481px) {
 }

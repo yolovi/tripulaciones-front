@@ -1,0 +1,30 @@
+@import "../../../index.scss";
+
+.custom-select {
+  display: flex;
+  width: 324px;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+
+  select {
+    flex: 1;
+    color: $blue;
+    padding: 0 10px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid $blue;
+    background: transparent;
+    cursor: pointer;
+    outline: none; /* Elimina el contorno al hacer clic */
+  }
+
+  select:focus {
+    border-bottom: 1px solid $blue;
+    border-radius: none;
+  }
+
+  option {
+    padding: 10px;
+  }
+}

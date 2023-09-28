@@ -1,12 +1,208 @@
 @import "../../../index.scss";
 
-input {
-    border: 1px solid #ccc;
-}
+.registro-container {
+  text-align: left;
+  align-items: center;
+  h2 {
+    color: $salmon;
+    font-family: $primary-font;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+  }
+  input {
+    border: none;
+    border-bottom: 1px solid $blue;
+    border-radius: 0;
+    outline: none;
+    display: flex;
+    height: 40px;
+    gap: 10px;
+    background-color: transparent; 
 
-.form-register {
+    // color: $light-Grey;
+    font-family: $primary-font;
+    font-size: 18px;
+  }
+
+  .form-register {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin: 20px;
+    align-items: center;
+    gap: 32px;
+
+    .textCheck {
+      overflow: hidden;
+      color: $blue;
+      text-overflow: ellipsis;
+      font-family: $primary-font;
+      font-size: 12px;
+      letter-spacing: 0.1px;
+    }
+
+    span {
+      color: $blue;
+      font-family: $primary-font;
+      font-size: 12px;
+    }
+
+    .register-data , .select-ecosystem {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      width: 300px;
+
+      input {
+        border: none;
+        border-bottom: 1px solid $blue;
+        outline: none;
+        display: flex;
+        width: 300px;
+        height: 40px;
+        gap: 10px;
+
+        color: $light-Grey;
+        font-family: $primary-font;
+        font-size: 18px;
+
+      }
+
+      .PhoneInputInput{
+        width: 255px;
+      }
+
+      label {
+        font-family: $primary-font;
+        font-size: 18px;
+        font-weight: 400;
+        color: $blue;
+      }
+
+      :first-child label{
+        font-size: 16px;
+      }
+
+      .actual-situation {
+        display: flex;
+        width: 324px;
+        padding: 4px 2px;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 10px;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+.captcha {
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.eyePassBtn {
+  border: none;
+  background-color: none;
+
+  &:focus {
+    outline: none; /* Quitar el borde de enfoque */
+  }
+}
+
+button:focus {
+  outline: none; 
+}
+
+%btn-primary {
+  display: flex;
+  width: 224px;
+  height: 50px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 7.2px;
+  border: 1px solid transparent;
+  background-color: $salmon;
+  transition: border-color 0.25s;
+  color: $white-color;
+  font-family: $primary-font;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $salmon-light;
+    border: 1px solid transparent;
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline: none;
+  }
+}
+
+.btn-primary {
+  @extend %btn-primary;
+}
+
+.btn-primary-blue {
+  @extend %btn-primary;
+  width: 160px;
+  height: 37.077px;
+  background: $blue;
+  font-size: 16px;
+  padding: 25px 12px;
+  &:hover {
+    background-color: $blue-light;
+  }
+}
+
+.btn-div {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary {
+  &:focus {
+    outline: none; 
+  }
+
+  &:disabled {
+    background-color: gray;
+    cursor: not-allowed; /* Cambia el cursor */
+    opacity: 0.5; 
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline: none;
+  }
+}
+
+.chakra-radio-group {
+  margin-top: 10px;
+  margin-left: 10px;
+
+
+ 
+}
+
+.link-register {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 10px;
+  margin-bottom: 20px;
+  color: $blue;
+
+}
+
+.chakra-radio-control {
+  border: 2px solid grey !important;
 }

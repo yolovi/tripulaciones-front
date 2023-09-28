@@ -1,0 +1,91 @@
+@import "../../variables.scss";
+
+h2 {
+  color: $black-color;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: $primary-font;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 21.6px */
+  text-align: left;
+}
+
+@media only screen and (min-width: 768px) {
+  
+}
+
+.filtros-home {
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  overflow-x: auto;
+  padding-left: 5%;
+
+  @media only screen and (min-width: 768px) {
+    position: inherit;
+    overflow: hidden;
+    padding-left: 0;
+    width: 100%;
+  }
+
+  &::-webkit-scrollbar {
+    height: 0px;
+  }
+
+  .botones-filtros-home {
+    white-space: nowrap;
+    display: flex;
+    gap: 2%;
+
+    @media only screen and (min-width: 768px) {
+     flex-wrap: wrap;
+    }
+
+    .boton-filtros-home {
+      border-radius: 24px;
+      background: #fefefe;
+      border: 1px #a8a8a8 solid;
+      line-height: 12px;
+      padding: 11px 24px;
+      font-weight: 400;
+      margin-bottom: 5px;
+
+      &:hover {
+        background-color: $blue;
+        color: $white-color;
+        border-color: $blue;
+      }
+
+      &.inactive{
+        background-color: inherit;
+        color: inherit;
+        border-color: inherit;
+      }
+
+      &.active {
+        background-color: $blue;
+        color: $white-color;
+        border-color: $blue;
+      }
+    }
+  }
+}
+
+.paraTi {
+  left: 0;
+  margin-top: 45px;
+  position: absolute;
+  width: 100%;
+  h2 {
+    margin: 3% 0;
+    padding-left: 30px;
+  }
+}
+
+.proximos-eventos {
+  margin-top: 390px;
+  .titulo {
+    margin: 5% 0;
+  }
+}
