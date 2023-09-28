@@ -148,7 +148,7 @@ const Header = () => {
                       </>
                     ) : (
                       <>
-                        <span>
+                        <span className="logout">
                           <button
                             type="button"
                             onClick={() => {

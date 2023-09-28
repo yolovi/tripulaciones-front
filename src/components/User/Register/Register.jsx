@@ -222,9 +222,10 @@ const Register = () => {
           (ecosystem === "1" || ecosystem === "2") && (
             <div className="actual-situation">
               <SelectForm
+              
                 isRequired
                 className="selectForm"
-                placeholder="Indica tu situación actual"
+                placeholder ="Indica tu situación actual"
                 options={ecosystem === "1" ? mdeTrue : mdeFalse}
                 selectedValue={occupation}
                 onChange={(e) => {

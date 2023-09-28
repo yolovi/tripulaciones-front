@@ -26,20 +26,6 @@ const SelectForm = ({
       </Select>
     </div>
   );
-
-  // return (
-  //   <div className="custom-select">
-  //      <select onChange={onChange} name={name} value={selectedValue} placeholder={placeholder}>
-  //       {options.map((elem, i) => {
-  //         return (
-  //           <option key={i} value={elem}>
-  //             {elem}
-  //           </option>
-  //         );
-  //       })}
-  //     </select>
-  //   </div>
-  // );
 };
 
 export default SelectForm;

@@ -197,9 +197,6 @@ const Profile = () => {
                       <span className="qr-footer">QR personal</span>
                     </ModalBody>
 
-                    {/* <ModalFooter>
-                      <span className="qr-footer">QR personal</span>
-                    </ModalFooter> */}
                   </ModalContent>
                 </Modal>
               </>
