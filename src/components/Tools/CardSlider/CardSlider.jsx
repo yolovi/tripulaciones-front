@@ -64,33 +64,37 @@ const CardSlider = ({
           </div>
           <div className="likes">{likes?.map(elem => elem.likes)}</div>
         </div>
-        <Box
-          position="relative"
-          bottom="140px"
-          right="110px"
-          onClick={e => {
-            e.stopPropagation();
-            onOpen();
-          }}
-          h="fit-content"
-        >
-          <Circle size="80px" bg="white" color="white" shadow="dark-lg">
-            <QRCodeSVG size="50" />
-          </Circle>
-        </Box>
+        {userForQR && (
+          <Box
+            position="relative"
+            bottom="140px"
+            right="110px"
+            onClick={e => {
+              e.stopPropagation();
+              onOpen();
+            }}
+            h="fit-content"
+          >
+            <Circle size="80px" bg="white" color="white" shadow="dark-lg">
+              <QRCodeSVG size="50" />
+            </Circle>
+          </Box>
+        )}
       </div>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent w="90%" borderRadius="20px">
-          <ModalHeader>
-            <ModalCloseButton color="#10628e" />
-          </ModalHeader>
-          <ModalBody justifyContent="center" display="inline-flex" pb="40px">
-            <QR user={userForQR} event={_id} />
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      {userForQR && (
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent w="90%" borderRadius="20px">
+            <ModalHeader>
+              <ModalCloseButton color="#10628e" />
+            </ModalHeader>
+            <ModalBody justifyContent="center" display="inline-flex" pb="40px">
+              <QR user={userForQR} event={_id} />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 };
