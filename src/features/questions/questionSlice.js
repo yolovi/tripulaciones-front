@@ -1,14 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import questionService from "./questionService";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import questionService from './questionService';
 
-/* CAMBIAR */
 const initialState = {
   user: null,
   token: null,
 };
 export const createQuestion = createAsyncThunk(
-  "events/createEvent",
-  async (formData) => {
+  'events/createEvent',
+  async formData => {
     try {
       return await questionService.createEvent(formData);
     } catch (error) {
@@ -18,10 +17,10 @@ export const createQuestion = createAsyncThunk(
 );
 
 export const questionSlice = createSlice({
-  name: "question",
+  name: 'question',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(createEvent.fulfilled, (state, action) => {
       state.events = action.payload;
     });

@@ -25,7 +25,6 @@ const Home = () => {
     { value: 'Sociedad', label: 'Sociedad' },
   ];
 
-  //retrasa la busqueda unos milisegundos para las busquedas de texto
   useEffect(() => {
     if (timer) {
       clearTimeout(timer);

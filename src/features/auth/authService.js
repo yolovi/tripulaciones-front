@@ -41,17 +41,6 @@ const getUserConnected = async () => {
   return res.data;
 };
 
-// const getUserById = async (_id) => {
-//   const token = JSON.parse(localStorage.getItem("token"));
-//   const res = await axios.get(API_URL + "/users/getuserbyid/" + _id, {
-//     headers: {
-//       Authorization: token,
-//     },
-//   });
-
-//   return res.data;
-// };
-
 const updateUser = async userData => {
   console.log(userData);
   const token = JSON.parse(localStorage.getItem('token'));
@@ -69,40 +58,12 @@ const turnstileKey = async () => {
   return res.data;
 };
 
-const imageSafePost = async image => {
-  const token = JSON.parse(localStorage.getItem('token'));
-  const res = await axios.post(
-    'https://datapi-9xvl-dev.fl0.io/img_det',
-    image,
-    {
-      headers: {
-        authorization: token,
-      },
-    }
-  );
-  console.log('imageSafePost', res);
-  return res.data;
-};
-
-const imageSafeRes = async () => {
-  const res = await axios.get('https://datapi-9xvl-dev.fl0.io/img_det', {
-    headers: {
-      authorization: token,
-    },
-  });
-  return res.data;
-  // devolerá {
-  //   "unsafe": false  //(o true)
-  // }
-};
-
 const authService = {
   turnstileKey,
   register,
   login,
   logout,
   getUserConnected,
-  //   getUserById,
   updateUser,
 };
 

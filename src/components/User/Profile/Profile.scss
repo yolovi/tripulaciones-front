@@ -7,9 +7,9 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    width: 100%; /* Ancho al 100% por defecto */
-    max-width: 375px; /* Ancho máximo de 760px */
-    overflow-x: hidden; /* Ocultar desplazamiento horizontal si lo hubiera */
+    width: 100%; 
+    max-width: 375px; 
+    overflow-x: hidden; 
 
     .profile-data {
       padding: 20px;
@@ -108,7 +108,7 @@
 }
 
 .container-events-profile {
-  width: 100%; /* Ancho al 100% para adaptarse al dispositivo */
+  width: 100%; 
 
   & {
     .inscritos,
@@ -140,7 +140,7 @@
 
   .evento-individual {
     box-shadow: 0px 1.20543px 7.23256px 0px rgba(0, 0, 0, 0.25);
-    margin-bottom: 5%; //Solo para verlo bien
+    margin-bottom: 5%; 
     background: var(--Blanco, #fefefe);
     width: 328px;
     height: 207px;
@@ -171,7 +171,7 @@
         font-size: 14.465px;
         font-style: normal;
         font-weight: 400;
-        line-height: 120%; /* 17.358px */
+        line-height: 120%; 
         .flecha {
           padding-right: 5%;
         }
@@ -192,7 +192,7 @@
         font-size: 14.465px;
         font-style: normal;
         font-weight: 700;
-        line-height: 120%; /* 17.358px */
+        line-height: 120%; 
       }
       .hora {
         color: #080808;
@@ -207,10 +207,6 @@
   }
 }
 
-
-
-
-/* Para pantallas de 481px hasta 600px (máximo 480px) */
 @media screen and (min-width: 481px) and (max-width: 600px) {
   .card-profile-data {
     min-width: 300px;
@@ -218,14 +214,12 @@
   }
 }
 
-/* Para pantallas de 600px hasta 768px (máximo 600px) */
 @media screen and (min-width: 600px) and (max-width: 768px) {
   .card-profile-data {
     max-width: 600px;
   }
 }
 
-/* Para pantallas a partir de 768px (máximo 768px) */
 @media screen and (min-width: 768px) {
   .card-profile-data {
     max-width: 768px;

@@ -41,7 +41,6 @@ const EventDetail = () => {
       />
     );
   }
-  // Función para formatear la fecha
   function formatearFecha(fechaISO) {
     const fecha = new Date(fechaISO);
     const dia = fecha.getDate().toString().padStart(2, '0');

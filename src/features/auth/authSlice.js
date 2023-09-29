@@ -29,12 +29,10 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         console.log('slice yes', action);
         state.isSuccess = true;
-        // state.message = action.payload.message;
       })
       .addCase(register.rejected, (state, action) => {
         console.log('slice no', action);
         state.isError = true;
-        // state.message = action.payload;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isSuccess = true;
@@ -114,14 +112,6 @@ export const getUserConnected = createAsyncThunk(
     }
   }
 );
-
-// export const getUserById = createAsyncThunk("auth/getUserById", async (_id) => {
-//   try {
-//     return await authService.getUserById(_id);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
 
 export const updateUser = createAsyncThunk(
   'auth/updateUser',

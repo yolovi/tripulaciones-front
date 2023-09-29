@@ -8,27 +8,26 @@ import {
   ModalCloseButton,
   Button,
   useDisclosure,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const ModalRender = ({
   onCloseButtonVisible = false,
   secondaryButtonVisible = false,
-  text = "I am a modal",
-  textBtn = "Click",
-  modalTitle = "Modal Title",
+  text = 'I am a modal',
+  textBtn = 'Click',
+  modalTitle = 'Modal Title',
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Button
         style={{
-          //border: "3px solid white",
-          borderRadius: "50%",
-          display: "inline-block",
-          background: "white",
-          height: "40px",
-          width: " 20px",
-          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          borderRadius: '50%',
+          display: 'inline-block',
+          background: 'white',
+          height: '40px',
+          width: ' 20px',
+          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
         }}
         onClick={onOpen}
       >

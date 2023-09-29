@@ -44,11 +44,7 @@ const Profile = () => {
   if (isLoading) {
     return <Spinner size="lg" color="red.500" />;
   }
-
-  //al poner el interrogante evitamos errores al cargar la página
   const eventsList = orderIds?.map(order => order.eventsIds);
-
-  //TODO: Nota. No utilizar un form si vas a subir/editar fotos > hay que usar un FORM-DATA (como en postman)
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -58,7 +54,6 @@ const Profile = () => {
         formData.set('avatar', event.target.avatar.files[0]);
       formData.set('name', event.target.name.value);
       formData.set('surname', event.target.surname.value);
-      // formData.set("email", event.target.email.value);
 
       dispatch(updateUser(formData));
     } catch (error) {

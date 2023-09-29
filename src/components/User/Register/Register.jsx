@@ -1,9 +1,9 @@
-import "./Register.scss";
-import "react-phone-number-input/style.css";
-import { useState } from "react";
-import PhoneInput from "react-phone-number-input";
-import { register } from "../../../features/auth/authSlice";
-import { useDispatch } from "react-redux";
+import './Register.scss';
+import 'react-phone-number-input/style.css';
+import { useState } from 'react';
+import PhoneInput from 'react-phone-number-input';
+import { register } from '../../../features/auth/authSlice';
+import { useDispatch } from 'react-redux';
 import {
   Stack,
   Radio,
@@ -11,27 +11,26 @@ import {
   FormControl,
   HStack,
   Input,
-} from "@chakra-ui/react";
-import CustomCheckbox from "../../Tools/CustomCheckbox/CustomCheckbox";
-import SelectForm from "../../Tools/SelectForm/SelectForm";
-import PasswordEye from "../../Tools/PasswordEye/PasswordEye";
-import { Link } from "react-router-dom";
-
+} from '@chakra-ui/react';
+import CustomCheckbox from '../../Tools/CustomCheckbox/CustomCheckbox';
+import SelectForm from '../../Tools/SelectForm/SelectForm';
+import PasswordEye from '../../Tools/PasswordEye/PasswordEye';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    bday: "", //input modificable + calendario
-    tel: "", //PhoneInput react
-    ecosystem: "", 
-    occupation: "", 
-    password: "",
-    password2: "",
-    role: "user",
-    acceptPolicity: false, 
-    acceptCommunication: false, 
+    name: '',
+    surname: '',
+    email: '',
+    bday: '',
+    tel: '',
+    ecosystem: '',
+    occupation: '',
+    password: '',
+    password2: '',
+    role: 'user',
+    acceptPolicity: false,
+    acceptCommunication: false,
   });
 
   const {
@@ -48,37 +47,35 @@ const Register = () => {
     acceptCommunication,
   } = formData;
 
-
   const dispatch = useDispatch();
 
   const mdeTrue = [
-    "Empleado de EDEM",
-    "Estudiante de EDEM",
-    "Empleado de LANZADERA",
-    "Inversor Angels",
+    'Empleado de EDEM',
+    'Estudiante de EDEM',
+    'Empleado de LANZADERA',
+    'Inversor Angels',
   ];
   const mdeFalse = [
-    "Propietario/a o dirección general",
-    "Director/a de departamento",
-    "Profesional senior",
-    "Profesional junior",
-    "Desempleado/a",
-    "Estudiante",
+    'Propietario/a o dirección general',
+    'Director/a de departamento',
+    'Profesional senior',
+    'Profesional junior',
+    'Desempleado/a',
+    'Estudiante',
   ];
 
-
-  const onChange = (e) => {
-    setFormData((prevState) => ({
+  const onChange = e => {
+    setFormData(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log("onChange", e.target.value);
+    console.log('onChange', e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
     if (acceptPolicity) {
-      console.log("formData", formData);
+      console.log('formData', formData);
       return dispatch(register(formData));
     }
 
@@ -105,7 +102,7 @@ const Register = () => {
               name="name"
               value={name}
               placeholder="Ej: Irene"
-              _placeholder={{ opacity: 1, color: "gray.400" }}
+              _placeholder={{ opacity: 1, color: 'gray.400' }}
               variant="unstyled"
               onChange={onChange}
               required
@@ -118,7 +115,7 @@ const Register = () => {
               name="surname"
               value={surname}
               placeholder="Ej: Pérez Gomez"
-              _placeholder={{ opacity: 1, color: "gray.400" }}
+              _placeholder={{ opacity: 1, color: 'gray.400' }}
               variant="unstyled"
               onChange={onChange}
               required
@@ -131,7 +128,7 @@ const Register = () => {
               name="email"
               value={email}
               placeholder="Indica tu correo electrónico"
-              _placeholder={{ opacity: 1, color: "gray.400" }}
+              _placeholder={{ opacity: 1, color: 'gray.400' }}
               variant="unstyled"
               onChange={onChange}
             />
@@ -143,7 +140,7 @@ const Register = () => {
               name="bday"
               value={bday}
               onChange={onChange}
-              _placeholder={{ opacity: 1, color: "gray.400" }}
+              _placeholder={{ opacity: 1, color: 'gray.400' }}
               variant="unstyled"
             />
           </label>
@@ -153,7 +150,7 @@ const Register = () => {
               placeholder="Indica tu número de teléfono"
               name="tel"
               value={tel}
-              onChange={(e) => {
+              onChange={e => {
                 setFormData({
                   ...formData,
                   tel: e,
@@ -166,7 +163,7 @@ const Register = () => {
           <FormControl as="fieldset">
             <label>¿Formas parte del ecosistema MDE?*</label>
             <RadioGroup
-              onChange={(e) => {
+              onChange={e => {
                 setFormData({
                   ...formData,
                   ecosystem: e,
@@ -185,27 +182,23 @@ const Register = () => {
             </RadioGroup>
           </FormControl>
         </div>
-        {
-          //con el && me ahorro hacer un ternario y tener que poner : null en el else
-          (ecosystem === "1" || ecosystem === "2") && (
-            <div className="actual-situation">
-              <SelectForm
-              
-                isRequired
-                className="selectForm"
-                placeholder ="Indica tu situación actual"
-                options={ecosystem === "1" ? mdeTrue : mdeFalse}
-                selectedValue={occupation}
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    occupation: e.target.value,
-                  });
-                }}
-              />
-            </div>
-          )
-        }
+        {(ecosystem === '1' || ecosystem === '2') && (
+          <div className="actual-situation">
+            <SelectForm
+              isRequired
+              className="selectForm"
+              placeholder="Indica tu situación actual"
+              options={ecosystem === '1' ? mdeTrue : mdeFalse}
+              selectedValue={occupation}
+              onChange={e => {
+                setFormData({
+                  ...formData,
+                  occupation: e.target.value,
+                });
+              }}
+            />
+          </div>
+        )}
 
         <PasswordEye
           label="Contraseña*"
@@ -252,30 +245,25 @@ const Register = () => {
               text="Acepto que EDEM me envíe comunicaciones electrónicas sobre los Cursos, jornadas, seminarios organizados por EDEM y aquellos vinculados con el emprendimiento, inversión y liderazgo desarrollados en MARINA DE EMPRESAS."
             />
             <div className="captcha">
-              <CustomCheckbox
-                // TODO: poner el captcha que está en login
-                text="No soy un robot + icono captcha"
-              />
+              <CustomCheckbox text="No soy un robot + icono captcha" />
             </div>
           </Stack>
         </div>
         <div className="btn-div">
           <button
             className="btn-primary"
-            disabled={ecosystem == "" || !acceptPolicity || occupation == ""}
+            disabled={ecosystem == '' || !acceptPolicity || occupation == ''}
             type="submit"
           >
             Siguiente
           </button>
-          
+
           <Link className="link-register" to="/login">
-          <h3>¿Ya tienes cuenta? Accede</h3>
-        </Link>
+            <h3>¿Ya tienes cuenta? Accede</h3>
+          </Link>
         </div>
-  
       </form>
     </div>
   );
 };
 export default Register;
-

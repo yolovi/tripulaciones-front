@@ -1,35 +1,34 @@
-import React, { useState } from "react";
-import { editEvent } from "../../../features/events/eventsSlice";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useState } from 'react';
+import { editEvent } from '../../../features/events/eventsSlice';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const EditEvent = () => {
   const [formData, setFormData] = useState({
-    title: "",
-    body: "",
-    price: "0",
-    date: "00/00/00",
-    place: "",
-    capacity: "0",
-    speaker: "",
+    title: '',
+    body: '',
+    price: '0',
+    date: '00/00/00',
+    place: '',
+    capacity: '0',
+    speaker: '',
     image: Image,
-    category:"",
+    category: '',
   });
   const dispatch = useDispatch();
   const { _id } = useParams();
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     dispatch(editEvent({ _id, formData }));
   };
   return (
     <>
-      {/* HAY QUE METER LAS ALERTAS */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -73,7 +72,6 @@ const EditEvent = () => {
           name="speaker"
           onChange={handleInputChange}
         />
-        {/* AÑADIR ETIQUETAS PARA ELEGIR LA CATEGORIA DEL EVENTO */}
         <select name="category" onChange={handleInputChange}>
           <optgroup label="Categoría">
             <option value="Finanzas e inversión">Finanzas e inversión</option>

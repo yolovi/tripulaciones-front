@@ -7,7 +7,7 @@ import { faBone, faBookmark } from '@fortawesome/free-solid-svg-icons';
 const LikeEvent = () => {
   const dispatch = useDispatch();
   const { _id } = useParams();
-  const { event } = useSelector(state => state.events); // Accede a la lista de eventos desde el estado de Redux
+  const { event } = useSelector(state => state.events);
   const { userConnected } = useSelector(state => state.auth);
 
   const isAlreadyLiked = event.likes?.includes(userConnected?._id);

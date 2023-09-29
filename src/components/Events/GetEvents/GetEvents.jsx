@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAll } from "../../../features/events/eventsSlice";
-import { Spinner } from "@chakra-ui/react";
-import "./GetEvents.scss";
-import CardSlider from "../../Tools/CardSlider/CardSlider";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAll } from '../../../features/events/eventsSlice';
+import { Spinner } from '@chakra-ui/react';
+import './GetEvents.scss';
+import CardSlider from '../../Tools/CardSlider/CardSlider';
 
 const GetEvents = () => {
-  const { events, isLoading } = useSelector((state) => state.events); // Accede a la lista de eventos desde el estado de Redux
+  const { events, isLoading } = useSelector(state => state.events);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAll());

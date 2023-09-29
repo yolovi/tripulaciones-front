@@ -117,4 +117,3 @@ const Login = ({ close = () => {} }) => {
 };
 
 export default Login;
-//https://chakra-ui.com/docs/components/input
