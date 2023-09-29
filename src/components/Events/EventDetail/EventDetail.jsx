@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getById } from '../../../features/events/eventsSlice';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -22,6 +22,14 @@ const EventDetail = () => {
   const navigate = useNavigate();
   const { event, isLoading } = useSelector(state => state.events);
   const { userConnected } = useSelector(state => state.auth);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  useEffect(() => {
+    const subscribed = userConnected?.orderIds?.find(o =>
+      o.eventsIds?.find(e => e._id === event._id)
+    );
+    setIsSubscribed(subscribed);
+  }, [userConnected]);
 
   const { _id } = useParams();
   useEffect(() => {
@@ -57,10 +65,9 @@ const EventDetail = () => {
     }
     await eventsService.register(event._id);
     onOpen();
+    setIsSubscribed(true);
   };
-  const isSubscribed = userConnected.orderIds.find(o =>
-    o.eventsIds.find(e => e._id === event._id)
-  );
+
   return (
     <>
       <div className="imagen-detalle">
