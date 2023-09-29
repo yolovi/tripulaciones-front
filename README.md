@@ -57,6 +57,25 @@ Ser capaces de hacer entender a la audiencia y jurado la solución propuesta y e
 5.- Interacción del conocimiento. Competencias técnicas Control técnico de la disciplina y valor diferenciador.
  </p>
 
+ <h1 align="center" style="color:red">Contextualización</h1>
+ <div style="text-align:center"><img src="./src/assets/readme/metodologia.png" /></div>
+
+  <h1 align="center" style="color:red">Herramientas metodológicas</h1>
+ <div style="text-align:center"><img src="./src/assets/readme/herramientas.png"/></div>
+<div>
+
+<div>
+<p>Desde el primer momento del proyecto, se crea un tablero a través de la aplicación Trello para coordinarnos dentro del mismo equipo y sobre todo en entre las diferentes verticales. Revisándolo cada mañana durante el daily, creando nuevas tareas y marcando las finalizadas.</p>
+<a href="https://trello.com/b/x5KTBZVh/desaf%C3%ADo-de-tripulaciones" target="_blank"><img src="src/assets/readme/Trello_logo.svg.png" target="_blank" width="100"></a>
+</div>
+<div>
+<p>El equipo de data realizó una API con los endpoints correspondientes para obtener la info necesaria como códigos QR, censor de texto, de imagen, ... </p>
+<a href="https://datapi-9xvl-dev.fl0.io/" target="_blank"><img src="src/assets/readme/Endpoints.png" target="_blank" width="100"></a>
+</div>
+<p>Usando MongoDB Atlas, que es un servicio de Cloud Database (o Base de Datos en la Nube), se crean y administran tres BBDD Mongo, una para los test, otra para los developers y la tercera para producción, la cual se comparte con el equipo de data para manejar los datos reales y poder trabajar ensuciar o eliminar BBDD.
+</p>
+<img src="src/assets/readme/mongo-db.png" width="600">
+</div>
 <!-- ABOUT THE OBJECTIVES -->
   <h1 align="center" style="color:red">
  Competencias específicas Full Stack</h1>
