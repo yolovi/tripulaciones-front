@@ -146,9 +146,19 @@ Este proyecto ha sido realizado como trabajo de aprendizaje por Adrían Pastor, 
 
 ## Preview
 
-- General overview
+General overview
 
-![gif](./public/gif/admin-cart.gif)
+·Home
+·Register
+·Login
+·Profile
+·Register in an event
+·Profile - QR ticket
+·Logout
+
+<div>
+<img src="./src/assets/readme/Apex_1696754969546.gif" height="350"/>
+</div>
 </views>
 
 <!-- CONTACT -->
